@@ -1,0 +1,4 @@
+{
+  "extends": "@voxpelli/eslint-config/esm",
+  "root": true
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://unpkg.com/knip@3/schema.json",
+  "entry": [
+    "index.js",
+    "index.d.ts"
+  ],
+  "ignoreDependencies": ["@types/mocha"]
+}
