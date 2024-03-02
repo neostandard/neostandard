@@ -6,7 +6,6 @@
 /.nyc_output
 
 # We're a library, so please, no lock files
-/package-lock.json
 /yarn.lock
 
 # Generated types
