@@ -19,10 +19,13 @@
     "/index.js",
     "/index.d.ts",
     "/index.d.ts.map",
-    "lib/*.js",
-    "lib/*.d.ts",
-    "lib/*.d.ts.map"
+    "lib/**/*.js",
+    "lib/**/*.d.ts",
+    "lib/**/*.d.ts.map"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build:0": "run-s clean",
     "build:1-declaration": "tsc -p declaration.tsconfig.json",
