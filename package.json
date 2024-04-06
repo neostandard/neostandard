@@ -1,14 +1,13 @@
 {
-  "name": "@voxpelli/node-module-template",
+  "name": "neostandard",
   "version": "0.0.0",
-  "description": "A GitHub template repo for node modules",
-  "homepage": "http://github.com/voxpelli/node-module-template",
+  "description": "A modern successor to standard",
+  "homepage": "http://github.com/neostandard/neostandard",
   "repository": {
     "type": "git",
-    "url": "git://github.com/voxpelli/node-module-template.git"
+    "url": "git://github.com/neostandard/neostandard.git"
   },
   "keywords": [],
-  "author": "Pelle Wessman <pelle@kodfabrik.se> (http://kodfabrik.se/)",
   "license": "MIT",
   "engines": {
     "node": "^18.18.0 || ^20.9.0 || >=21.1.0"

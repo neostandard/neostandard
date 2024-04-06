@@ -1,3 +1,3 @@
 # Neostandard
 
-A modern equivalent to `standard`
+A modern successor to `standard`
