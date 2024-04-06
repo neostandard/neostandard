@@ -37,7 +37,7 @@
     "clean:declarations-top": "rm -rf $(find . -maxdepth 1 -type f -name '*.d.ts*')",
     "clean:declarations-lib": "rm -rf $(find lib -type f -name '*.d.ts*' ! -name '*-types.d.ts')",
     "clean": "run-p clean:*",
-    "prepare": "husky install",
+    "prepare": "husky",
     "prepublishOnly": "run-s build",
     "test:eslint": "eslint .",
     "test-ci": "run-s test:*",
