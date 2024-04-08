@@ -27,6 +27,12 @@ TODO
 
 ## Options
 
-* `semi` – _boolean_ – when set semi-colons will be enforced rather than banned (defaults to `false`)
-* `noTs` – _boolean_ – deactivates type aware linting (defaults to `false`)
-* `typeAwareJs` – _boolean_ – makes the type aware linting apply to JS-files as well, not just TS-files (defaults to `false`)
+* `semi` - _boolean_ - when set semi-colons will be enforced rather than banned (defaults to `false`)
+* `noTs` - _boolean_ - deactivates all TypeScript based linting (defaults to `false`)
+* `tsForJs` - _boolean_ - activates TypeScript based linting for JavaScript files (defaults to `false`)
+* `typeChecking` - _boolean_ - activates type checking rules (defaults to `false`)
+
+### Additional TypeScript Eslint Parser options
+
+* [`project`](https://typescript-eslint.io/packages/parser/#project) - can be useful when `typeChecking` is on
+* [`tsconfigRootDir`](https://typescript-eslint.io/packages/parser/#tsconfigrootdir) - can be useful when `typeChecking` is on

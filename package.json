@@ -56,11 +56,11 @@
     "typescript": "~5.4.4"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.5.0",
-    "@typescript-eslint/utils": "^7.5.0",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/utils": "^7.6.0",
     "eslint": "^9.0.0",
-    "eslint-plugin-n": "^17.0.0-6",
+    "eslint-plugin-n": "^17.0.0",
     "globals": "^15.0.0",
-    "typescript-eslint": "^7.5.0"
+    "typescript-eslint": "^7.6.0"
   }
 }
