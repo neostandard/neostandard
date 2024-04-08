@@ -1,6 +1,7 @@
 {
   "extends": "@voxpelli/tsconfig/node18.json",
   "files": [
+    "cli.js",
     "eslint.config.js",
     "index.js"
   ],
