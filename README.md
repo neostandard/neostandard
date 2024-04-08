@@ -14,7 +14,7 @@ TODO
     ```js
     import { neostandard } from 'neostandard'
 
-    export default neostandard({ semi: true, typeAwareJs: true })
+    export default neostandard({ semi: true, tsForJs: true })
     ```
 
     Or for the most basic setup:
