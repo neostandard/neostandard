@@ -16,7 +16,7 @@
 
 Neostandard Lead Maintainers are the organization owners.
 They are the only members of the `@neostandard/leads` team. The Lead
-Maintainers are the curator of the Neostandard project and their key responsibility
+Maintainers are the curators of the Neostandard project and their key responsibility
 is to issue releases of Neostandard and its dependencies.
 
 Lead maintainers are responsible for releases.
