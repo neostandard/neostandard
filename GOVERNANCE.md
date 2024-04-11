@@ -37,7 +37,6 @@ following the [CONTRIBUTING](CONTRIBUTING.md) guidelines.
 * Reviewing and commenting on issues and pull requests
 * Participation in working groups
 * Merging pull requests
-* Release plugins
 
 The Lead Maintainers can remove inactive Collaborators or provide them with
 _Past Collaborators_ status. Past Collaborators may request that the Lead
