@@ -4,7 +4,8 @@ A modern equivalent to `standard`
 
 ## Usage as CLI
 
-TODO
+1. `npm install -D neostandard`
+2. `npx neostandard` / `npx neostandard --fix` / `npx neostandard --help`
 
 ## Usage as config
 
