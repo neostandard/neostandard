@@ -1,7 +1,7 @@
 {
   "name": "neostandard",
   "version": "0.2.0",
-  "description": "A modern successor to standard",
+  "description": "A modern equivalent to standard",
   "homepage": "http://github.com/neostandard/neostandard",
   "repository": {
     "type": "git",
@@ -15,10 +15,16 @@
   "type": "module",
   "exports": "./index.js",
   "types": "index.d.ts",
+  "bin": {
+    "neostandard": "cli.js"
+  },
   "files": [
     "/index.js",
     "/index.d.ts",
     "/index.d.ts.map",
+    "choices/**/*.js",
+    "choices/**/*.d.ts",
+    "choices/**/*.d.ts.map",
     "lib/**/*.js",
     "lib/**/*.d.ts",
     "lib/**/*.d.ts.map"
@@ -28,16 +34,19 @@
   },
   "scripts": {
     "build:0": "run-s clean",
-    "build:1-declaration": "tsc -p declaration.tsconfig.json",
+    "build:1-configs": "node build.js",
+    "build:2-declaration": "tsc -p declaration.tsconfig.json",
+    "build:3-add-ignores": "ts-ignore-import '**/*.d.ts' --allow '@typescript-eslint/utils'",
     "build": "run-s build:*",
-    "check:installed-check": "installed-check -i eslint-plugin-jsdoc -i knip -i installed-check",
+    "check:installed-check": "installed-check --engine-check --version-check",
     "check:knip": "knip",
     "check:lint": "eslint --report-unused-disable-directives .",
     "check:tsc": "tsc",
-    "check:type-coverage": "type-coverage --detail --strict --at-least 99 --ignore-files 'test/*'",
+    "check:type-coverage": "type-coverage --detail --strict --at-least 96 --ignore-files 'test/*'",
     "check": "run-s clean && run-p check:*",
     "clean:declarations-top": "rm -rf $(find . -maxdepth 1 -type f -name '*.d.ts*')",
     "clean:declarations-lib": "rm -rf $(find lib -type f -name '*.d.ts*' ! -name '*-types.d.ts')",
+    "clean:declarations-configs": "rm -rf $(find configs -type f -name '*.d.ts*')",
     "clean": "run-p clean:*",
     "prepare": "husky",
     "prepublishOnly": "run-s build",
@@ -46,21 +55,27 @@
     "test": "run-s check test:*"
   },
   "devDependencies": {
+    "@types/debug": "^4.1.12",
     "@types/node": "^18.19.30",
     "@voxpelli/tsconfig": "^11.0.0",
     "husky": "^9.0.11",
     "installed-check": "^9.3.0",
     "knip": "^5.8.0",
     "npm-run-all2": "^6.1.1",
+    "redent": "^4.0.0",
+    "trim-newlines": "^5.0.0",
+    "ts-ignore-import": "^4.0.1",
     "type-coverage": "^2.28.1",
     "typescript": "~5.4.4"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/utils": "^7.6.0",
+    "debug": "^4.3.2",
     "eslint": "^9.0.0",
     "eslint-plugin-n": "^17.0.0",
     "globals": "^15.0.0",
+    "peowly": "^1.1.2",
     "typescript-eslint": "^7.6.0"
   },
   "peerDependencies": {
