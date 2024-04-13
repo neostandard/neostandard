@@ -62,5 +62,13 @@
     "eslint-plugin-n": "^17.0.0",
     "globals": "^15.0.0",
     "typescript-eslint": "^7.6.0"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0"
+  },
+  "peerDependenciesMeta": {
+    "eslint": {
+      "optional": true
+    }
   }
 }
