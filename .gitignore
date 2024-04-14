@@ -14,3 +14,4 @@
 !/lib/**/*-types.d.ts
 
 # Library specific ones
+/configs/*.js
