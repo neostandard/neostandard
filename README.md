@@ -18,7 +18,7 @@ A modern equivalent to `standard`
     In CommonJS:
 
     ```js
-    module.exports = require('./')({
+    module.exports = require('neostandard')({
       // options
     })
     ```
