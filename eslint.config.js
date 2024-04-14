@@ -1,6 +1,3 @@
 'use strict'
 
-module.exports = require('./')({
-  tsForJs: true,
-  typeChecking: true,
-})
+module.exports = require('./')()
