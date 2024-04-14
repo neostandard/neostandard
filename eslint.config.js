@@ -1,6 +1,6 @@
-import { neostandard } from './index.js'
+'use strict'
 
-export default neostandard({
+module.exports = require('./')({
   tsForJs: true,
   typeChecking: true,
 })

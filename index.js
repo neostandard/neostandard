@@ -1,1 +1,3 @@
-export * from './lib/main.js'
+'use strict'
+
+module.exports = require('./lib/main').neostandard

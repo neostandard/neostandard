@@ -12,8 +12,7 @@
   "engines": {
     "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
   },
-  "type": "module",
-  "exports": "./index.js",
+  "main": "index.js",
   "types": "index.d.ts",
   "files": [
     "/index.js",
@@ -48,6 +47,7 @@
   "devDependencies": {
     "@types/node": "^18.19.30",
     "@voxpelli/tsconfig": "^11.0.0",
+    "eslint": "^9.0.0",
     "husky": "^9.0.11",
     "installed-check": "^9.3.0",
     "knip": "^5.8.0",
@@ -58,9 +58,11 @@
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/utils": "^7.6.0",
-    "eslint": "^9.0.0",
     "eslint-plugin-n": "^17.0.0",
     "globals": "^15.0.0",
     "typescript-eslint": "^7.6.0"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0"
   }
 }
