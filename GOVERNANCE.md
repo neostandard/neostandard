@@ -62,8 +62,8 @@ example:
 
 Otherwise, a Contributor may self-apply if they believe they meet the above
 criteria by reaching out to a Lead Maintainer privately with the links to their
-valuable contributions. The Lead Maintainers will reply to the Contributor and
-will decide if candidate it to be made a collaborator.
+valuable contributions. That Lead Maintainer will then open a private team discussion on
+GitHub regarding that and reply back when a decision has been made.
 
 The consensus to grant a new candidate Collaborator status is reached when:
 
