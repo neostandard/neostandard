@@ -3,5 +3,8 @@
   "entry": [
     "index.js",
     "index.d.ts"
+  ],
+  "ignoreDependencies": [
+    "list-dependents-cli"
   ]
 }
