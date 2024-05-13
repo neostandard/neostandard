@@ -35,14 +35,14 @@ npx list-dependents update -n ts-standard
 In `./dependents-data/source/`:
 
 ```sh
-npx list-dependents refresh eslint-config-semistandard.ndjson
-npx list-dependents refresh eslint-config-standard-with-typescript.ndjson
-npx list-dependents refresh eslint-config-standard.ndjson
-npx list-dependents refresh semistandard.ndjson
-npx list-dependents refresh snazzy.ndjson
-npx list-dependents refresh standard.ndjson
-npx list-dependents refresh standardx.ndjson
-npx list-dependents refresh ts-standard.ndjson
+npx list-dependents refresh -n eslint-config-semistandard
+npx list-dependents refresh -n eslint-config-standard-with-typescript
+npx list-dependents refresh -n eslint-config-standard
+npx list-dependents refresh -n semistandard
+npx list-dependents refresh -n snazzy
+npx list-dependents refresh -n standard
+npx list-dependents refresh -n standardx
+npx list-dependents refresh -n ts-standard
 ```
 
 ## Filter using
