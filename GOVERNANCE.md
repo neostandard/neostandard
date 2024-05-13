@@ -35,7 +35,6 @@ following the [CONTRIBUTING](CONTRIBUTING.md) guidelines.
 * Helping users and novice contributors
 * Contributing code and documentation changes that improve the project
 * Reviewing and commenting on issues and pull requests
-* Participation in working groups
 * Merging pull requests
 
 The Lead Maintainers can remove inactive Collaborators or provide them with
@@ -77,13 +76,19 @@ Lead maintainer and with agreement from the rest of Lead Maintainers.
 
 ## Consensus seeking process
 
-The Neostandard organization follows a [Consensus Seeking][] decision-making model.
-In case of a Collaborator objection to a specific change, the Lead Maintainers can
-vote to override the objection.
+The Neostandard organization follows a Lazy [Consensus Seeking][] decision-making model,
+inspired by the ASF
 
-For all votes, a simple majority of all Lead Maintainers for, or against, the
-issue wins. A Lead Maintainer member may choose to participate in any vote through
-abstention.
+Lazy means that silence is consent if an appropriate amount of time has passed
+(most of the time: at least a week) since the suggestion was made and no objections
+has been raised.
+
+This only holds true if all relevant parties has been notified of the suggestion
+and given the opportunity to take part. Eg. extra care needs to be taken during
+holiday and vacation times.
+
+Decision makers should strive to give active consent and not actively wait out
+silent consent.
 
 [Consensus Seeking]:
     https://en.wikipedia.org/wiki/Consensus-seeking_decision-making
