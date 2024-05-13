@@ -47,7 +47,8 @@ npx list-dependents refresh ts-standard.ndjson
 
 ## Filter using
 
+From `./`:
 
 ```sh
-npx list-dependents filter -i dependents-data/source/standard.ndjson -o dependents-data/standard-filtered.ndjson --min-downloads=100000 --max-age=90 --sort-download
+npx list-dependents filter -i dependents-data/source/standard.ndjson -o dependents-data/standard-filtered.ndjson --min-downloads=100000 --max-count=30 --sort-download
 ```
