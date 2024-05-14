@@ -35,7 +35,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: set-matrix
-        run: echo "matrix=$(jq -s -c '[.[].repositoryUrl]' dependents-data/${{ github.event.inputs.moduleSet || 'eslint-config-standard-filtered' }}.ndjson)" >> $GITHUB_OUTPUT
+        run: echo "matrix=$(jq -s -c '[.[].repositoryUrl | sub("https://github.com/";"";"i")]' dependents-data/${{ github.event.inputs.moduleSet || 'eslint-config-standard-filtered' }}.ndjson)" >> $GITHUB_OUTPUT
 
   test_external:
     needs: read_projects
