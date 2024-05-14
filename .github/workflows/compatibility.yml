@@ -14,10 +14,12 @@ on:
       moduleSet:
         description: 'Module set'
         required: true
-        default: 'eslint-config-standard-filtered'
+        default: 'standard-filtered'
         type: choice
         options:
+        - standard-filtered
         - eslint-config-standard-filtered
+        - eslint-config-semistandard-filtered
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -35,7 +37,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: set-matrix
-        run: echo "matrix=$(jq -s -c '[.[].repositoryUrl | sub("https://github.com/";"";"i")]' dependents-data/${{ github.event.inputs.moduleSet || 'eslint-config-standard-filtered' }}.ndjson)" >> $GITHUB_OUTPUT
+        run: echo "matrix=$(jq -s -c '[.[].repositoryUrl | sub("https://github.com/";"";"i")]' dependents-data/${{ github.event.inputs.moduleSet || 'standard-filtered' }}.ndjson)" >> $GITHUB_OUTPUT
 
   test_external:
     needs: read_projects
@@ -83,5 +85,11 @@ jobs:
         working-directory: ./project
 
       - name: run eslint
+        if: github.event.inputs.moduleSet != 'eslint-config-semistandard-filtered'
         run: ../main/node_modules/.bin/eslint -c ../main/eslint.config.js
+        working-directory: ./project
+
+      - name: run eslint semi
+        if: github.event.inputs.moduleSet == 'eslint-config-semistandard-filtered'
+        run: ../main/node_modules/.bin/eslint -c ../main/test-configs/semi.js
         working-directory: ./project

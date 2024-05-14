@@ -4,6 +4,9 @@
     "index.js",
     "index.d.ts"
   ],
+  "ignore": [
+    "test-configs/*"
+  ],
   "ignoreDependencies": [
     "list-dependents-cli"
   ]
