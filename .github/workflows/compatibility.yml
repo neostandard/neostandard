@@ -64,7 +64,21 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node_version }}
-          cache: 'npm'
+
+      - name: Determine npm cache directory windows
+        id: npm-cache-dir-windows
+        if: runner.os == 'Windows'
+        run: echo "dir=$(npm config get cache)" >> $env:GITHUB_OUTPUT
+      - name: Determine npm cache directory non-windows
+        id: npm-cache-dir
+        if: runner.os != 'Windows'
+        run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.npm-cache-dir-windows.outputs.dir || steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json', '**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: install main
         run: 'npm ci --ignore-scripts --force'
