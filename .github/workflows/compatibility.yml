@@ -1,0 +1,78 @@
+name: Compatibility
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      moduleSet:
+        description: 'Module set'
+        required: true
+        default: 'eslint-config-standard-filtered'
+        type: choice
+        options:
+        - eslint-config-standard-filtered
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  read_projects:
+    name: Read list of ${{ github.event.inputs.moduleSet || 'compliant' }} projects
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: set-matrix
+        run: echo "matrix=$(jq -s -r '[.[].name] | join(" ")' ${{ github.event.inputs.moduleSet || 'eslint-config-standard-filtered' }}.ndjson)" >> $GITHUB_OUTPUT
+
+  test_external:
+    needs: read_projects
+    name: Test ${{ matrix.project }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node_version: [lts/*]
+        project: ${{ fromJson(needs.read_projects.outputs.matrix) }}
+
+    steps:
+      - name: Checkout main project
+        uses: actions/checkout@v4
+        with:
+          path: main
+
+      - name: Checkout ${{ matrix.project }}
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ matrix.project }}
+          path: project
+
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node_version }}
+          cache: 'npm'
+
+      - name: install main
+        run: 'npm ci --ignore-scripts --force'
+        working-directory: ./main
+      - name: install project
+        run: '[ -f package-lock.json ] && npm ci --ignore-scripts --force || npm install --ignore-scripts --force'
+        working-directory: ./project
+
+      - name: run eslint
+        run: ../main/node_modules/.bin/eslint -c ../main/eslint.config.js
+        working-directory: ./project
