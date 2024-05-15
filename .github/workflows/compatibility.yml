@@ -86,10 +86,5 @@ jobs:
 
       - name: run eslint
         if: github.event.inputs.moduleSet != 'eslint-config-semistandard-filtered'
-        run: ../main/node_modules/.bin/eslint -c ../main/eslint.config.js
-        working-directory: ./project
-
-      - name: run eslint semi
-        if: github.event.inputs.moduleSet == 'eslint-config-semistandard-filtered'
-        run: ../main/node_modules/.bin/eslint -c ../main/test-configs/semi.js --quiet
+        run: ../main/node_modules/.bin/eslint --quiet -c ${{github.event.inputs.moduleSet == 'eslint-config-semistandard-filtered' && '../main/test-configs/semi.js' || '../main/eslint.config.js' }}
         working-directory: ./project
