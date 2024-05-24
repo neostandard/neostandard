@@ -81,7 +81,15 @@ const flagsFromMigration = {}
 
 if (migrate) {
   /** @type {unknown} */
-  const sourcePkg = JSON.parse(await readFile(join(process.cwd(), 'package.json'), 'utf8'))
+  let sourcePkg
+
+  try {
+    sourcePkg = JSON.parse(await readFile(join(process.cwd(), 'package.json'), 'utf8'))
+  } catch (cause) {
+    console.log('Failed to read package.json:', cause)
+    process.exit(1)
+  }
+
   if (sourcePkg && typeof sourcePkg === 'object' && 'standard' in sourcePkg && sourcePkg.standard && typeof sourcePkg.standard === 'object') {
     for (const [key, value] of Object.entries(sourcePkg.standard)) {
       if (key === 'global' || key === 'globals' || key === 'ignore' || key === 'ignores') {
