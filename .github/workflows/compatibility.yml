@@ -37,7 +37,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: set-matrix
-        run: echo "matrix=$(jq -s -c '[.[].repositoryUrl | sub("https://github.com/";"";"i")] | unique' dependents-data/${{ github.event.inputs.moduleSet || 'standard-filtered' }}.ndjson)" >> $GITHUB_OUTPUT
+        run: echo "matrix=$(jq -s -c '[.[].repositoryUrl | sub("https://github.com/";"";"i")] | unique | sort' dependents-data/${{ github.event.inputs.moduleSet || 'standard-filtered' }}.ndjson)" >> $GITHUB_OUTPUT
 
   test_external:
     needs: read_projects
@@ -86,5 +86,5 @@ jobs:
 
       - name: run eslint
         if: github.event.inputs.moduleSet != 'eslint-config-semistandard-filtered'
-        run: ../main/node_modules/.bin/eslint --quiet -c ${{github.event.inputs.moduleSet == 'eslint-config-semistandard-filtered' && '../main/test-configs/semi.js' || '../main/eslint.config.js' }}
+        run: ../main/node_modules/.bin/eslint --quiet -c ${{github.event.inputs.moduleSet == 'eslint-config-semistandard-filtered' && '../main/test-configs/semi.js' || '../main/test-configs/no-ts.js' }}
         working-directory: ./project
