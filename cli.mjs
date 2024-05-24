@@ -138,9 +138,7 @@ console.log(
   esm
     ? `import neostandard from 'neostandard'${semiEnding}
 
-export default neostandard(${formattedConfig})${semiEnding}
-`
+export default neostandard(${formattedConfig})${semiEnding}`
     : `'use strict'${semiEnding}
 
-module.exports = require('neostandard')(${formattedConfig})${semiEnding}
-`)
+module.exports = require('neostandard')(${formattedConfig})${semiEnding}`)
