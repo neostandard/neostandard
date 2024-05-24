@@ -16,7 +16,6 @@ const {
     migrate,
     ...flags
   },
-  showHelp,
 } = peowly({
   options: {
     esm: {
@@ -118,13 +117,13 @@ for (const flag of flagKeys) {
   }
 }
 
-if (!config.length) {
-  showHelp()
-}
-
 const formattedConfig = config.length > 1
   ? `{\n  ${config.join(',\n  ')},\n}`
-  : `{ ${config.join(', ')} }`
+  : (
+      config.length
+        ? `{ ${config.join(', ')} }`
+        : '{}'
+    )
 const semiEnding = flags.semi ? ';' : ''
 
 console.log(
