@@ -6,8 +6,5 @@
   ],
   "ignore": [
     "test-configs/*"
-  ],
-  "ignoreDependencies": [
-    "list-dependents-cli"
   ]
 }
