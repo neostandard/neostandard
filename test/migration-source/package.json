@@ -1,0 +1,10 @@
+{
+  "standard": {
+    "globals": [
+      "describe",
+      "it"
+    ],
+    "ignore": "bench",
+    "random": true
+  }
+}

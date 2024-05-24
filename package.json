@@ -13,7 +13,7 @@
     "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
   },
   "bin": {
-    "neostandard": "cli.js"
+    "neostandard": "cli.mjs"
   },
   "main": "index.js",
   "types": "index.d.ts",

@@ -1,15 +1,19 @@
 #!/usr/bin/env node
 
 import { readFile } from 'node:fs/promises'
+import { join } from 'node:path'
 
 import { peowly } from 'peowly'
+import { isStringArray } from './lib/utils.js'
 
 const packagePath = new URL('./package.json', import.meta.url)
+// type-coverage:ignore-next-line
 const pkg = JSON.parse(await readFile(packagePath, { encoding: 'utf8' }))
 
 const {
   flags: {
     esm,
+    migrate,
     ...flags
   },
   showHelp,
@@ -19,7 +23,6 @@ const {
       listGroup: 'Output options',
       description: 'Outputs as ESM instead of as CJS',
       type: 'boolean',
-
     },
     global: {
       listGroup: 'Config options',
@@ -43,6 +46,11 @@ const {
     'no-ts': {
       listGroup: 'Config options',
       description: 'Deactivates all TypeScript based linting',
+      type: 'boolean',
+    },
+    migrate: {
+      listGroup: 'Input options',
+      description: 'Migrates the standardjs config in the package.json in the current directory',
       type: 'boolean',
     },
     semi: {
@@ -69,16 +77,44 @@ const flagMapping = /** @satisfies {Record<keyof typeof flags, keyof import('./i
 
 const flagKeys = /** @type {Array<keyof typeof flagMapping>} */ (Object.keys(flagMapping))
 
+/** @type {Partial<typeof flags>} */
+const flagsFromMigration = {}
+
+if (migrate) {
+  /** @type {unknown} */
+  const sourcePkg = JSON.parse(await readFile(join(process.cwd(), 'package.json'), 'utf8'))
+  if (sourcePkg && typeof sourcePkg === 'object' && 'standard' in sourcePkg && sourcePkg.standard && typeof sourcePkg.standard === 'object') {
+    for (const [key, value] of Object.entries(sourcePkg.standard)) {
+      if (key === 'global' || key === 'globals' || key === 'ignore' || key === 'ignores') {
+        const targetKey = key === 'ignore' || key === 'ignores' ? 'ignore' : 'global'
+
+        if (typeof value === 'string') {
+          flagsFromMigration[targetKey] = [value]
+        } else if (Array.isArray(value) && isStringArray(value)) {
+          flagsFromMigration[targetKey] = value
+        } else {
+          console.log(`Invalid migration value for "standard.${key}". Expected an array of strings, got:`, value)
+          process.exit(1)
+        }
+      } else {
+        console.warn(`Migration for "standard.${key}" is not yet supported. Open an issue at https://github.com/neostandard/neostandard`)
+      }
+    }
+  }
+}
+
 /** @type {string[]} */
 const config = []
 
 for (const flag of flagKeys) {
-  if (flags[flag]) {
-    const value = JSON.stringify(flags[flag])
+  const value = flags[flag] || flagsFromMigration[flag]
+
+  if (value) {
+    const formattedValue = JSON.stringify(value)
       .replaceAll('"', '\'')
       .replaceAll('\',\'', '\', \'')
 
-    config.push(`${flagMapping[flag]}: ${value}`)
+    config.push(`${flagMapping[flag]}: ${formattedValue}`)
   }
 }
 
