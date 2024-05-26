@@ -8,6 +8,5 @@
   "include": [
     "lib/**/*",
     "test/**/*",
-    "test-configs/**/*",
   ]
 }

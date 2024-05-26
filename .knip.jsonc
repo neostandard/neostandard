@@ -3,8 +3,5 @@
   "entry": [
     "index.js",
     "index.d.ts"
-  ],
-  "ignore": [
-    "test-configs/*"
   ]
 }
