@@ -89,5 +89,5 @@ jobs:
         working-directory: ./project
 
       - name: run eslint
-        run: ../main/node_modules/.bin/eslint --quiet -c eslint.config.cjs
+        run: ../main/node_modules/.bin/eslint -c eslint.config.cjs
         working-directory: ./project
