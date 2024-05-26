@@ -1,0 +1,9 @@
+{
+  "standard": {
+    "globals": [
+      "describe",
+      "it"
+    ],
+    "ignore": true
+  }
+}

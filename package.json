@@ -12,6 +12,9 @@
   "engines": {
     "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
   },
+  "bin": {
+    "neostandard": "cli.mjs"
+  },
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
@@ -29,19 +32,28 @@
     "build:0": "run-s clean",
     "build:1-declaration": "tsc -p declaration.tsconfig.json",
     "build": "run-s build:*",
-    "check:installed-check": "installed-check --engine-check --version-check",
+    "check:installed-check": "installed-check --engine-check --version-check -i list-dependents-cli",
     "check:knip": "knip",
     "check:lint": "eslint --report-unused-disable-directives .",
     "check:tsc": "tsc",
     "check:type-coverage": "type-coverage --detail --strict --at-least 99 --ignore-files 'test/*'",
     "check": "run-s clean && run-p check:*",
-    "clean:declarations-top": "rm -rf $(find . -maxdepth 1 -type f -name '*.d.ts*')",
     "clean:declarations-lib": "rm -rf $(find lib -type f -name '*.d.ts*' ! -name '*-types.d.ts')",
+    "clean:declarations-top": "rm -rf $(find . -maxdepth 1 -type f -name '*.d.ts*')",
     "clean": "run-p clean:*",
+    "dependents-filter-one": "list-dependents filter --max-count=30 --sort-download --max-age=550 --repository-prefix=https://github.com/",
+    "dependents-filter:eslint-config-semistandard": "npm run --silent dependents-filter-one -- -i dependents-data/source/eslint-config-semistandard.ndjson -o dependents-data/eslint-config-semistandard-filtered.ndjson --min-downloads=5000 --target-version='>=17.0.0'",
+    "dependents-filter:eslint-config-standard": "npm run --silent dependents-filter-one -- -i dependents-data/source/eslint-config-standard.ndjson -o dependents-data/eslint-config-standard-filtered.ndjson --min-downloads=5000 --target-version='>=17.0.0'",
+    "dependents-filter:standard": "npm run --silent dependents-filter-one -- -i dependents-data/source/standard.ndjson -o dependents-data/standard-filtered.ndjson --min-downloads=75000 --target-version='>=17.0.0'",
+    "dependents-filter": "run-p dependents-filter:*",
+    "dependents-refresh-one": "cd dependents-data/source/ && list-dependents refresh --field engines -n",
+    "dependents-refresh": "run-s --print-label \"dependents-refresh-one -- {%}\" -- $(jq -r 'join(\" \")' dependents-data/projects.json)",
+    "dependents-update-one": "cd dependents-data/source/ && list-dependents list --field engines -n",
+    "dependents-update": "run-s --print-label \"dependents-update-one -- {%}\" -- $(jq -r 'join(\" \")' dependents-data/projects.json)",
     "prepare": "husky",
     "prepublishOnly": "run-s build",
-    "test:eslint": "eslint .",
     "test-ci": "run-s test:*",
+    "test:eslint": "eslint .",
     "test": "run-s check test:*"
   },
   "devDependencies": {
@@ -50,9 +62,10 @@
     "eslint": "^9.0.0",
     "husky": "^9.0.11",
     "installed-check": "^9.3.0",
-    "knip": "^5.8.0",
-    "npm-run-all2": "^6.1.1",
-    "type-coverage": "^2.28.1",
+    "knip": "^5.16.0",
+    "list-dependents-cli": "^2.0.1",
+    "npm-run-all2": "^6.2.0",
+    "type-coverage": "^2.28.2",
     "typescript": "~5.4.4"
   },
   "dependencies": {
@@ -60,7 +73,8 @@
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/utils": "^7.6.0",
     "eslint-plugin-n": "^17.0.0",
-    "globals": "^15.0.0",
+    "globals": "^15.3.0",
+    "peowly": "^1.3.0",
     "typescript-eslint": "^7.6.0"
   },
   "peerDependencies": {
