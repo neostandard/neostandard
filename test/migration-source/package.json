@@ -5,6 +5,11 @@
       "it"
     ],
     "ignore": "bench",
+    "env": [
+      "browser",
+      "mocha",
+      "serviceworker"
+    ],
     "random": true
   }
 }

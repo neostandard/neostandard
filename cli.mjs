@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
 import { peowly } from 'peowly'
+
 import { isStringArray } from './lib/utils.js'
 
 const packagePath = new URL('./package.json', import.meta.url)
@@ -18,6 +19,12 @@ const {
   },
 } = peowly({
   options: {
+    env: {
+      listGroup: 'Config options',
+      description: 'Legacy environment definition, eg. "mocha". --global is preferred',
+      type: 'string',
+      multiple: true,
+    },
     esm: {
       listGroup: 'Output options',
       description: 'Outputs as ESM instead of as CJS',
@@ -67,6 +74,7 @@ const {
 })
 
 const flagMapping = /** @satisfies {Record<keyof typeof flags, keyof import('./index.js').NeostandardOptions>} */ ({
+  env: 'env',
   global: 'globals',
   ignore: 'ignores',
   'no-style': 'noStyle',
@@ -76,8 +84,18 @@ const flagMapping = /** @satisfies {Record<keyof typeof flags, keyof import('./i
 
 const flagKeys = /** @type {Array<keyof typeof flagMapping>} */ (Object.keys(flagMapping))
 
-/** @type {Partial<typeof flags>} */
+/** @type {Partial<typeof flags> & { env?: string[] }} */
 const flagsFromMigration = {}
+
+/**
+ * @template {string} T
+ * @template {T extends `${infer U}s` ? U : T} R
+ * @param {T} value
+ * @returns {R}
+ */
+function ensureSingular (value) {
+  return /** @type {R} */ (value.endsWith('s') ? value.slice(0, -1) : value)
+}
 
 if (migrate) {
   /** @type {unknown} */
@@ -91,14 +109,14 @@ if (migrate) {
   }
 
   if (sourcePkg && typeof sourcePkg === 'object' && 'standard' in sourcePkg && sourcePkg.standard && typeof sourcePkg.standard === 'object') {
-    for (const [key, value] of Object.entries(sourcePkg.standard)) {
-      if (key === 'global' || key === 'globals' || key === 'ignore' || key === 'ignores') {
-        const targetKey = key === 'ignore' || key === 'ignores' ? 'ignore' : 'global'
+    for (const [rawKey, value] of Object.entries(sourcePkg.standard)) {
+      const key = ensureSingular(rawKey)
 
+      if (key === 'global' || key === 'ignore' || key === 'env') {
         if (typeof value === 'string') {
-          flagsFromMigration[targetKey] = [value]
+          flagsFromMigration[key] = [value]
         } else if (Array.isArray(value) && isStringArray(value)) {
-          flagsFromMigration[targetKey] = value
+          flagsFromMigration[key] = value
         } else {
           console.log(`Invalid migration value for "standard.${key}". Expected an array of strings, got:`, value)
           process.exit(1)
@@ -114,7 +132,12 @@ if (migrate) {
 const config = []
 
 for (const flag of flagKeys) {
-  const value = flags[flag] || flagsFromMigration[flag]
+  const newValue = flags[flag]
+  const migratedValue = flagsFromMigration[flag]
+
+  const value = Array.isArray(newValue) && Array.isArray(migratedValue)
+    ? [...newValue, ...migratedValue]
+    : (newValue || migratedValue)
 
   if (value) {
     const formattedValue = JSON.stringify(value)
