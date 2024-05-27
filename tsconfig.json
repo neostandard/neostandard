@@ -8,5 +8,9 @@
   "include": [
     "lib/**/*",
     "test/**/*",
-  ]
+  ],
+  "compilerOptions": {
+    // Temporary: Until typescript-eslint passes without it
+    "skipLibCheck": true
+  }
 }
