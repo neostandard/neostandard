@@ -78,8 +78,8 @@ const flagMapping = /** @satisfies {Record<keyof typeof flags, keyof import('./i
   global: 'globals',
   ignore: 'ignores',
   'no-style': 'noStyle',
-  ts: 'ts',
   semi: 'semi',
+  ts: 'ts',
 })
 
 const flagKeys = /** @type {Array<keyof typeof flagMapping>} */ (Object.keys(flagMapping))

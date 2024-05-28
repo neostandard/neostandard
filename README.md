@@ -44,8 +44,8 @@ A modern equivalent to `standard`
 * `globals` - _`string[] | object`_ - an array of names of globals or an object of the same shape as ESLint [`languageOptions.globals`](https://eslint.org/docs/latest/use/configure/language-options#using-configuration-files)
 * `ignores` - _`string[]`_ - an array of glob patterns indicating the files that the config should not apply to
 * `noStyle` - _`boolean`_ - if set, no style rules will be added
-* `noTs` - _`boolean`_ - if set, no `*.ts` (or `*.d.ts`) will be checked
 * `semi` - _`boolean`_ - if set, enforce rather than forbid semicolons
+* `ts` - _`boolean`_ - if set, `.ts` (and `.d.ts`) files will be checked
 
 ## Differences to standard / eslint-config-standard 17.x
 
