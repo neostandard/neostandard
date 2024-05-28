@@ -76,7 +76,7 @@ A modern equivalent to `standard`
 You can use the provided CLI tool to generate a config for you:
 
 ```sh
-neostandard --semi --no-ts > eslint.config.js
+neostandard --semi --ts > eslint.config.js
 ```
 
 To see all available flags, run:
