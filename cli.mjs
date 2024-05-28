@@ -49,9 +49,9 @@ const {
       description: 'Deactivates all style linting',
       type: 'boolean',
     },
-    'no-ts': {
+    ts: {
       listGroup: 'Config options',
-      description: 'Deactivates all TypeScript based linting',
+      description: 'Activates all TypeScript based linting',
       type: 'boolean',
     },
     migrate: {
@@ -78,7 +78,7 @@ const flagMapping = /** @satisfies {Record<keyof typeof flags, keyof import('./i
   global: 'globals',
   ignore: 'ignores',
   'no-style': 'noStyle',
-  'no-ts': 'noTs',
+  ts: 'ts',
   semi: 'semi',
 })
 
