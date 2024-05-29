@@ -52,7 +52,7 @@ contributor.
 Individuals making significant and valuable contributions to the project may be
 a candidate to join the Neostandard organization.
 
-A Collaborator needs to open a private team discussion on GitHub and list the
+A Collaborator needs to open a private team discussion in [`neostandard/collaborators`](https://github.com/neostandard/collaborators) and list the
 candidates they want to sponsor with a link to the user's contributions. For
 example:
 
