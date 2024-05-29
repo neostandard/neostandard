@@ -1,6 +1,6 @@
 <div align="center">
   <img
-    src="assets/neostandard2.svg"
+    src="assets/neostandard3.svg"
     width="650"
     height="auto"
     alt="neostandard"
