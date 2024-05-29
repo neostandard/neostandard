@@ -11,21 +11,37 @@
 
 [![npm version](https://img.shields.io/npm/v/neostandard.svg?style=flat)](https://www.npmjs.com/package/neostandard)
 [![npm downloads](https://img.shields.io/npm/dm/neostandard.svg?style=flat)](https://www.npmjs.com/package/neostandard)
-[![neostandard javascript style](https://img.shields.io/badge/neo-standard-7fffff?style=flat&labelColor=ff80ff)](https://github.com/neostandard/neostandard)
+[![neostandard javascript style](https://img.shields.io/badge/neo-standard-7fffff?style=flat\&labelColor=ff80ff)](https://github.com/neostandard/neostandard)
 
 A spiritual successor to the [`standard`](https://github.com/standard/standard) javascript style guide
 
 **Initial development sponsored by:**
 
 <img
-  src="assets/platformatic.svg"
-  width="450"
-  height="auto"
-  alt="platformatic"
+src="assets/platformatic.svg"
+width="450"
+height="auto"
+alt="platformatic"
 />
+
 </div>
 
-## Usage
+## Table of Contents
+
+* [Quick Start](#quick-start)
+  * [Migrate from `standard`](#migrate-from-standard)
+  * [Add to new project](#add-to-new-project)
+* [Configuration options](#configuration-options)
+* [Missing for 1.0.0 release](#missing-for-100-release)
+* [Differences to standard / eslint-config-standard 17.x](#differences-to-standard--eslint-config-standard-17x)
+  * [Changed rules](#changed-rules)
+  * [Relaxed rules](#relaxed-rules)
+  * [Missing bits](#missing-bits)
+* [Config helper](#config-helper)
+  * [Config migration](#config-migration)
+* [Readme badges](#readme-badges)
+
+## Quick Start
 
 ### Migrate from `standard`
 
@@ -33,63 +49,64 @@ A spiritual successor to the [`standard`](https://github.com/standard/standard) 
 2. `npx neostandard --migrate > eslint.config.js` (uses our [config helper](#config-helper))
 3. Replace `standard` with `eslint` in all places where you run `standard`, eg. `"scripts"` and `.github/workflows/` (`neostandard` CLI tracked in [#2](https://github.com/neostandard/neostandard/issues/2))
 4. (Add ESLint editor integration, eg. [VS Code ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint))
-6. Cleanup:
-    * `npm uninstall standard`
-    * Remove unused `"standard"` top level key from your `package.json`
-    * Deactivate `standard` specific integrations if you no longer use them (eg. [vscode-standard](https://marketplace.visualstudio.com/items?itemName=standard.vscode-standard)))
-
+5. Cleanup:
+   * `npm uninstall standard`
+   * Remove unused `"standard"` top level key from your `package.json`
+   * Deactivate `standard` specific integrations if you no longer use them (eg. [vscode-standard](https://marketplace.visualstudio.com/items?itemName=standard.vscode-standard)))
 
 ### Add to new project
 
 1. `npm install -D neostandard`
 2. Add an `eslint.config.js`:
 
-    Using config helper:
+   Using config helper:
 
-    ```sh
-    npx neostandard --esm > eslint.config.js
-    ```
+   ```sh
+   npx neostandard --esm > eslint.config.js
+   ```
 
-    Or to get CommonJS:
+   Or to get CommonJS:
 
-    ```sh
-    npx neostandard > eslint.config.js
-    ```
+   ```sh
+   npx neostandard > eslint.config.js
+   ```
 
-    Or manually create the file as ESM:
+   Or manually create the file as ESM:
 
-    ```js
-    import { neostandard } from 'neostandard'
+   ```js
+   import { neostandard } from 'neostandard'
 
-    export default neostandard({
-      // options
-    })
-    ```
+   export default neostandard({
+     // options
+   })
+   ```
 
-    Or as CommonJS:
+   Or as CommonJS:
 
-    ```js
-    module.exports = require('neostandard')({
-      // options
-    })
-    ```
+   ```js
+   module.exports = require('neostandard')({
+     // options
+   })
+   ```
 3. Run `neostandard` by running ESLint, eg. using `npx eslint`, `npx eslint --fix` or similar
 
 ## Configuration options
 
-* `env` - _`string[]`_ - adds additional globals by importing them from the [globals](https://www.npmjs.com/package/globals) npm module
-* `globals` - _`string[] | object`_ - an array of names of globals or an object of the same shape as ESLint [`languageOptions.globals`](https://eslint.org/docs/latest/use/configure/language-options#using-configuration-files)
-* `ignores` - _`string[]`_ - an array of glob patterns indicating the files that the config should not apply to, see [ESLint documentation](https://eslint.org/docs/latest/use/configure/ignore) for details
-* `noStyle` - _`boolean`_ - if set, no style rules will be added. Especially useful when combined with [Prettier](https://prettier.io/), [dprint](https://dprint.dev/) or similar
-* `semi` - _`boolean`_ - if set, enforce rather than forbid semicolons (same as `semistandard` did)
-* `ts` - _`boolean`_ - if set, `.ts` (and `.d.ts`) files will be checked
+* `env` - *`string[]`* - adds additional globals by importing them from the [globals](https://www.npmjs.com/package/globals) npm module
+* `globals` - *`string[] | object`* - an array of names of globals or an object of the same shape as ESLint [`languageOptions.globals`](https://eslint.org/docs/latest/use/configure/language-options#using-configuration-files)
+* `ignores` - *`string[]`* - an array of glob patterns indicating the files that the config should not apply to, see [ESLint documentation](https://eslint.org/docs/latest/use/configure/ignore) for details
+* `noStyle` - *`boolean`* - if set, no style rules will be added. Especially useful when combined with [Prettier](https://prettier.io/), [dprint](https://dprint.dev/) or similar
+* `semi` - *`boolean`* - if set, enforce rather than forbid semicolons (same as `semistandard` did)
+* `ts` - *`boolean`* - if set, `.ts` (and `.d.ts`) files will be checked
 
-## Missing before 1.0.0 release
+## Missing for 1.0.0 release
 
 * Add JSX/TSX support: [#11](https://github.com/neostandard/neostandard/issues/11)
 * Migrate `eslint-plugin-promise` rules from `standard`: [#14](https://github.com/neostandard/neostandard/issues/14)
 * Migrate `eslint-plugin-import` rules from `standard`: [#15](https://github.com/neostandard/neostandard/issues/15)
 * Investigate a dedicated `neostandard` runner: [#2](https://github.com/neostandard/neostandard/issues/2)
+
+Full list in [1.0.0 milestone](https://github.com/neostandard/neostandard/milestone/1)
 
 ## Differences to standard / eslint-config-standard 17.x
 
@@ -143,19 +160,18 @@ Migrations can also be extended, so to eg. migrate a `semistandard` setup, do:
 neostandard --semi --migrate > eslint.config.js
 ```
 
-
 ## Readme badges
 
 Yes! If you use `neostandard` in your project, you can include one of these badges in
 your readme to let people know that your code is using the neostandard style.
 
-[![neostandard javascript style](https://img.shields.io/badge/neo-standard-7fffff?style=flat&labelColor=ff80ff)](https://github.com/neostandard/neostandard)
+[![neostandard javascript style](https://img.shields.io/badge/neo-standard-7fffff?style=flat\&labelColor=ff80ff)](https://github.com/neostandard/neostandard)
 
 ```md
 [![neostandard javascript style](https://img.shields.io/badge/neo-standard-7fffff?style=flat&labelColor=ff80ff)](https://github.com/neostandard/neostandard)
 ```
 
-[![neostandard javascript style](https://img.shields.io/badge/code_style-neostandard-7fffff?style=flat&labelColor=ff80ff)](https://github.com/neostandard/neostandard)
+[![neostandard javascript style](https://img.shields.io/badge/code_style-neostandard-7fffff?style=flat\&labelColor=ff80ff)](https://github.com/neostandard/neostandard)
 
 ```md
 [![neostandard javascript style](https://img.shields.io/badge/code_style-neostandard-7fffff?style=flat&labelColor=ff80ff)](https://github.com/neostandard/neostandard)
