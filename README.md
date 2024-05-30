@@ -17,12 +17,12 @@ A spiritual successor to the [`standard`](https://github.com/standard/standard) 
 
 **Initial development sponsored by:**
 
-<img
+<a href="https://platformatic.dev/"><img
 src="assets/platformatic.svg"
 width="450"
 height="auto"
 alt="platformatic"
-/>
+/></a>
 
 </div>
 
