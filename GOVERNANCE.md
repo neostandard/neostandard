@@ -71,8 +71,8 @@ The consensus to grant a new candidate Collaborator status is reached when:
 
 ## Lead Maintainers nominations
 
-A Team Member may be promoted to a Lead Maintainers only through nomination by a
-Lead maintainer and with agreement from the rest of Lead Maintainers.
+A Team Member may be promoted to a Lead Maintainer only through nomination by a
+Lead Maintainer and with agreement from the rest of Lead Maintainers.
 
 ## Consensus seeking process
 
