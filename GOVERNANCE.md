@@ -90,5 +90,4 @@ holiday and vacation times.
 Decision makers should strive to give active consent and not actively wait out
 silent consent.
 
-[Consensus Seeking]:
-    https://en.wikipedia.org/wiki/Consensus-seeking_decision-making
+[Consensus Seeking]: https://github.com/openjs-foundation/cross-project-council/blob/main/CPC-CHARTER.md#section-9-decision-making
