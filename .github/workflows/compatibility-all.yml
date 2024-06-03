@@ -10,18 +10,27 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+
 jobs:
-  compatibility-semistandard:
-    uses: ./.github/workflows/compatibility.yml
-    with:
-      moduleSet: semistandard-filtered
+  read_projects:
+    name: Read targets
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: set-matrix
+        run: echo "matrix=$(cat dependents-data/projects.json | jq -c)" >> $GITHUB_OUTPUT
 
-  compatibility-standard:
-    uses: ./.github/workflows/compatibility.yml
-    with:
-      moduleSet: standard-filtered
 
-  compatibility-ts-standard:
+  compatibility:
+    needs: read_projects
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJson(needs.read_projects.outputs.matrix) }}
     uses: ./.github/workflows/compatibility.yml
     with:
-      moduleSet: ts-standard-filtered
+      moduleSet: ${{ matrix.project }}-filtered
