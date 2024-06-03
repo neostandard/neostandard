@@ -1,3 +1,16 @@
 {
-  "https://github.com/MeUndies/loom": "Repository no longer exists"
+  "https://github.com/carhartl/typescript-cookie": "Archived + failing on @stylistic/space-before-function-paren and @stylistic/indent",
+  "https://github.com/extended-library/extended": "Lerna monorepo with ts-standard added in each individual package",
+  "https://github.com/godrix/dotenv2env": "Includes, but does not use ts-standard",
+  "https://github.com/MeUndies/loom": "Repository no longer exists",
+  "https://github.com/Tom-Hudson/test-nino": "Fails because the ts-standard command is fed a list of files to test, rather than using an ignore",
+  "https://github.com/ivan-topp/y-socket.io": "Partly correct, partly because ignores are not migrated correctly",
+  "https://github.com/polycolor/polycolor": "Correct failure",
+  "https://github.com/rwx-research/abq-js": "Includes, but does not use ts-standard",
+  "https://github.com/storyset/storyset": "Correct failure",
+  "https://github.com/stylebox-library/stylebox": "Lerna monorepo with ts-standard added in each individual package",
+  "https://github.com/valeriangalliat/markdown-it-highlightjs/": "Fails due to /* eslint-env mocha */",
+  "https://github.com/web3-storage/w3name": "Monorepo with ts-standard added in each individual package",
+  "https://github.com/zacanger/shrink-string": "Fails because the ts-standard command is fed a list of files to test, rather than using an ignore",
+  "https://github.com/zce/caz": "Fails because @stylistic/ rule does not match @typescript-eslint/no-extra-parens"
 }
