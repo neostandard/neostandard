@@ -108,8 +108,12 @@ if (migrate) {
     process.exit(1)
   }
 
-  if (sourcePkg && typeof sourcePkg === 'object' && 'standard' in sourcePkg && sourcePkg.standard && typeof sourcePkg.standard === 'object') {
-    for (const [rawKey, value] of Object.entries(sourcePkg.standard)) {
+  if (sourcePkg && typeof sourcePkg === 'object') {
+    const sourceConfig = ('standard' in sourcePkg && sourcePkg.standard) ||
+      ('semistandard' in sourcePkg && sourcePkg.semistandard) ||
+      ('ts-standard' in sourcePkg && sourcePkg['ts-standard'])
+
+    for (const [rawKey, value] of Object.entries((typeof sourceConfig === 'object' && sourceConfig) || {})) {
       const key = ensureSingular(rawKey)
 
       if (key === 'global' || key === 'ignore' || key === 'env') {

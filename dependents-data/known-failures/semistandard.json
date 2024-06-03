@@ -1,0 +1,4 @@
+{
+  "https://github.com/Esri/esri-leaflet-vector": "Fails due to /* eslint-env mocha */",
+  "https://github.com/compwright/split-human-name": "Fails due to /* eslint-env mocha */ and has a minified file that for some reason gets included in check"
+}
