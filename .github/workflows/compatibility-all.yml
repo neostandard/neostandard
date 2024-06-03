@@ -1,0 +1,32 @@
+name: Compatibility
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  read_projects:
+    name: Read targets
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: set-matrix
+        run: echo "matrix=$(cat dependents-data/projects.json)" >> $GITHUB_OUTPUT
+
+  compatibility:
+    needs: read_projects
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJson(needs.read_projects.outputs.matrix) }}
+    uses: ./.github/workflows/compatibility.yml
+    with:
+      moduleSet: ${{ matrix.project }}-filtered
