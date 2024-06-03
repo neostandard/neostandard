@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: set-matrix
-        run: echo "matrix=$(cat dependents-data/projects.json)" >> $GITHUB_OUTPUT
+        run: echo "matrix=$(cat dependents-data/projects.json | jq -c)" >> $GITHUB_OUTPUT
 
   compatibility:
     needs: read_projects
