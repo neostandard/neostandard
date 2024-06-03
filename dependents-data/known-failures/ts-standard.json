@@ -4,7 +4,7 @@
   "https://github.com/godrix/dotenv2env": "Includes, but does not use ts-standard",
   "https://github.com/MeUndies/loom": "Repository no longer exists",
   "https://github.com/Tom-Hudson/test-nino": "Fails because the ts-standard command is fed a list of files to test, rather than using an ignore",
-  "https://github.com/ivan-topp/y-socket.io": "Partly correct, partly because ignores are not migrated correctly",
+  "https://github.com/ivan-topp/y-socketio": "Partly correct, partly because ignores are not migrated correctly",
   "https://github.com/polycolor/polycolor": "Correct failure",
   "https://github.com/rwx-research/abq-js": "Includes, but does not use ts-standard",
   "https://github.com/storyset/storyset": "Correct failure",
