@@ -15,3 +15,4 @@ jobs:
     uses: ./.github/workflows/compatibility.yml
     with:
       moduleSet: ts-standard-filtered
+      flags: '--ts'

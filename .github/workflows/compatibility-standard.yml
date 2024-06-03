@@ -12,6 +12,11 @@ on:
 
 jobs:
   compatibility:
+    strategy:
+      fail-fast: false
+      matrix:
+        flags: ['', '--ts']
     uses: ./.github/workflows/compatibility.yml
     with:
       moduleSet: standard-filtered
+      flags: ${{ matrix.flags }}
