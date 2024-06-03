@@ -133,8 +133,8 @@ if (migrate) {
             } else if (!item.startsWith('./')) {
               item = `**/${item}`
             }
-            if (!item.slice(1).includes('.') && !item.endsWith('*') && !item.endsWith('/')) {
-              item = `${item}/**/*`
+            if (!item.slice(1).includes('.') && !item.endsWith('*')) {
+              item = `${item}${item.endsWith('/') ? '' : '/'}**/*`
             }
             return item
           })
