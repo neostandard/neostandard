@@ -125,6 +125,21 @@ if (migrate) {
           console.log(`Invalid migration value for "standard.${key}". Expected an array of strings, got:`, value)
           process.exit(1)
         }
+
+        if (key === 'ignore') {
+          flagsFromMigration[key] = flagsFromMigration[key]?.map(item => {
+            if (item.includes('.')) {
+              if (!item.startsWith('/')) {
+                return `**/${item}`
+              }
+            } else if (item.startsWith('/')) {
+              if (!item.includes('.')) {
+                return `${item}${item.endsWith('/') ? '' : '/'}**/*`
+              }
+            }
+            return item
+          })
+        }
       } else {
         console.warn(`Migration for "standard.${key}" is not yet supported. Open an issue at https://github.com/neostandard/neostandard`)
       }
