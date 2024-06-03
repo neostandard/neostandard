@@ -1,0 +1,20 @@
+name: Compatibility standard
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+
+jobs:
+  compatibility:
+    uses: ./.github/workflows/compatibility.yml
+    with:
+      moduleSet: standard-filtered
