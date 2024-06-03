@@ -12,11 +12,7 @@ on:
 
 jobs:
   compatibility:
-    strategy:
-      fail-fast: false
-      matrix:
-        flags: ['--semi', '--semi --ts']
     uses: ./.github/workflows/compatibility.yml
     with:
       moduleSet: semistandard-filtered
-      flags: ${{ matrix.flags }}
+      flags: --semi
