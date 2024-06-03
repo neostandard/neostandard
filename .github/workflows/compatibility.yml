@@ -79,7 +79,7 @@ jobs:
         working-directory: ./project
 
       - name: generate config
-        run: ../main/cli.mjs --migrate ${{github.event.inputs.moduleSet == 'semistandard-filtered' && '--semi'}} ${{github.event.inputs.moduleSet == 'ts-standard-filtered' && '--ts'}} | sed "s/'neostandard'/'..\/main\/index.js'/" > eslint.config.cjs && cat eslint.config.cjs
+        run: ../main/cli.mjs --migrate ${{(inputs.moduleSet || github.event.inputs.moduleSet) == 'semistandard-filtered' && '--semi'}} ${{(inputs.moduleSet || github.event.inputs.moduleSet) == 'ts-standard-filtered' && '--ts'}} | sed "s/'neostandard'/'..\/main\/index.js'/" > eslint.config.cjs && cat eslint.config.cjs
         working-directory: ./project
 
       - name: run eslint
