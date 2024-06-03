@@ -128,14 +128,11 @@ if (migrate) {
 
         if (key === 'ignore') {
           flagsFromMigration[key] = flagsFromMigration[key]?.map(item => {
-            if (item.includes('.')) {
-              if (!item.startsWith('/')) {
-                return `**/${item}`
-              }
-            } else if (item.startsWith('/')) {
-              if (!item.includes('.')) {
-                return `${item}${item.endsWith('/') ? '' : '/'}**/*`
-              }
+            if (!item.startsWith('/')) {
+              item = `**/${item}`
+            }
+            if (!item.includes('.')) {
+              item = `${item}${item.endsWith('/') ? '' : '/'}**/*`
             }
             return item
           })
