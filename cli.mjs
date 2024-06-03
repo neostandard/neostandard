@@ -130,11 +130,9 @@ if (migrate) {
           flagsFromMigration[key] = flagsFromMigration[key]?.map(item => {
             if (item.startsWith('/')) {
               item = `./${item}`
-            } else if (!item.startsWith('./')) {
-              item = `**/${item}`
             }
             if (!item.slice(1).includes('.') && !item.endsWith('*')) {
-              item = `${item}${item.endsWith('/') ? '' : '/'}**/*`
+              item = `${item}${item.endsWith('/') ? '' : '/'}`
             }
             return item
           })
