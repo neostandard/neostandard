@@ -10,6 +10,10 @@ on:
       flags:
         description: 'Flags'
         type: string
+      quiet:
+        description: 'Quiet'
+        type: boolean
+        default: true
   workflow_dispatch:
     inputs:
       moduleSet:
@@ -24,6 +28,10 @@ on:
       flags:
         description: 'Flags'
         type: string
+      quiet:
+        description: 'Quiet'
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -89,5 +97,5 @@ jobs:
         working-directory: ./project
 
       - name: run eslint
-        run: ../main/node_modules/.bin/eslint -c eslint.config.cjs
+        run: ../main/node_modules/.bin/eslint -c eslint.config.cjs ${{(inputs.quiet || github.event.inputs.quiet) && '--quiet' || ''}}
         working-directory: ./project
