@@ -132,7 +132,7 @@ if (migrate) {
               item = `./${item}`
             }
             if (!item.slice(1).includes('.') && !item.endsWith('*')) {
-              item = `${item}${item.endsWith('/') ? '' : '/'}`
+              item = `${item}${item.endsWith('/') ? '' : '/**/*'}`
             }
             return item
           })
