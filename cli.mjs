@@ -3,6 +3,7 @@
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
+import { gitignoreToMinimatch } from '@humanwhocodes/gitignore-to-minimatch'
 import { peowly } from 'peowly'
 
 import { isStringArray } from './lib/utils.js'
@@ -127,15 +128,7 @@ if (migrate) {
         }
 
         if (key === 'ignore') {
-          flagsFromMigration[key] = flagsFromMigration[key]?.map(item => {
-            if (item.startsWith('/')) {
-              item = `./${item}`
-            }
-            if (!item.slice(1).includes('.') && !item.endsWith('*')) {
-              item = `${item}${item.endsWith('/') ? '' : '/'}**/*`
-            }
-            return item
-          })
+          flagsFromMigration[key] = flagsFromMigration[key]?.map(item => gitignoreToMinimatch(item))
         }
       } else {
         console.warn(`Migration for "standard.${key}" is not yet supported. Open an issue at https://github.com/neostandard/neostandard`)
