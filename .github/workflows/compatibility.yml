@@ -1,14 +1,19 @@
-name: Compatibility
+name: Reusable Compatibility
 
 on:
-  push:
-    branches:
-      - main
-    tags:
-      - '*'
-  pull_request:
-    branches:
-      - main
+  workflow_call:
+    inputs:
+      moduleSet:
+        description: 'Module set'
+        required: true
+        type: string
+      flags:
+        description: 'Flags'
+        type: string
+      quiet:
+        description: 'Quiet'
+        type: boolean
+        default: true
   workflow_dispatch:
     inputs:
       moduleSet:
@@ -17,30 +22,33 @@ on:
         default: 'standard-filtered'
         type: choice
         options:
+        - semistandard-filtered
         - standard-filtered
-        - eslint-config-standard-filtered
-        - eslint-config-semistandard-filtered
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
+        - ts-standard-filtered
+      flags:
+        description: 'Flags'
+        type: string
+      quiet:
+        description: 'Quiet'
+        type: boolean
+        default: true
 
 permissions:
   contents: read
 
 jobs:
-  read_projects:
-    name: Read list of ${{ github.event.inputs.moduleSet || 'compliant' }} projects
+  read_repos:
+    name: Read list of ${{ inputs.moduleSet || github.event.inputs.moduleSet }} repos
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
       - id: set-matrix
-        run: echo "matrix=$(jq -s -c '[.[].repositoryUrl | sub("https://github.com/";"";"i")] | unique | sort' dependents-data/${{ github.event.inputs.moduleSet || 'standard-filtered' }}.ndjson)" >> $GITHUB_OUTPUT
+        run: echo "matrix=$(jq -s -c '[.[].repositoryUrl | sub("https://github.com/";"";"i")] | unique | sort' dependents-data/${{ inputs.moduleSet || github.event.inputs.moduleSet }}.ndjson)" >> $GITHUB_OUTPUT
 
   test_external:
-    needs: read_projects
+    needs: read_repos
     name: Test ${{ matrix.project }}
     runs-on: ubuntu-latest
 
@@ -48,7 +56,7 @@ jobs:
       fail-fast: false
       matrix:
         node_version: [lts/*]
-        project: ${{ fromJson(needs.read_projects.outputs.matrix) }}
+        project: ${{ fromJson(needs.read_repos.outputs.matrix) }}
 
     steps:
       - name: Checkout main project
@@ -85,9 +93,9 @@ jobs:
         working-directory: ./project
 
       - name: generate config
-        run: ../main/cli.mjs --migrate ${{github.event.inputs.moduleSet == 'eslint-config-semistandard-filtered' && '--semi' }} | sed "s/'neostandard'/'..\/main\/index.js'/" > eslint.config.cjs && cat eslint.config.cjs
+        run: ../main/cli.mjs --migrate ${{inputs.flags || github.event.inputs.flags || ''}} | sed "s/'neostandard'/'..\/main\/index.js'/" > eslint.config.cjs && cat eslint.config.cjs
         working-directory: ./project
 
       - name: run eslint
-        run: ../main/node_modules/.bin/eslint -c eslint.config.cjs
+        run: ../main/node_modules/.bin/eslint -c eslint.config.cjs ${{(inputs.quiet || github.event.inputs.quiet) && '--quiet' || ''}}
         working-directory: ./project

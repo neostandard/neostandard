@@ -3,6 +3,7 @@
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
+import { gitignoreToMinimatch } from '@humanwhocodes/gitignore-to-minimatch'
 import { peowly } from 'peowly'
 
 import { isStringArray } from './lib/utils.js'
@@ -108,8 +109,12 @@ if (migrate) {
     process.exit(1)
   }
 
-  if (sourcePkg && typeof sourcePkg === 'object' && 'standard' in sourcePkg && sourcePkg.standard && typeof sourcePkg.standard === 'object') {
-    for (const [rawKey, value] of Object.entries(sourcePkg.standard)) {
+  if (sourcePkg && typeof sourcePkg === 'object') {
+    const sourceConfig = ('standard' in sourcePkg && sourcePkg.standard) ||
+      ('semistandard' in sourcePkg && sourcePkg.semistandard) ||
+      ('ts-standard' in sourcePkg && sourcePkg['ts-standard'])
+
+    for (const [rawKey, value] of Object.entries((typeof sourceConfig === 'object' && sourceConfig) || {})) {
       const key = ensureSingular(rawKey)
 
       if (key === 'global' || key === 'ignore' || key === 'env') {
@@ -120,6 +125,10 @@ if (migrate) {
         } else {
           console.log(`Invalid migration value for "standard.${key}". Expected an array of strings, got:`, value)
           process.exit(1)
+        }
+
+        if (key === 'ignore') {
+          flagsFromMigration[key] = flagsFromMigration[key]?.map(item => gitignoreToMinimatch(item))
         }
       } else {
         console.warn(`Migration for "standard.${key}" is not yet supported. Open an issue at https://github.com/neostandard/neostandard`)
