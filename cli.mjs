@@ -28,7 +28,7 @@ const {
     },
     esm: {
       listGroup: 'Output options',
-      description: 'Outputs as ESM instead of as CJS',
+      description: 'Outputs as ESM instead of CJS',
       type: 'boolean',
     },
     global: {
@@ -44,6 +44,11 @@ const {
       type: 'string',
       multiple: true,
       short: 'i',
+    },
+    'no-default-ignore': {
+      listGroup: 'Config options',
+      description: 'Deactivates the default ingores that neostandard adds',
+      type: 'boolean',
     },
     'no-style': {
       listGroup: 'Config options',
@@ -78,6 +83,7 @@ const flagMapping = /** @satisfies {Record<keyof typeof flags, keyof import('./i
   env: 'env',
   global: 'globals',
   ignore: 'ignores',
+  'no-default-ignore': 'noDefaultIgnore',
   'no-style': 'noStyle',
   semi: 'semi',
   ts: 'ts',
