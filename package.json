@@ -54,6 +54,7 @@
     "prepublishOnly": "run-s build",
     "test-ci": "run-s test:*",
     "test:eslint": "eslint .",
+    "test:install": "NEOSTANDARD_PATH=`pwd` && cd $(mktemp -d -p $NEOSTANDARD_PATH install-test-XXXXXXXXXX) && npm init -y && npm install --no-legacy-peer-deps --package-lock-only --strict-peer-deps --install-links eslint $NEOSTANDARD_PATH",
     "test": "run-s check test:*"
   },
   "devDependencies": {
