@@ -1,11 +1,11 @@
 name: Type Checks, Internal Types
 
 on:
-  push:
-    branches:
-      - main
-    tags:
-      - '*'
+  workflow_run:
+    workflows: ["Tests"]
+    branches: [main]
+    types:
+      - completed
   pull_request:
     branches:
       - main

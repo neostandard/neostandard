@@ -1,11 +1,9 @@
-name: Node CI
+name: Tests
 
 on:
   push:
     branches:
       - main
-    tags:
-      - '*'
   pull_request:
     branches:
       - main
@@ -14,6 +12,18 @@ permissions:
   contents: read
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+          node-version: lts/*
+      - run: npm ci
+      - run: npm run check
+
   test:
     name: Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-latest

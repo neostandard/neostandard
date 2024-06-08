@@ -1,17 +1,18 @@
 name: Compatibility standard
 
 on:
-  push:
-    branches:
-      - main
-    tags:
-      - '*'
+  workflow_run:
+    workflows: ["Tests"]
+    branches: [main]
+    types:
+      - completed
   pull_request:
     branches:
       - main
 
 jobs:
   compatibility:
+    if: (github.event.workflow_run.conclusion || 'success') == 'success'
     uses: ./.github/workflows/compatibility.yml
     with:
       moduleSet: standard-filtered
