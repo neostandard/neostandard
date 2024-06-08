@@ -32,6 +32,7 @@
     "build:0": "run-s clean",
     "build:1-declaration": "tsc -p declaration.tsconfig.json",
     "build": "run-s build:*",
+    "check-peer-compatibility": "NEOSTANDARD_PATH=`pwd` && cd $(mktemp -d -p $NEOSTANDARD_PATH install-test-XXXXXXXXXX) && npm init -y && npm install --no-legacy-peer-deps --package-lock-only --strict-peer-deps --install-links eslint $NEOSTANDARD_PATH",
     "check:installed-check": "installed-check --engine-check --version-check -i list-dependents-cli",
     "check:knip": "knip",
     "check:lint": "eslint --report-unused-disable-directives .",
@@ -54,7 +55,6 @@
     "prepublishOnly": "run-s build",
     "test-ci": "run-s test:*",
     "test:eslint": "eslint .",
-    "test:install": "NEOSTANDARD_PATH=`pwd` && cd $(mktemp -d -p $NEOSTANDARD_PATH install-test-XXXXXXXXXX) && npm init -y && npm install --no-legacy-peer-deps --package-lock-only --strict-peer-deps --install-links eslint $NEOSTANDARD_PATH",
     "test": "run-s check test:*"
   },
   "devDependencies": {
