@@ -45,7 +45,7 @@ alt="platformatic"
 
 ### Migrate from `standard`
 
-1. `npm install -D neostandard`
+1. `npm install -D neostandard eslint`
 2. `npx neostandard --migrate > eslint.config.js` (uses our [config helper](#config-helper))
 3. Replace `standard` with `eslint` in all places where you run `standard`, eg. `"scripts"` and `.github/workflows/` (`neostandard` CLI tracked in [#2](https://github.com/neostandard/neostandard/issues/2))
 4. (Add ESLint editor integration, eg. [VS Code ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint))
@@ -56,7 +56,7 @@ alt="platformatic"
 
 ### Add to new project
 
-1. `npm install -D neostandard`
+1. `npm install -D neostandard eslint`
 2. Add an `eslint.config.js`:
 
    Using config helper:
