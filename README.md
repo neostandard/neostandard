@@ -106,6 +106,7 @@ alt="platformatic"
 * Migrate `eslint-plugin-promise` rules from `standard`: [#14](https://github.com/neostandard/neostandard/issues/14)
 * Migrate `eslint-plugin-import` rules from `standard`: [#15](https://github.com/neostandard/neostandard/issues/15)
 * Investigate a dedicated `neostandard` runner: [#2](https://github.com/neostandard/neostandard/issues/2)
+* Style rules for TypeScript files: [eslint-stylistic#414](https://github.com/eslint-stylistic/eslint-stylistic/issues/414)
 
 Full list in [1.0.0 milestone](https://github.com/neostandard/neostandard/milestone/1)
 
