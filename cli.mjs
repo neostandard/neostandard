@@ -45,11 +45,6 @@ const {
       multiple: true,
       short: 'i',
     },
-    'no-default-ignore': {
-      listGroup: 'Config options',
-      description: 'Deactivates the default ingores that neostandard adds',
-      type: 'boolean',
-    },
     'no-style': {
       listGroup: 'Config options',
       description: 'Deactivates all style linting',
@@ -83,7 +78,6 @@ const flagMapping = /** @satisfies {Record<keyof typeof flags, keyof import('./i
   env: 'env',
   global: 'globals',
   ignore: 'ignores',
-  'no-default-ignore': 'noDefaultIgnore',
   'no-style': 'noStyle',
   semi: 'semi',
   ts: 'ts',

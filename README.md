@@ -32,6 +32,7 @@ alt="platformatic"
   * [Migrate from `standard`](#migrate-from-standard)
   * [Add to new project](#add-to-new-project)
 * [Configuration options](#configuration-options)
+* [resolveIgnoresFromGitignore()](#resolveignoresfromgitignore)
 * [Missing for 1.0.0 release](#missing-for-100-release)
 * [Differences to standard / eslint-config-standard 17.x](#differences-to-standard--eslint-config-standard-17x)
   * [Changed rules](#changed-rules)
@@ -95,10 +96,31 @@ alt="platformatic"
 * `env` - *`string[]`* - adds additional globals by importing them from the [globals](https://www.npmjs.com/package/globals) npm module
 * `globals` - *`string[] | object`* - an array of names of globals or an object of the same shape as ESLint [`languageOptions.globals`](https://eslint.org/docs/latest/use/configure/language-options#using-configuration-files)
 * `ignores` - *`string[]`* - an array of glob patterns for files that the config should not apply to, see [ESLint documentation](https://eslint.org/docs/latest/use/configure/ignore) for details
-* `noDefaultIgnore` - *`boolean`* - opts out of default `ignores` that `neostandard` adds (`**/*.min.js`, `coverage/**/*` as well as everything in the project's `.gitignore`)
 * `noStyle` - *`boolean`* - if set, no style rules will be added. Especially useful when combined with [Prettier](https://prettier.io/), [dprint](https://dprint.dev/) or similar
 * `semi` - *`boolean`* - if set, enforce rather than forbid semicolons (same as `semistandard` did)
 * `ts` - *`boolean`* - if set, `.ts` (and `.d.ts`) files will be checked
+
+## resolveIgnoresFromGitignore()
+
+Finds a `.gitignore` file that recides in the same directory as the ESLint config file and returns an array of ESLint ignores that matches the same files.
+
+ESM:
+
+```js
+import neostandard, { resolveIgnoresFromGitignore } from 'neostandard'
+
+export default neostandard({
+  ignores: resolveIgnoresFromGitignore(),
+})
+```
+
+CommonJS:
+
+```js
+module.exports = require('neostandard')({
+  ignores: require('neostandard').resolveIgnoresFromGitignore(),
+})
+```
 
 ## Missing for 1.0.0 release
 
