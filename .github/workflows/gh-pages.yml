@@ -32,7 +32,7 @@ jobs:
         id: pages
         uses: actions/configure-pages@v3
       - name: Build
-        run: npx --yes @eslint/config-inspector build
+        run: node cli.mjs | sed "s/'neostandard'/'.\/'/" > eslint.config.js && npx --yes @eslint/config-inspector build --base /neostandard/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
