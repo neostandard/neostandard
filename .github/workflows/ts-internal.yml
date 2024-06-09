@@ -1,14 +1,7 @@
 name: Type Checks, Internal Types
 
 on:
-  push:
-    branches:
-      - main
-    tags:
-      - '*'
-  pull_request:
-    branches:
-      - main
+  workflow_call:
   schedule:
     - cron: '14 5 * * 1,3,5'
 
