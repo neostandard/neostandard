@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.7.0](https://github.com/neostandard/neostandard/compare/v0.6.1...v0.7.0) (2024-06-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove built in ignores + fix ignores for ts ([#40](https://github.com/neostandard/neostandard/issues/40))
+
+### 🩹 Fixes
+
+* remove built in ignores + fix ignores for ts ([#40](https://github.com/neostandard/neostandard/issues/40)) ([86ac8ea](https://github.com/neostandard/neostandard/commit/86ac8ea53263958cdd0744ff7032ce6638e6c7d4))
+
 ## [0.6.1](https://github.com/neostandard/neostandard/compare/v0.6.0...v0.6.1) (2024-06-09)
 
 
