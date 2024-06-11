@@ -33,7 +33,7 @@
     },
     {
       "matchDepTypes": ["devDependencies"],
-      "rangeStrategy": "update-lockfile",
+      "rangeStrategy": "bump",
       "groupName": "all non-major dev dependencies",
       "groupSlug": "all-dev",
       "matchUpdateTypes": [
