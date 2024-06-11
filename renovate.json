@@ -15,6 +15,7 @@
     ":semanticCommitScopeDisabled",
     ":semanticPrefixChore",
     ":separateMajorReleases",
+    "group:typescript-eslintMonorepo",
     "helpers:disableTypesNodeMajor",
     "npm:unpublishSafe",
     "replacements:all",
@@ -32,13 +33,21 @@
     },
     {
       "matchDepTypes": ["devDependencies"],
-      "rangeStrategy": "update-lockfile"
+      "rangeStrategy": "update-lockfile",
+      "groupName": "all non-major dev dependencies",
+      "groupSlug": "all-dev",
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
     },
     {
+      "enabled": false,
       "matchDepTypes": ["peerDependencies"],
       "semanticCommitType": "chore!"
     },
     {
+      "enabled": true,
       "matchDepTypes": ["peerDependencies"],
       "matchUpdateTypes": ["major"],
       "semanticCommitType": "feat!"
