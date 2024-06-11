@@ -51,6 +51,7 @@
       "enabled": true,
       "matchDepTypes": ["peerDependencies"],
       "matchUpdateTypes": ["major"],
+      "semanticCommitScope": "",
       "semanticCommitType": "feat!"
     }
   ]
