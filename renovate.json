@@ -33,7 +33,10 @@
     },
     {
       "matchDepTypes": ["devDependencies"],
-      "rangeStrategy": "bump",
+      "rangeStrategy": "bump"
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
       "groupName": "all non-major dev dependencies",
       "groupSlug": "all-dev",
       "matchUpdateTypes": [
@@ -43,8 +46,7 @@
     },
     {
       "enabled": false,
-      "matchDepTypes": ["peerDependencies"],
-      "semanticCommitType": "chore!"
+      "matchDepTypes": ["peerDependencies"]
     },
     {
       "enabled": true,
