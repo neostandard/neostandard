@@ -63,7 +63,7 @@
     "eslint": "^9.4.0",
     "husky": "^9.0.11",
     "installed-check": "^9.3.0",
-    "knip": "^5.17.4",
+    "knip": "^5.18.2",
     "list-dependents-cli": "^2.3.0",
     "npm-run-all2": "^6.2.0",
     "type-coverage": "^2.29.0",
