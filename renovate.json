@@ -1,5 +1,47 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "github>voxpelli/renovate-config"
+    ":automergeDisabled",
+    ":combinePatchMinorReleases",
+    ":dependencyDashboard",
+    ":ignoreModulesAndTests",
+    ":ignoreUnstable",
+    ":maintainLockFilesWeekly",
+    ":noUnscheduledUpdates",
+    ":prConcurrentLimit20",
+    ":prHourlyLimitNone",
+    ":prImmediately",
+    ":semanticCommits",
+    ":semanticCommitScopeDisabled",
+    ":semanticPrefixChore",
+    ":separateMajorReleases",
+    "helpers:disableTypesNodeMajor",
+    "npm:unpublishSafe",
+    "replacements:all",
+    "schedule:weekly",
+    "workarounds:all"
+  ],
+  "supportPolicy": [
+    "all"
+  ],
+  "ignoreDeps": ["@types/node"],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["*"],
+      "rangeStrategy": "bump"
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "rangeStrategy": "update-lockfile"
+    },
+    {
+      "matchDepTypes": ["peerDependencies"],
+      "semanticCommitType": "chore!"
+    },
+    {
+      "matchDepTypes": ["peerDependencies"],
+      "matchUpdateTypes": ["major"],
+      "semanticCommitType": "feat!"
+    }
   ]
 }
