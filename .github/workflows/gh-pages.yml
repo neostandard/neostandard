@@ -11,6 +11,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: read
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -34,7 +35,7 @@ jobs:
       - name: Build
         run: node cli.mjs | sed "s/'neostandard'/'.\/'/" > eslint.config.js && npx --yes @eslint/config-inspector build --base /neostandard/
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./.eslint-config-inspector
 
@@ -48,4 +49,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v3
+        uses: actions/deploy-pages@v4
