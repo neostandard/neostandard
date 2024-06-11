@@ -67,7 +67,7 @@
     "list-dependents-cli": "^2.3.0",
     "npm-run-all2": "^6.2.0",
     "type-coverage": "^2.29.0",
-    "typescript": "~5.4.4"
+    "typescript": "~5.4.5"
   },
   "dependencies": {
     "@humanwhocodes/gitignore-to-minimatch": "^1.0.2",
