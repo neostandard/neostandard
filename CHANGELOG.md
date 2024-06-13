@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.7.1](https://github.com/neostandard/neostandard/compare/v0.7.0...v0.7.1) (2024-06-11)
+
+
+### 🩹 Fixes
+
+* **deps:** update dependency eslint-plugin-n to ^17.8.1 ([#58](https://github.com/neostandard/neostandard/issues/58)) ([050d894](https://github.com/neostandard/neostandard/commit/050d894d3f3fc5f62c07723dbce56bf5a781d887))
+* **deps:** update dependency globals to ^15.4.0 ([#59](https://github.com/neostandard/neostandard/issues/59)) ([9af005d](https://github.com/neostandard/neostandard/commit/9af005df8e299ecc9274d8dce18156032a2a84e4))
+* **deps:** update typescript-eslint monorepo to ^8.0.0-alpha.28 ([#56](https://github.com/neostandard/neostandard/issues/56)) ([ffce1c5](https://github.com/neostandard/neostandard/commit/ffce1c5ff96c8b0784d15ef1852c57361af6a51a))
+
+
+### 📚 Documentation
+
+* add names to the configs ([9841180](https://github.com/neostandard/neostandard/commit/9841180d0711cb1824f391c3f502436c47166658))
+* fix config inspector publish ([9417a88](https://github.com/neostandard/neostandard/commit/9417a886e3b2ca0c224debbe9bface1b1f163941))
+
+
+### 🧹 Chores
+
+* fix an accidental gitignore ([4651eda](https://github.com/neostandard/neostandard/commit/4651edaea24aa24068c2145c597b8fe39ea66c4b))
+
 ## [0.7.0](https://github.com/neostandard/neostandard/compare/v0.6.1...v0.7.0) (2024-06-09)
 
 
