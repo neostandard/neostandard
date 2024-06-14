@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.2](https://github.com/neostandard/neostandard/compare/v0.7.1...v0.7.2) (2024-06-14)
+
+
+### 🩹 Fixes
+
+* make config names conform to name convention ([#64](https://github.com/neostandard/neostandard/issues/64)) ([2077be0](https://github.com/neostandard/neostandard/commit/2077be04b56d3d8d425b166187e99249469fd5de))
+
 ## [0.7.1](https://github.com/neostandard/neostandard/compare/v0.7.0...v0.7.1) (2024-06-11)
 
 
