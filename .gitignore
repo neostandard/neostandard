@@ -9,9 +9,10 @@
 /yarn.lock
 
 # Generated types
-*.d.ts
-*.d.ts.map
+/lib/**/*.d.ts
+/lib/**/*.d.ts.map
+/index.d.ts
+/index.d.ts.map
 
 # Library specific ones
 /install-test-*
-!/test/test-types.d.ts
