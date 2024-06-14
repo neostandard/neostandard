@@ -5,7 +5,7 @@
     "index.js"
   ],
   "exclude": [
-    "test/**/*.js"
+    "test/**/*"
   ],
   "compilerOptions": {
     "declaration": true,
