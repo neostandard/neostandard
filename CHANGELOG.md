@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.8.0](https://github.com/neostandard/neostandard/compare/v0.7.2...v0.8.0) (2024-06-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* adopt ignore findings from `fastify/fastify` ([#67](https://github.com/neostandard/neostandard/issues/67))
+
+### 🩹 Fixes
+
+* adopt ignore findings from `fastify/fastify` ([#67](https://github.com/neostandard/neostandard/issues/67)) ([7ef49ce](https://github.com/neostandard/neostandard/commit/7ef49ce98b5efc86aa8397d17e7350d5d5daaf43))
+* **deps:** update dependency @stylistic/eslint-plugin-js to ^2.2.2 ([#73](https://github.com/neostandard/neostandard/issues/73)) ([6086d51](https://github.com/neostandard/neostandard/commit/6086d512d6dc2bca121c36e91f5c7d27d4cf6c01))
+* **deps:** update dependency eslint-plugin-n to ^17.9.0 ([#74](https://github.com/neostandard/neostandard/issues/74)) ([4bc272e](https://github.com/neostandard/neostandard/commit/4bc272eb971dd771aacc0bc01ce5f7a8617b2a50))
+* **deps:** update dependency globals to ^15.6.0 ([#75](https://github.com/neostandard/neostandard/issues/75)) ([9ed8b21](https://github.com/neostandard/neostandard/commit/9ed8b21f80ed2e43fd4b7358ff89833fe8ae5509))
+* **deps:** update dependency peowly to ^1.3.1 ([#72](https://github.com/neostandard/neostandard/issues/72)) ([d71eb65](https://github.com/neostandard/neostandard/commit/d71eb652a48e1493db77e4cbd87d029e3be36511))
+* **deps:** update typescript-eslint monorepo to ^8.0.0-alpha.30 ([#61](https://github.com/neostandard/neostandard/issues/61)) ([8856d07](https://github.com/neostandard/neostandard/commit/8856d074ec1145bc8d19ce65627fe7ee69c3d969))
+
 ## [0.7.2](https://github.com/neostandard/neostandard/compare/v0.7.1...v0.7.2) (2024-06-14)
 
 
