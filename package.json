@@ -71,7 +71,7 @@
   },
   "dependencies": {
     "@humanwhocodes/gitignore-to-minimatch": "^1.0.2",
-    "@stylistic/eslint-plugin-js": "^2.1.0",
+    "@stylistic/eslint-plugin-js": "^2.2.2",
     "@typescript-eslint/eslint-plugin": "^8.0.0-alpha.28",
     "@typescript-eslint/utils": "^8.0.0-alpha.28",
     "eslint-plugin-n": "^17.8.1",
