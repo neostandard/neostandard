@@ -6,5 +6,8 @@
   ],
   "ignoreBinaries": [
     "pwd"
+  ],
+  "ignore": [
+    "test/should-*/**/*"
   ]
 }

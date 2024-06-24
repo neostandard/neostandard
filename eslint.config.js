@@ -1,6 +1,9 @@
 'use strict'
 
 module.exports = require('./')({
-  ignores: require('./').resolveIgnoresFromGitignore(),
+  ignores: [
+    ...require('./').resolveIgnoresFromGitignore(),
+    '**/should-be-ignored/**',
+  ],
   ts: true,
 })
