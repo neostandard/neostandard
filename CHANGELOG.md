@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.9.0](https://github.com/neostandard/neostandard/compare/v0.8.0...v0.9.0) (2024-06-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* reactivate stylistic rules for TypeScript ([#80](https://github.com/neostandard/neostandard/issues/80))
+
+### 🌟 Features
+
+* reactivate stylistic rules for TypeScript ([#80](https://github.com/neostandard/neostandard/issues/80)) ([e2b0daa](https://github.com/neostandard/neostandard/commit/e2b0daabc6e29f82fac957233eac83ecff9326c3))
+
 ## [0.8.0](https://github.com/neostandard/neostandard/compare/v0.7.2...v0.8.0) (2024-06-24)
 
 
