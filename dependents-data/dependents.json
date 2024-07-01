@@ -1,7 +1,6 @@
 {
   "direct": [
-    "fastify/fastify",
-    "voxpelli/eslint-config"
+    "fastify/fastify"
   ],
   "indirect": [
     "voxpelli/buffered-async-iterable",
