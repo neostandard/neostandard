@@ -113,6 +113,20 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
 
+      - name: Determine npm cache directory
+        id: npm-cache-dir
+        run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('main/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: install main
+        run: 'npm ci --ignore-scripts --force'
+        working-directory: ./main
+
       - name: modify project neostandard version
         run: "jq '. + { overrides: (.overrides + {neostandard: \"file:${{ github.workspace }}/main\"}) }' package.json > tmp.package.json && rm package.json && mv tmp.package.json package.json"
         working-directory: ./project
