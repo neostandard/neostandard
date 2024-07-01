@@ -115,6 +115,7 @@ jobs:
 
       - name: modify project neostandard version
         run: "jq '. + { override: (.override + {neostandard: \"file:../main\"}) }' package.json"
+        working-directory: ./project
 
       - name: install project
         run: 'npm install --ignore-scripts --force'
