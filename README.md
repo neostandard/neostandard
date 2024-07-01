@@ -108,7 +108,7 @@ alt="platformatic"
 
 ### resolveIgnoresFromGitignore()
 
-Finds a `.gitignore` file that recides in the same directory as the ESLint config file and returns an array of ESLint ignores that matches the same files.
+Finds a `.gitignore` file that resides in the same directory as the ESLint config file and returns an array of ESLint ignores that matches the same files.
 
 ESM:
 
@@ -137,6 +137,7 @@ module.exports = require('neostandard')({
 * `@stylistic` - export of [`@stylistic/eslint-plugin`](https://npmjs.com/package/@stylistic/eslint-plugin)
 * `@typescript-eslint` - export of [`@typescript-eslint/eslint-plugin`](https://npmjs.com/package/@typescript-eslint/eslint-plugin)
 * `n` - export of [`eslint-plugin-n`](https://npmjs.com/package/eslint-plugin-n)
+* `promise` - export of [`eslint-plugin-promise`](https://npmjs.com/package/eslint-plugin-promise)
 
 #### Usage of exported plugin
 
