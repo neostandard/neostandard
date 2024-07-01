@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: set-matrix
-        run: echo "matrix=$(cat dependents-datadirect-dependencies.json | jq -c '.direct')" >> $GITHUB_OUTPUT
+        run: echo "matrix=$(cat dependents-data/dependents.json | jq -c '.direct')" >> $GITHUB_OUTPUT
   test_direct_dependents:
     needs: read_direct_dependents
     name: Test ${{ matrix.project }}
@@ -79,14 +79,14 @@ jobs:
         working-directory: ./project
 
   read_indirect_dependents:
-    name: Read list of direct dependents
+    name: Read list of indirect dependents
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
       - id: set-matrix
-        run: echo "matrix=$(cat dependents-datadirect-dependencies.json | jq -c '.indirect')" >> $GITHUB_OUTPUT
+        run: echo "matrix=$(cat dependents-data/dependents.json | jq -c '.indirect')" >> $GITHUB_OUTPUT
   test_indirect_dependents:
     needs: read_indirect_dependents
     name: Test ${{ matrix.project }}
