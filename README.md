@@ -127,7 +127,6 @@ module.exports = require('neostandard')({
 ## Missing for 1.0.0 release
 
 * Add JSX/TSX support: [#11](https://github.com/neostandard/neostandard/issues/11)
-* Migrate `eslint-plugin-promise` rules from `standard`: [#14](https://github.com/neostandard/neostandard/issues/14)
 * Migrate `eslint-plugin-import` rules from `standard`: [#15](https://github.com/neostandard/neostandard/issues/15)
 * Investigate a dedicated `neostandard` runner: [#2](https://github.com/neostandard/neostandard/issues/2)
 
@@ -154,7 +153,8 @@ Full list in [1.0.0 milestone](https://github.com/neostandard/neostandard/milest
 
 ### Missing bits
 
-* Some plugins are not yet supporting ESLint 9 or flat configs and has thus not yet been added. These are: `eslint-plugin-import` and `eslint-plugin-promise`
+* Some plugins are not yet supporting ESLint 9 or flat configs and has thus not yet been added. These are:
+  - `eslint-plugin-import`
 * JSX parsing is not supported out of the box
 
 ## Config helper
