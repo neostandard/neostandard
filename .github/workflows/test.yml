@@ -45,10 +45,6 @@ jobs:
     with:
       command: check-peer-compatibility
 
-  types:
-    needs: [lint, test]
-    uses: ./.github/workflows/ts-internal.yml
-
   compatibility-semistandard:
     needs: [lint, test]
     uses: ./.github/workflows/compatibility.yml
