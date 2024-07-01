@@ -114,7 +114,7 @@ jobs:
           node-version: ${{ matrix.node_version }}
 
       - name: modify project neostandard version
-        run: "jq '. + { override: (.override + {neostandard: \"file:../main\"}) }' package.json"
+        run: "jq '. + { overrides: (.overrides + {neostandard: \"file:../main\"}) }' package.json"
         working-directory: ./project
 
       - name: install project
