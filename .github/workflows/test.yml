@@ -18,50 +18,37 @@ permissions:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          cache: 'npm'
-          node-version: lts/*
-      - run: npm ci
-      - run: npm run check
+    uses: ./.github/workflows/reusable-npm-run.yml
+    with:
+      command: check
 
   test:
-    name: Node.js ${{ matrix.node-version }}
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        node-version:
-          - 22
-          - 20
-          - 18
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          cache: 'npm'
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run test-ci
+    name: Test on Node 18
+    uses: ./.github/workflows/reusable-npm-run.yml
+    with:
+      command: test-ci
+      node-version: 18
+
+  test-20:
+    name: Test on Node 20
+    uses: ./.github/workflows/reusable-npm-run.yml
+    with:
+      command: test-ci
+      node-version: 20
+
+  test-22:
+    name: Test on Node 22
+    uses: ./.github/workflows/reusable-npm-run.yml
+    with:
+      command: test-ci
+      node-version: 22
 
   peer:
     needs: [lint, test]
     name: Check peerDependencies issues
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          cache: 'npm'
-          node-version: lts/*
-      - run: npm run check-peer-compatibility
-
-  types:
-    needs: [lint, test]
-    uses: ./.github/workflows/ts-internal.yml
+    uses: ./.github/workflows/reusable-npm-run.yml
+    with:
+      command: check-peer-compatibility
 
   compatibility-semistandard:
     needs: [lint, test]

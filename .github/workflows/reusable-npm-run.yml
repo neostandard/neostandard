@@ -1,0 +1,53 @@
+name: Reusable npm run
+
+on:
+  workflow_call:
+    inputs:
+      command:
+        description: 'npm run command'
+        required: true
+        type: string
+      node-version:
+        default: 'lts/*'
+        description: 'node version'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  npm_run:
+    name: npm run ${{ inputs.command }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          show-progress: false
+
+      - name: Use Node.js ${{ inputs.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      # New prefix generated every 120 days, to ensure npm cache doesn't grow too large
+      # See https://github.com/actions/setup-node/pull/702
+      - name: Get npm cache timed expiration
+        id: npm-timed-expiration
+        run: echo "prefix=$(( $(date +%s) / 60 / 60 / 24 / 120 ))" >> $GITHUB_OUTPUT
+
+      - name: Determine npm cache directory
+        id: npm-cache-dir
+        run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ steps.npm-timed-expiration.outputs.prefix }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ steps.npm-timed-expiration.outputs.prefix }}-
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --force --no-fund --no-audit
+
+      - run: npm run ${{ inputs.command }}
