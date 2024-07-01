@@ -114,14 +114,11 @@ jobs:
           node-version: ${{ matrix.node_version }}
 
       - name: modify project neostandard version
-        run: "jq '. + { overrides: (.overrides + {neostandard: \"file:../main\"}) }' package.json > tmp.package.json && rm package.json && mv tmp.package.json package.json"
+        run: "jq '. + { overrides: (.overrides + {neostandard: \"file:${{ github.workspace }}/main\"}) }' package.json > tmp.package.json && rm package.json && mv tmp.package.json package.json"
         working-directory: ./project
 
       - name: install project
         run: 'npm install --ignore-scripts --force'
-        working-directory: ./project
-
-      - run: npm why neostandard
         working-directory: ./project
 
       - name: run eslint
