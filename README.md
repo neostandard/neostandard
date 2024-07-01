@@ -32,7 +32,9 @@ alt="platformatic"
   * [Migrate from `standard`](#migrate-from-standard)
   * [Add to new project](#add-to-new-project)
 * [Configuration options](#configuration-options)
-* [resolveIgnoresFromGitignore()](#resolveignoresfromgitignore)
+* [Additional exports](#additional-exports)
+  * [resolveIgnoresFromGitignore()](#resolveignoresfromgitignore)
+  * [Exported plugins](#exported-plugins)
 * [Missing for 1.0.0 release](#missing-for-100-release)
 * [Differences to standard / eslint-config-standard 17.x](#differences-to-standard--eslint-config-standard-17x)
   * [Changed rules](#changed-rules)
@@ -102,9 +104,11 @@ alt="platformatic"
 * `semi` - *`boolean`* - if set, enforce rather than forbid semicolons (same as `semistandard` did)
 * `ts` - *`boolean`* - if set, TypeScript syntax will be supported and `*.ts` (including `*.d.ts`) will be checked. To add additional file patterns to the TypeScript checks, use `filesTs`
 
-## resolveIgnoresFromGitignore()
+## Additional exports
 
-Finds a `.gitignore` file that recides in the same directory as the ESLint config file and returns an array of ESLint ignores that matches the same files.
+### resolveIgnoresFromGitignore()
+
+Finds a `.gitignore` file that resides in the same directory as the ESLint config file and returns an array of ESLint ignores that matches the same files.
 
 ESM:
 
@@ -124,12 +128,37 @@ module.exports = require('neostandard')({
 })
 ```
 
+### Exported plugins
+
+`neostandard` exports all the ESLint plugins that it uses. This to ensure that users who need to reference the plugin themselves will use the exact same instance of the plugin, which is a necessity when a plugin prefix is defined in multiple places.
+
+#### List of exported plugins
+
+* `@stylistic` - export of [`@stylistic/eslint-plugin`](https://npmjs.com/package/@stylistic/eslint-plugin)
+* `n` - export of [`eslint-plugin-n`](https://npmjs.com/package/eslint-plugin-n)
+* `promise` - export of [`eslint-plugin-promise`](https://npmjs.com/package/eslint-plugin-promise)
+* `typescript-eslint` - export of [`typescript-eslint`](https://npmjs.com/package/typescript-eslint)
+
+#### Usage of exported plugin
+
+If one eg. wants to add the `eslint-plugin-n` recommended config, then one can do:
+
+```js
+import neostandard, { plugins } from 'neostandard'
+
+export default [
+  ...neostandard({
+    ignores: resolveIgnoresFromGitignore(),
+  }),
+  plugins.n.configs['flat/recommended'],
+]
+```
+
 ## Missing for 1.0.0 release
 
 * Add JSX/TSX support: [#11](https://github.com/neostandard/neostandard/issues/11)
-* Migrate `eslint-plugin-promise` rules from `standard`: [#14](https://github.com/neostandard/neostandard/issues/14)
 * Migrate `eslint-plugin-import` rules from `standard`: [#15](https://github.com/neostandard/neostandard/issues/15)
-* Investigate a dedicated `neostandard` runner: [#2](https://github.com/neostandard/neostandard/issues/2)
+* Investigate a dedicated `neostandard` runner: [#33](https://github.com/neostandard/neostandard/issues/33) / [#2](https://github.com/neostandard/neostandard/issues/2)
 
 Full list in [1.0.0 milestone](https://github.com/neostandard/neostandard/milestone/1)
 
@@ -154,7 +183,8 @@ Full list in [1.0.0 milestone](https://github.com/neostandard/neostandard/milest
 
 ### Missing bits
 
-* Some plugins are not yet supporting ESLint 9 or flat configs and has thus not yet been added. These are: `eslint-plugin-import` and `eslint-plugin-promise`
+* Some plugins are not yet supporting ESLint 9 or flat configs and has thus not yet been added. These are:
+  - `eslint-plugin-import`
 * JSX parsing is not supported out of the box
 
 ## Config helper

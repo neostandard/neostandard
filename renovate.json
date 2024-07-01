@@ -44,6 +44,35 @@
       ]
     },
     {
+      "enabled": true,
+      "matchPackagePrefixes": [
+        "@typescript-eslint"
+      ],
+      "matchPackageNames": [
+        "@stylistic/eslint-plugin",
+        "typescript-eslint",
+        "eslint-plugin-n",
+        "eslint-plugin-promise"
+      ],
+      "matchUpdateTypes": ["major"],
+      "semanticCommitScope": "",
+      "semanticCommitType": "feat!"
+    },
+    {
+      "enabled": true,
+      "matchPackagePrefixes": [
+        "@typescript-eslint"
+      ],
+      "matchPackageNames": [
+        "@stylistic/eslint-plugin",
+        "typescript-eslint",
+        "eslint-plugin-n",
+        "eslint-plugin-promise"
+      ],
+      "matchUpdateTypes": ["minor"],
+      "semanticCommitType": "feat"
+    },
+    {
       "enabled": false,
       "matchDepTypes": ["peerDependencies"]
     },

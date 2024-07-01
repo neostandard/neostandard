@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.11.0](https://github.com/neostandard/neostandard/compare/v0.10.0...v0.11.0) (2024-07-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* export `typescript-eslint` instead of `@typescript-eslint/eslint-… ([#88](https://github.com/neostandard/neostandard/issues/88))
+
+### 🩹 Fixes
+
+* export `typescript-eslint` instead of `@typescript-eslint/eslint-… ([#88](https://github.com/neostandard/neostandard/issues/88)) ([9502724](https://github.com/neostandard/neostandard/commit/95027247e9975b54f694aae5e16f529eca912219))
+
+## [0.10.0](https://github.com/neostandard/neostandard/compare/v0.9.0...v0.10.0) (2024-07-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* add eslint-plugin-promise support ([#86](https://github.com/neostandard/neostandard/issues/86))
+
+### 🌟 Features
+
+* add eslint-plugin-promise support ([#86](https://github.com/neostandard/neostandard/issues/86)) ([8f141ae](https://github.com/neostandard/neostandard/commit/8f141ae3d3c968092875f6a4f6bab41ffdbdbceb))
+* export plugins for others to use ([26b472b](https://github.com/neostandard/neostandard/commit/26b472b52b32d704f60f12bfb228692f2f74b2f6))
+
 ## [0.9.0](https://github.com/neostandard/neostandard/compare/v0.8.0...v0.9.0) (2024-06-27)
 
 

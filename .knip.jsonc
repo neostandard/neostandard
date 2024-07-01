@@ -8,6 +8,7 @@
     "pwd"
   ],
   "ignore": [
-    "test/should-*/**/*"
+    "test/should-*/**/*",
+    "test/ts-extension-eslint.config.mjs"
   ]
 }
