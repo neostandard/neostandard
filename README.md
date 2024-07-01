@@ -108,7 +108,7 @@ alt="platformatic"
 
 ### resolveIgnoresFromGitignore()
 
-Finds a `.gitignore` file that recides in the same directory as the ESLint config file and returns an array of ESLint ignores that matches the same files.
+Finds a `.gitignore` file that resides in the same directory as the ESLint config file and returns an array of ESLint ignores that matches the same files.
 
 ESM:
 
@@ -137,6 +137,7 @@ module.exports = require('neostandard')({
 * `@stylistic` - export of [`@stylistic/eslint-plugin`](https://npmjs.com/package/@stylistic/eslint-plugin)
 * `@typescript-eslint` - export of [`@typescript-eslint/eslint-plugin`](https://npmjs.com/package/@typescript-eslint/eslint-plugin)
 * `n` - export of [`eslint-plugin-n`](https://npmjs.com/package/eslint-plugin-n)
+* `promise` - export of [`eslint-plugin-promise`](https://npmjs.com/package/eslint-plugin-promise)
 
 #### Usage of exported plugin
 
@@ -156,7 +157,6 @@ export default [
 ## Missing for 1.0.0 release
 
 * Add JSX/TSX support: [#11](https://github.com/neostandard/neostandard/issues/11)
-* Migrate `eslint-plugin-promise` rules from `standard`: [#14](https://github.com/neostandard/neostandard/issues/14)
 * Migrate `eslint-plugin-import` rules from `standard`: [#15](https://github.com/neostandard/neostandard/issues/15)
 * Investigate a dedicated `neostandard` runner: [#33](https://github.com/neostandard/neostandard/issues/33) / [#2](https://github.com/neostandard/neostandard/issues/2)
 
@@ -183,7 +183,8 @@ Full list in [1.0.0 milestone](https://github.com/neostandard/neostandard/milest
 
 ### Missing bits
 
-* Some plugins are not yet supporting ESLint 9 or flat configs and has thus not yet been added. These are: `eslint-plugin-import` and `eslint-plugin-promise`
+* Some plugins are not yet supporting ESLint 9 or flat configs and has thus not yet been added. These are:
+  - `eslint-plugin-import`
 * JSX parsing is not supported out of the box
 
 ## Config helper

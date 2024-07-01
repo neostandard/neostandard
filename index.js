@@ -16,4 +16,8 @@ module.exports.plugins = /** @type {const} */ ({
   get n () {
     return require('eslint-plugin-n')
   },
+  get promise () {
+    // @ts-ignore
+    return require('eslint-plugin-promise')
+  },
 })
