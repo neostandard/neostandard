@@ -55,6 +55,7 @@
     "prepublishOnly": "run-s build",
     "test-ci": "run-s test:*",
     "test:eslint": "eslint .",
+    "test:tseslint-extension": "eslint -c test/ts-extension-eslint.config.mjs test/test-types.d.ts",
     "test": "run-s check test:*"
   },
   "devDependencies": {
