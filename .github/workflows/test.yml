@@ -23,18 +23,21 @@ jobs:
       command: check
 
   test:
+    name: Test on Node 18
     uses: ./.github/workflows/reusable-npm-run.yml
     with:
       command: test-ci
       node-version: 18
 
   test-20:
+    name: Test on Node 20
     uses: ./.github/workflows/reusable-npm-run.yml
     with:
       command: test-ci
       node-version: 20
 
   test-22:
+    name: Test on Node 22
     uses: ./.github/workflows/reusable-npm-run.yml
     with:
       command: test-ci
