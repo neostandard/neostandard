@@ -18,15 +18,9 @@ permissions:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          cache: 'npm'
-          node-version: lts/*
-      - run: npm ci
-      - run: npm run check
+    uses: ./.github/workflows/reusable-npm-run.yml
+    with:
+      command: check
 
   test:
     name: Node.js ${{ matrix.node-version }}
@@ -39,25 +33,17 @@ jobs:
           - 20
           - 18
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: ./.github/workflows/reusable-npm-run.yml
         with:
-          cache: 'npm'
+          command: test-ci
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run test-ci
 
   peer:
     needs: [lint, test]
     name: Check peerDependencies issues
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          cache: 'npm'
-          node-version: lts/*
-      - run: npm run check-peer-compatibility
+    uses: ./.github/workflows/reusable-npm-run.yml
+    with:
+      command: check-peer-compatibility
 
   types:
     needs: [lint, test]
