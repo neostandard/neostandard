@@ -1,6 +1,7 @@
 {
   "direct": [
-    "fastify/fastify"
+    "fastify/fastify",
+    "poolifier/poolifier"
   ],
   "indirect": [
     "voxpelli/buffered-async-iterable",
