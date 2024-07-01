@@ -121,6 +121,9 @@ jobs:
         run: 'npm install --ignore-scripts --force'
         working-directory: ./project
 
+      - run: npm why neostandard
+        working-directory: ./project
+
       - name: run eslint
         run: npx eslint
         working-directory: ./project
