@@ -46,6 +46,7 @@ alt="platformatic"
 * [Readme badges](#readme-badges)
 * [Mission statement](#mission-statement)
   * [Rule guidelines](#rule-guidelines)
+* [Governance](#governance)
 
 ## Quick Start
 
@@ -272,3 +273,9 @@ _Prior to the `1.0.0` release we are still rapidly evolving with fixes and impro
 3. `neostandard` rule changes and additions should be aligned with projects prior to being released, by eg. sending PR:s to them to align them ahead of time. When new best practices are incompatible with current best practices, rules should first be relaxed to allow for both approaches, then be made stricter when the community has moved to the new approach
 4. `neostandard` rule changes and additions should improve the _description_ of project best practices, not _prescribe_ new practices
 5. `neostandard` should, when faced with no clear best practice, avoid adding such a rule as it risks becoming _prescriptive_ rather than _descriptive_. If leaving out such a rule would make `neostandard` an incomplete baseline config, and the community is split between a few clear alternatives (such as `semi`), then making it configurable can enable it to still be added, but that should only be done in exceptional cases
+
+## Governance
+
+`neostandard` is a community project with open governance.
+
+See [GOVERNANCE.md](./GOVERNANCE.md) for specifics.
