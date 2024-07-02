@@ -44,6 +44,8 @@ alt="platformatic"
 * [Config helper](#config-helper)
   * [Config migration](#config-migration)
 * [Readme badges](#readme-badges)
+* [Mission statement](#mission-statement)
+  * [Rule guidelines](#rule-guidelines)
 
 ## Quick Start
 
@@ -256,3 +258,17 @@ your readme to let people know that your code is using the neostandard style.
 ```md
 [![neostandard javascript style](https://img.shields.io/badge/code_style-neostandard-brightgreen?style=flat)](https://github.com/neostandard/neostandard)
 ```
+
+## Mission statement
+
+_Prior to the `1.0.0` release we are still rapidly evolving with fixes and improvements to reach rule parity with `standard`, hence more breaking changes will be experienced until then, as well as evolution of this statement_
+
+`neostandard` intends to set an expectable baseline for project linting that's _descriptive_ of best practices rather than _prescriptive_ of any opinionated approach.
+
+### Rule guidelines
+
+1. `neostandard` rules _describes_ current best practices in the community and help align developers, contributors and maintainers along those
+2. `neostandard` rules _are not_ a tool to promote changed practices within the community by _prescribing_ new such practices
+3. `neostandard` rule changes and additions should be aligned with projects prior to being released, by eg. sending PR:s to them to align them ahead of time. When new best practices are incompatible with current best practices, rules should first be relaxed to allow for both approaches, then be made stricter when the community has moved to the new approach
+4. `neostandard` rule changes and additions should improve the _description_ of project best practices, not _prescribe_ new practices
+5. `neostandard` should, when faced with no clear best practice, avoid adding such a rule as it risks becoming _prescriptive_ rather than _descriptive_. If leaving out such a rule would make `neostandard` an incomplete baseline config, and the community is split between a few clear alternatives (such as `semi`), then making it configurable can enable it to still be added, but that should only be done in exceptional cases
