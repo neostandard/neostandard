@@ -24,7 +24,6 @@
   "supportPolicy": [
     "all"
   ],
-  "ignoreDeps": ["@types/node"],
   "packageRules": [
     {
       "matchPackagePatterns": ["*"],
@@ -42,6 +41,13 @@
         "minor",
         "patch"
       ]
+    },
+    {
+      "enabled": false,
+      "matchPackageNames": [
+        "@types/node"
+      ],
+      "matchUpdateTypes": ["major"]
     },
     {
       "enabled": true,
