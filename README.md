@@ -77,7 +77,7 @@ alt="platformatic"
    Or manually create the file as ESM:
 
    ```js
-   import { neostandard } from 'neostandard'
+   import neostandard from 'neostandard'
 
    export default neostandard({
      // options
