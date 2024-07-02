@@ -3,5 +3,6 @@
   "https://github.com/Esri/esri-leaflet-vector": "Fails due to /* eslint-env mocha */",
   "https://github.com/compwright/split-human-name": "Fails due to /* eslint-env mocha */ and has a minified file that for some reason gets included in check",
   "https://github.com/gabrielcsapo/tap-html": "Correct failure",
-  "https://github.com/lisb/hubot-direct": "Correct failure"
+  "https://github.com/lisb/hubot-direct": "Correct failure",
+  "https://github.com/freecycle/swig-templates": "Fails due to weird npm auth error?"
 }

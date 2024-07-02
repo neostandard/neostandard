@@ -17,5 +17,7 @@
   "https://github.com/TechTeamer/ocsp": "",
   "https://github.com/vimeo/vimeo.js": "Fails due to /* eslint-env mocha */",
   "https://github.com/visionmedia/node-migrate": "Fails due to /* eslint-env mocha */",
-  "https://github.com/web3-storage/ipfs-car": "Fails due to /* eslint-env mocha */"
+  "https://github.com/web3-storage/ipfs-car": "Fails due to /* eslint-env mocha */",
+  "https://github.com/clinicjs/node-clinic-flame": "Fails for issue that should have existed with latest standard as well",
+  "https://github.com/bitcoinjs/bolt11": "Fails for issue that should have existed with latest standard as well"
 }
