@@ -32,6 +32,7 @@ alt="platformatic"
   * [Migrate from `standard`](#migrate-from-standard)
   * [Add to new project](#add-to-new-project)
 * [Configuration options](#configuration-options)
+* [Extending](#extending)
 * [Additional exports](#additional-exports)
   * [resolveIgnoresFromGitignore()](#resolveignoresfromgitignore)
   * [Exported plugins](#exported-plugins)
@@ -103,6 +104,24 @@ alt="platformatic"
 * `noStyle` - *`boolean`* - if set, no style rules will be added. Especially useful when combined with [Prettier](https://prettier.io/), [dprint](https://dprint.dev/) or similar
 * `semi` - *`boolean`* - if set, enforce rather than forbid semicolons (same as `semistandard` did)
 * `ts` - *`boolean`* - if set, TypeScript syntax will be supported and `*.ts` (including `*.d.ts`) will be checked. To add additional file patterns to the TypeScript checks, use `filesTs`
+
+## Extending
+
+The `neostandard()` function returns an ESLint config array which is intended to be exported directly or, if you want to modify or extend the config, can be [combined with other configs](https://eslint.org/docs/latest/use/configure/combine-configs) like any other ESLint config array:
+
+```js
+import neostandard from 'neostandard'
+import jsdoc from 'eslint-plugin-jsdoc';
+
+export default [
+  ...neostandard(),
+  jsdoc.configs['flat/recommended-typescript-flavor'],
+]
+```
+
+Do note that `neostandard()` is intended to be a complete linting config in itself, only extend it if you have needs that goes beyond what `neostandard` provides, and [open an issue](https://github.com/neostandard/neostandard/issues) if you believe `neostandard` itself should be extended or changed in that direction.
+
+Its recommended to stay compatible with the plain config when extending and only make your config stricter, not relax any of the rules, as your project would then still pass when using just the plain `neostandard`-config, which helps people know what baseline to expect from your project.
 
 ## Additional exports
 
