@@ -1,6 +1,8 @@
 {
   "direct": [
     "fastify/fastify",
+    "hifiwi-fi/breadcrum.net"
+
   ],
   "indirect": [
     "voxpelli/buffered-async-iterable",
