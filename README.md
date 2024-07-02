@@ -169,9 +169,7 @@ If one eg. wants to add the `eslint-plugin-n` recommended config, then one can d
 import neostandard, { plugins } from 'neostandard'
 
 export default [
-  ...neostandard({
-    ignores: resolveIgnoresFromGitignore(),
-  }),
+  ...neostandard(),
   plugins.n.configs['flat/recommended'],
 ]
 ```
