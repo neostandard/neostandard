@@ -9,10 +9,9 @@ import { peowly } from 'peowly'
 import { isStringArray } from './lib/utils.js'
 
 const packagePath = new URL('./package.json', import.meta.url)
-// type-coverage:ignore-next-line
 const pkg = JSON.parse(await readFile(packagePath, { encoding: 'utf8' }))
 
-const {
+let {
   flags: {
     esm,
     migrate,
@@ -110,6 +109,7 @@ if (migrate) {
   }
 
   if (sourcePkg && typeof sourcePkg === 'object') {
+    esm = esm || ('type' in sourcePkg && sourcePkg.type === 'module')
     const sourceConfig = ('standard' in sourcePkg && sourcePkg.standard) ||
       ('semistandard' in sourcePkg && sourcePkg.semistandard) ||
       ('ts-standard' in sourcePkg && sourcePkg['ts-standard'])
