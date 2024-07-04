@@ -32,6 +32,7 @@ alt="platformatic"
   * [Migrate from `standard`](#migrate-from-standard)
   * [Add to new project](#add-to-new-project)
 * [Configuration options](#configuration-options)
+* [Extending](#extending)
 * [Additional exports](#additional-exports)
   * [resolveIgnoresFromGitignore()](#resolveignoresfromgitignore)
   * [Exported plugins](#exported-plugins)
@@ -43,6 +44,9 @@ alt="platformatic"
 * [Config helper](#config-helper)
   * [Config migration](#config-migration)
 * [Readme badges](#readme-badges)
+* [Mission statement](#mission-statement)
+  * [Rule guidelines](#rule-guidelines)
+* [Governance](#governance)
 
 ## Quick Start
 
@@ -77,7 +81,7 @@ alt="platformatic"
    Or manually create the file as ESM:
 
    ```js
-   import { neostandard } from 'neostandard'
+   import neostandard from 'neostandard'
 
    export default neostandard({
      // options
@@ -103,6 +107,24 @@ alt="platformatic"
 * `noStyle` - *`boolean`* - if set, no style rules will be added. Especially useful when combined with [Prettier](https://prettier.io/), [dprint](https://dprint.dev/) or similar
 * `semi` - *`boolean`* - if set, enforce rather than forbid semicolons (same as `semistandard` did)
 * `ts` - *`boolean`* - if set, TypeScript syntax will be supported and `*.ts` (including `*.d.ts`) will be checked. To add additional file patterns to the TypeScript checks, use `filesTs`
+
+## Extending
+
+The `neostandard()` function returns an ESLint config array which is intended to be exported directly or, if you want to modify or extend the config, can be [combined with other configs](https://eslint.org/docs/latest/use/configure/combine-configs) like any other ESLint config array:
+
+```js
+import neostandard from 'neostandard'
+import jsdoc from 'eslint-plugin-jsdoc';
+
+export default [
+  ...neostandard(),
+  jsdoc.configs['flat/recommended-typescript-flavor'],
+]
+```
+
+Do note that `neostandard()` is intended to be a complete linting config in itself, only extend it if you have needs that goes beyond what `neostandard` provides, and [open an issue](https://github.com/neostandard/neostandard/issues) if you believe `neostandard` itself should be extended or changed in that direction.
+
+It's recommended to stay compatible with the plain config when extending and only make your config stricter, not relax any of the rules, as your project would then still pass when using just the plain `neostandard`-config, which helps people know what baseline to expect from your project.
 
 ## Additional exports
 
@@ -147,9 +169,7 @@ If one eg. wants to add the `eslint-plugin-n` recommended config, then one can d
 import neostandard, { plugins } from 'neostandard'
 
 export default [
-  ...neostandard({
-    ignores: resolveIgnoresFromGitignore(),
-  }),
+  ...neostandard(),
   plugins.n.configs['flat/recommended'],
 ]
 ```
@@ -237,3 +257,23 @@ your readme to let people know that your code is using the neostandard style.
 ```md
 [![neostandard javascript style](https://img.shields.io/badge/code_style-neostandard-brightgreen?style=flat)](https://github.com/neostandard/neostandard)
 ```
+
+## Mission statement
+
+_Prior to the `1.0.0` release we are still rapidly evolving with fixes and improvements to reach rule parity with `standard`, hence more breaking changes will be experienced until then, as well as evolution of this statement_
+
+`neostandard` intends to set an expectable baseline for project linting that's _descriptive_ of best practices rather than _prescriptive_ of any opinionated approach.
+
+### Rule guidelines
+
+1. `neostandard` rules _describes_ current best practices in the community and help align developers, contributors and maintainers along those
+2. `neostandard` rules _are not_ a tool to promote changed practices within the community by _prescribing_ new such practices
+3. `neostandard` rule changes and additions should be aligned with projects prior to being released, by eg. sending PR:s to them to align them ahead of time. When new best practices are incompatible with current best practices, rules should first be relaxed to allow for both approaches, then be made stricter when the community has moved to the new approach
+4. `neostandard` rule changes and additions should improve the _description_ of project best practices, not _prescribe_ new practices
+5. `neostandard` should, when faced with no clear best practice, avoid adding such a rule as it risks becoming _prescriptive_ rather than _descriptive_. If leaving out such a rule would make `neostandard` an incomplete baseline config, and the community is split between a few clear alternatives (such as `semi`), then making it configurable can enable it to still be added, but that should only be done in exceptional cases
+
+## Governance
+
+`neostandard` is a community project with open governance.
+
+See [GOVERNANCE.md](./GOVERNANCE.md) for specifics.
