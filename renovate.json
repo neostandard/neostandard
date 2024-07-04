@@ -35,14 +35,6 @@
     },
     {
       "matchDepTypes": ["devDependencies"],
-      "groupName": "all major dev dependencies",
-      "groupSlug": "all-major-dev",
-      "matchUpdateTypes": [
-        "major"
-      ]
-    },
-    {
-      "matchDepTypes": ["devDependencies"],
       "groupName": "all non-major dev dependencies",
       "groupSlug": "all-dev",
       "matchUpdateTypes": [
