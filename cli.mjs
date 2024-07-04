@@ -109,7 +109,7 @@ if (migrate) {
   }
 
   if (sourcePkg && typeof sourcePkg === 'object') {
-    esm = 'type' in sourcePkg && sourcePkg.type === 'module'
+    esm = esm || ('type' in sourcePkg && sourcePkg.type === 'module')
     const sourceConfig = ('standard' in sourcePkg && sourcePkg.standard) ||
       ('semistandard' in sourcePkg && sourcePkg.semistandard) ||
       ('ts-standard' in sourcePkg && sourcePkg['ts-standard'])
