@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { readFile } from 'node:fs/promises'
+import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 import { gitignoreToMinimatch } from '@humanwhocodes/gitignore-to-minimatch'
@@ -9,7 +9,7 @@ import { peowly } from 'peowly'
 import { isStringArray } from './lib/utils.js'
 
 const packagePath = new URL('./package.json', import.meta.url)
-const pkg = JSON.parse(await readFile(packagePath, { encoding: 'utf8' }))
+const pkg = JSON.parse(readFileSync(packagePath, { encoding: 'utf8' }))
 
 let {
   flags: {
@@ -66,9 +66,7 @@ let {
     },
   },
   description: 'Generate a neostandard config for eslint',
-  examples: [
-    '--semi --no-style > eslint.config.js',
-  ],
+  examples: ['--semi --no-style > eslint.config.js'],
   name: 'neostandard',
   pkg,
 })
@@ -102,7 +100,7 @@ if (migrate) {
   let sourcePkg
 
   try {
-    sourcePkg = JSON.parse(await readFile(join(process.cwd(), 'package.json'), 'utf8'))
+    sourcePkg = JSON.parse(readFileSync(join(process.cwd(), 'package.json'), { encoding: 'utf8' }))
   } catch (cause) {
     console.log('Failed to read package.json:', cause)
     process.exit(1)
@@ -150,8 +148,8 @@ for (const flag of flagKeys) {
 
   if (value) {
     const formattedValue = JSON.stringify(value)
-      .replaceAll('"', '\'')
-      .replaceAll('\',\'', '\', \'')
+      .replaceAll('"', "'")
+      .replaceAll("','", "', '")
 
     config.push(`${flagMapping[flag]}: ${formattedValue}`)
   }
