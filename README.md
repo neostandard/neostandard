@@ -184,12 +184,14 @@ Full list in [1.0.0 milestone](https://github.com/neostandard/neostandard/milest
 
 ## Differences to standard / eslint-config-standard 17.x
 
-* Uses ESLint flat configs to bundle plugins rather than relying on `standard-engine`
-* Built upon ESLint 9
-* Support for `.ts` as option in main package
-* Contains `semistandard` as option in main package
-* Uses [`eslint-stylistic`](https://eslint.style/) instead of [deprecated ESLint style rules](https://eslint.org/blog/2023/10/deprecating-formatting-rules/)
-* Enables opting out of style rules (no need for eg. [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier) anymore)
+* [Open governance](./GOVERNANCE.md), resolving [governance issue](https://github.com/standard/standard/issues/1948#issuecomment-2138078249)
+* Built for [ESLint 9](https://eslint.org/blog/2024/04/eslint-v9.0.0-released/)
+* Relies on [ESLint flat config](https://eslint.org/blog/2023/10/flat-config-rollout-plans/) to bundle plugins rather than custom [`standard-engine`](https://github.com/standard/standard-engine)
+* Replaces [deprecated ESLint style rules](https://eslint.org/blog/2023/10/deprecating-formatting-rules/) with [`eslint-stylistic`](https://eslint.style/) rules
+* Built in options replaces need for separate modules
+  * `ts` option makes `*.ts` files be checked as well (used to be handled by [`ts-standard`](https://github.com/standard/ts-standard))
+  * `semi` option enforces rather than ban semicolons (used to be handled by [`semistandard`](https://github.com/standard/semistandard))
+  * `noStyle` option deactivates style rules (used to require something like [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier))
 
 ### Changed rules
 
