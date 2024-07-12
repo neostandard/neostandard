@@ -189,9 +189,9 @@ Full list in [1.0.0 milestone](https://github.com/neostandard/neostandard/milest
 * Relies on [ESLint flat config](https://eslint.org/blog/2023/10/flat-config-rollout-plans/) to bundle plugins rather than custom [`standard-engine`](https://github.com/standard/standard-engine)
 * Replaces [deprecated ESLint style rules](https://eslint.org/blog/2023/10/deprecating-formatting-rules/) with [`eslint-stylistic`](https://eslint.style/) rules
 * Built in options replaces need for separate modules
-  * To opt in to TypeScript `*.ts` files support (used to be [`ts-standard`](https://github.com/standard/ts-standard))
-  * To enforce rather than ban semicolons (used to be [`semistandard`](https://github.com/standard/semistandard))
-  * To opt out of style rules (used to be [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier))
+  * `ts` option makes `*.ts` files be checked as well (used to be handled by [`ts-standard`](https://github.com/standard/ts-standard))
+  * `semi` option enforces rather than ban semicolons (used to be handled by [`semistandard`](https://github.com/standard/semistandard))
+  * `noStyle` option deactivates style rules (used to require something like [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier))
 
 ### Changed rules
 
