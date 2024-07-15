@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.11.1](https://github.com/neostandard/neostandard/compare/v0.11.0...v0.11.1) (2024-07-15)
+
+
+### 🌟 Features
+
+* autodetect ESM at configuration migration ([#98](https://github.com/neostandard/neostandard/issues/98)) ([d51787f](https://github.com/neostandard/neostandard/commit/d51787fa40f9ca3e3d3e833876cd116260af3058))
+
+
+### 🩹 Fixes
+
+* **deps:** update dependency globals to ^15.7.0 ([#99](https://github.com/neostandard/neostandard/issues/99)) ([a5df311](https://github.com/neostandard/neostandard/commit/a5df311755401744c85f8ca968bb7856bc46b7a3))
+* **deps:** update dependency globals to ^15.8.0 ([#104](https://github.com/neostandard/neostandard/issues/104)) ([7b21e44](https://github.com/neostandard/neostandard/commit/7b21e445e4dcde53cab6d32ffd50bedde92a38b0))
+* **deps:** update dependency peowly to ^1.3.2 ([#100](https://github.com/neostandard/neostandard/issues/100)) ([aa85713](https://github.com/neostandard/neostandard/commit/aa857131d4ee9198246050b6e719bd691f19ba07))
+* **deps:** update dependency typescript-eslint to ^8.0.0-alpha.41 ([#82](https://github.com/neostandard/neostandard/issues/82)) ([b6bac9c](https://github.com/neostandard/neostandard/commit/b6bac9c034b3ba22054f10f9dd3d5c6d2a2f11e1))
+
+
+### 📚 Documentation
+
+* add mission statement + notes on extending ([#94](https://github.com/neostandard/neostandard/issues/94)) ([7835e15](https://github.com/neostandard/neostandard/commit/7835e1578f847ba3f04557ab17b103be3e7b8537))
+* improve list of differences ([#102](https://github.com/neostandard/neostandard/issues/102)) ([ca82086](https://github.com/neostandard/neostandard/commit/ca82086b73de1fd9d1bba6c1c088232db5908635))
+
+
+### 🧹 Chores
+
+* remove direct dependency on @typescript-eslint/utils ([#93](https://github.com/neostandard/neostandard/issues/93)) ([f224088](https://github.com/neostandard/neostandard/commit/f224088d5c16f094e09e8e3d7f1d93f0f49e3da8))
+
 ## [0.11.0](https://github.com/neostandard/neostandard/compare/v0.10.0...v0.11.0) (2024-07-01)
 
 
