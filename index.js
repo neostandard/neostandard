@@ -20,4 +20,8 @@ module.exports.plugins = /** @type {const} */ ({
   get 'typescript-eslint' () {
     return require('typescript-eslint')
   },
+  get react () {
+    // @ts-ignore
+    return require('eslint-plugin-react')
+  },
 })
