@@ -36,6 +36,7 @@ alt="platformatic"
 * [Additional exports](#additional-exports)
   * [resolveIgnoresFromGitignore()](#resolveignoresfromgitignore)
   * [Exported plugins](#exported-plugins)
+* [JSX/TSX support](#jsxtsx-support)
 * [Missing for 1.0.0 release](#missing-for-100-release)
 * [Differences to standard / eslint-config-standard 17.x](#differences-to-standard--eslint-config-standard-17x)
   * [Changed rules](#changed-rules)
@@ -107,6 +108,7 @@ alt="platformatic"
 * `noStyle` - *`boolean`* - if set, no style rules will be added. Especially useful when combined with [Prettier](https://prettier.io/), [dprint](https://dprint.dev/) or similar
 * `semi` - *`boolean`* - if set, enforce rather than forbid semicolons (same as `semistandard` did)
 * `ts` - *`boolean`* - if set, TypeScript syntax will be supported and `*.ts` (including `*.d.ts`) will be checked. To add additional file patterns to the TypeScript checks, use `filesTs`
+* `react` - *`boolean | string | object`* - if set, React (JSX) will be supported. In combination with `ts` option also TSX will be supported. See [JSX/TSX support](#jsxtsx-support) for more details.
 
 ## Extending
 
@@ -173,6 +175,19 @@ export default [
   plugins.n.configs['flat/recommended'],
 ]
 ```
+
+## JSX/TSX support
+
+JSX/TSX support can be enabled using `react` option. By default `react` support is disabled (`false`). To add the JSX/TSX support, `eslint-plugin-react` package is used.
+
+Using `true` as a value will use `recommended` ESLint configuration and a "default" React settings (`{ version: "detect" }`). See [eslint-plugin-react Docs](https://www.npmjs.com/package/eslint-plugin-react) for more information about React settings and available ESLint React configurations.
+
+`react` option accepts:
+- *`boolean`* - default value: `false`
+- *`string`* - `"recommended" | "all" | "jsx-runtime"`
+- *`object`* with `name` and `settings` where
+  - `name` - *`string`* - one of available configurations
+  - `settings` - *`object`* - `settings.react` object from `eslint-plugin-react` (see linked [package Docs](https://www.npmjs.com/package/eslint-plugin-react) for more information)
 
 ## Missing for 1.0.0 release
 
