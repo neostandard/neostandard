@@ -36,7 +36,7 @@ alt="platformatic"
 * [Additional exports](#additional-exports)
   * [resolveIgnoresFromGitignore()](#resolveignoresfromgitignore)
   * [Exported plugins](#exported-plugins)
-* [JSX/TSX support](#jsxtsx-support)
+* [JSX support](#jsx-support)
 * [Missing for 1.0.0 release](#missing-for-100-release)
 * [Differences to standard / eslint-config-standard 17.x](#differences-to-standard--eslint-config-standard-17x)
   * [Changed rules](#changed-rules)
@@ -108,7 +108,8 @@ alt="platformatic"
 * `noStyle` - *`boolean`* - if set, no style rules will be added. Especially useful when combined with [Prettier](https://prettier.io/), [dprint](https://dprint.dev/) or similar
 * `semi` - *`boolean`* - if set, enforce rather than forbid semicolons (same as `semistandard` did)
 * `ts` - *`boolean`* - if set, TypeScript syntax will be supported and `*.ts` (including `*.d.ts`) will be checked. To add additional file patterns to the TypeScript checks, use `filesTs`
-* `react` - *`boolean | string | object`* - if set, React (JSX) will be supported. In combination with `ts` option also TSX will be supported. See [JSX/TSX support](#jsxtsx-support) for more details.
+* `react` - *`'recommended' | 'all'`* - selected rule set from `eslint-plugin-react`, see [JSX support](#jsx-support) for details
+* `requireReactImport` - *`boolean`* - if set, import of React is required whenever JSX is used, see [JSX support](#jsx-support) for details
 
 ## Extending
 
@@ -176,18 +177,17 @@ export default [
 ]
 ```
 
-## JSX/TSX support
+## JSX support
 
-JSX/TSX support can be enabled using `react` option. By default `react` support is disabled (`false`). To add the JSX/TSX support, `eslint-plugin-react` package is used.
+JSX support is by default enabled. Selected React rule set can be changed by defining a `react` option.
 
-Using `true` as a value will use `recommended` ESLint configuration and a "default" React settings (`{ version: "detect" }`). See [eslint-plugin-react Docs](https://www.npmjs.com/package/eslint-plugin-react) for more information about React settings and available ESLint React configurations.
+Supported values for `react` option are:
+* `'recommended'` - default
+* `'all'`
 
-`react` option accepts:
-- *`boolean`* - default value: `false`
-- *`string`* - `"recommended" | "all" | "jsx-runtime"`
-- *`object`* with `name` and `settings` where
-  - `name` - *`string`* - one of available configurations
-  - `settings` - *`object`* - `settings.react` object from `eslint-plugin-react` (see linked [package Docs](https://www.npmjs.com/package/eslint-plugin-react) for more information)
+See [eslint-plugin-react Docs](https://www.npmjs.com/package/eslint-plugin-react) for more information about available ESLint React configurations and rules.
+
+Old React versions (16 and older) needs `React` to be always imported when using JSX in the file. To update ESLint configuration to require `React` in the import section, set `requireReactImport` option to `true`.
 
 ## Missing for 1.0.0 release
 
