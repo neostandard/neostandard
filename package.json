@@ -62,7 +62,7 @@
     "@types/node": "^18.19.42",
     "@voxpelli/tsconfig": "^12.0.1",
     "eslint": "^9.8.0",
-    "husky": "^9.1.3",
+    "husky": "^9.1.4",
     "installed-check": "^9.3.0",
     "knip": "^5.27.0",
     "list-dependents-cli": "^2.4.0",
