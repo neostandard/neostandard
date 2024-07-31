@@ -8,6 +8,9 @@ on:
     - cron: '28 16 14 * *'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+
 permissions:
   contents: write
   pull-requests: write
