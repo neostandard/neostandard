@@ -58,6 +58,13 @@ jobs:
     name: Sync ${{ inputs.npm-sync-script }}
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+          node-version: lts/*
+      - run: npm ci
+
       # Actual syncing
 
       - name: Run npm sync script
