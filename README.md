@@ -160,6 +160,7 @@ module.exports = require('neostandard')({
 * `@stylistic` - export of [`@stylistic/eslint-plugin`](https://npmjs.com/package/@stylistic/eslint-plugin)
 * `n` - export of [`eslint-plugin-n`](https://npmjs.com/package/eslint-plugin-n)
 * `promise` - export of [`eslint-plugin-promise`](https://npmjs.com/package/eslint-plugin-promise)
+* `react` - export of [`eslint-plugin-react`](https://npmjs.com/package/eslint-plugin-react)
 * `typescript-eslint` - export of [`typescript-eslint`](https://npmjs.com/package/typescript-eslint)
 
 #### Usage of exported plugin
