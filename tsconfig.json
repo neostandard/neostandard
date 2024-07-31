@@ -9,7 +9,11 @@
     "lib/**/*",
     "test/**/*",
   ],
+  "exclude": [
+    "test/**/*.jsx",
+  ],
   "compilerOptions": {
+    "jsx": "preserve",
     // Temporary: Until typescript-eslint passes without it
     "skipLibCheck": true
   }
