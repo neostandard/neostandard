@@ -64,8 +64,8 @@ jobs:
       # Actual syncing
       - name: Prepare for diff
         run: >
-          for PROJECT in $(jq -r 'join(\" \")' dependents-data/projects.json); do
-            cp \"dependents-data/$PROJECT.json\" \"dependents-data/$PROJECT-old.json\"
+          for PROJECT in $(jq -r 'join(" ")' dependents-data/projects.json); do
+            cp "dependents-data/$PROJECT.json" "dependents-data/$PROJECT-old.json"
           done
 
       - name: Run npm sync script
