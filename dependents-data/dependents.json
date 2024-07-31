@@ -1,9 +1,4 @@
 {
-  "direct": [
-    "fastify/fastify",
-    "hifiwi-fi/breadcrum.net",
-    "bcomnes/npm-run-all2"
-  ],
   "indirect": [
     "voxpelli/buffered-async-iterable",
     "voxpelli/linemod-core",
