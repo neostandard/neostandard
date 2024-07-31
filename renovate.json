@@ -24,7 +24,6 @@
   "supportPolicy": [
     "all"
   ],
-  "ignoreDeps": ["@types/node"],
   "packageRules": [
     {
       "matchPackagePatterns": ["*"],

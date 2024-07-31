@@ -1,6 +1,6 @@
 {
   "name": "neostandard",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "A modern successor to standard",
   "homepage": "http://github.com/neostandard/neostandard",
   "repository": {
@@ -59,27 +59,27 @@
     "test": "run-s check test:*"
   },
   "devDependencies": {
-    "@types/node": "^18.19.34",
-    "@voxpelli/tsconfig": "^12.0.1",
-    "eslint": "^9.5.0",
-    "husky": "^9.0.11",
+    "@types/node": "^18.19.42",
+    "@voxpelli/tsconfig": "^13.0.0",
+    "eslint": "^9.8.0",
+    "husky": "^9.1.4",
     "installed-check": "^9.3.0",
-    "knip": "^5.22.1",
+    "knip": "^5.27.0",
     "list-dependents-cli": "^2.4.0",
-    "npm-run-all2": "^6.2.0",
-    "type-coverage": "^2.29.0",
-    "typescript": "~5.5.2"
+    "npm-run-all2": "^6.2.2",
+    "type-coverage": "^2.29.1",
+    "typescript": "~5.5.4"
   },
   "dependencies": {
     "@humanwhocodes/gitignore-to-minimatch": "^1.0.2",
-    "@stylistic/eslint-plugin": "^2.6.0-beta.0",
-    "@typescript-eslint/utils": "^8.0.0-alpha.34",
-    "eslint-plugin-n": "^17.9.0",
-    "eslint-plugin-promise": "^6.4.0",
+    "@stylistic/eslint-plugin": "^2.6.0-beta.1",
+    "@types/eslint": "^9.6.0",
+    "eslint-plugin-n": "^17.10.1",
+    "eslint-plugin-promise": "^7.0.0",
     "find-up": "^5.0.0",
-    "globals": "^15.6.0",
-    "peowly": "^1.3.1",
-    "typescript-eslint": "^8.0.0-alpha.34"
+    "globals": "^15.8.0",
+    "peowly": "^1.3.2",
+    "typescript-eslint": "^8.0.0-alpha.54"
   },
   "peerDependencies": {
     "eslint": "^9.0.0"
