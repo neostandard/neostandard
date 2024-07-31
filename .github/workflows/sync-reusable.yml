@@ -1,0 +1,97 @@
+# Inspired by https://github.com/SocketDev/workflows/blob/fe40aa6135a5ea6d81ad8103e4f044d2f9227e41/.github/workflows/reusable-sync.yml
+
+name: Reusable Sync
+
+on:
+  workflow_call:
+    secrets:
+      GITHUB_TOKEN_OVERRIDE:
+        description: 'If you need to override the GITHUB_TOKEN used with the "gh" cli, then do so with this one'
+        required: false
+
+    inputs:
+      npm-diff-script:
+        description: 'The name of a script to run as the diff mechanism.'
+        required: false
+        type: string
+      npm-sync-script:
+        description: 'The name of the script to run as the sync.'
+        required: true
+        type: string
+
+      branch-name:
+        description: 'The name of the branch to create'
+        required: true
+        type: string
+
+      pr-title:
+        description: 'The title of the PR.'
+        required: true
+        type: string
+      pr-body:
+        description: 'The body of the PR.'
+        required: true
+        type: string
+
+      commit-message:
+        description: 'The title of the PR.'
+        required: true
+        type: string
+
+      commit-user:
+        description: 'The name to use in the commit.'
+        required: false
+        default: "github-actions[bot]"
+        type: string
+      commit-email:
+        description: 'The email to use in the commit.'
+        required: false
+        default: "41898282+github-actions[bot]@users.noreply.github.com"
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    name: Sync ${{ inputs.npm-sync-script }}
+    runs-on: ubuntu-latest
+    steps:
+      # Actual syncing
+
+      - name: Run npm sync script
+        run: npm run ${{ inputs.npm-sync-script }}
+
+      - name: Run npm diff script
+        if: inputs.npm-diff-script
+        id: diff-script
+        continue-on-error: true
+        run: npm run ${{ inputs.npm-diff-script }}
+
+      # Commit, push and open a PR if that's the need
+
+      # Inspired by https://github.com/actions/toolkit/blob/0db3029fcfcb1393a2b3ccd14caecd7a3460af4e/.github/workflows/update-github.yaml#L22-L23
+      # And by https://github.com/actions/deploy-pages/blob/ff669327f73994ba35f45d1cd2fc81d82d1c852c/.github/workflows/rebuild-dependabot-prs.yml#L43-L44
+      - name: Commit and push any changes
+        if: steps.diff-script.outcome == 'skipped' || steps.diff-script.outcome == 'failure'
+        id: push-changes
+        run: |
+          if [[ "$(git status --porcelain)" != "" ]]; then
+            git config --global user.name "${{ inputs.commit-user }}"
+            git config --global user.email "${{ inputs.commit-email }}"
+            git checkout -b ${{ inputs.branch-name }}
+            git add .
+            if (! git show-ref origin/${{ inputs.branch-name }} -q) || [[ "$(git diff origin/${{ inputs.branch-name }} --stat)" != "" ]]; then
+              echo "createPR=true" >> $GITHUB_OUTPUT
+              git commit -m "${{ inputs.commit-message }}"
+              git push origin ${{ inputs.branch-name }} -fu --no-verify
+            fi
+          fi
+
+      - name: Open a PR for the sync
+        if: steps.push-changes.outputs.createPR
+        continue-on-error: true
+        run: gh pr create --head ${{ inputs.branch-name }} --title " ${{ inputs.pr-title }}" --body "${{ inputs.pr-body }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN_OVERRIDE || secrets.GITHUB_TOKEN }}

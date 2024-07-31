@@ -1,0 +1,26 @@
+name: Refresh dependents data
+
+on:
+  # FIXME: Remove before merging
+  push:
+  schedule:
+    # At 16:28 on day-of-month 14: https://crontab.guru/#28_16_14_*_*
+    - cron: '28 16 14 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    name: Refresh dependents data
+    uses: ./.github/workflows/sync-reusable.yml
+    secrets: inherit
+    with:
+      npm-diff-script: 'sync-refresh-diff'
+      npm-sync-script: 'sync-refresh'
+      branch-name: 'automated/refresh'
+      commit-message: 'chore(dependents): refresh npm data'
+      pr-title: 'Refresh dependents data'
+      pr-body: 'The dependents data is outdated and this PR refreshes it.'
