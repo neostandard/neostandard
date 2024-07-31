@@ -2,6 +2,7 @@
   "Trott/cumberbatch-name",
   "grandom-library/fnv1a",
   "grandom-library/mt19937",
+  "holmok/pino-tiny",
   "intradoc/core",
   "jsdoc-type-pratt-parser/jsdoc-type-pratt-parser",
   "juanelas/bigint-mod-arith",
