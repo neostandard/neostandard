@@ -67,19 +67,19 @@ jobs:
     needs: [lint, test]
     uses: ./.github/workflows/compatibility.yml
     with:
-      moduleSet: semistandard-filtered
+      moduleSet: semistandard
       flags: --semi
 
   compatibility-standard:
     needs: [lint, test]
     uses: ./.github/workflows/compatibility.yml
     with:
-      moduleSet: standard-filtered
+      moduleSet: standard
 
   compatibility-ts-standard:
     needs: [lint, test]
     uses: ./.github/workflows/compatibility.yml
     with:
-      moduleSet: ts-standard-filtered
+      moduleSet: ts-standard
       flags: '--ts'
 
