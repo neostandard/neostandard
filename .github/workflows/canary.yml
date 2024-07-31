@@ -77,7 +77,7 @@ jobs:
         working-directory: ./project
 
       - name: modify project eslint config
-        run: CANARY_ESLINT_CONFIG_FILE=$([ -f eslint.config.mjs ] && echo "eslint.config.mjs" || ([ -f eslint.config.cjs ] && echo "eslint.config.cjs" || echo "eslint.config.js")) && sed "s/'neostandard'/'..\/main\/index.js'/" $CANARY_ESLINT_CONFIG_FILE > tmp.eslint.config.js && rm $CANARY_ESLINT_CONFIG_FILE && mv tmp.eslint.config.js $CANARY_ESLINT_CONFIG_FILE
+        run: CANARY_ESLINT_CONFIG_FILE=$([ -f eslint.config.mjs ] && echo "eslint.config.mjs" || ([ -f eslint.config.cjs ] && echo "eslint.config.cjs" || echo "eslint.config.js")) && sed "s/'neostandard'/'..\/main\/index.js'/" $CANARY_ESLINT_CONFIG_FILE > tmp.eslint.config.js && rm $CANARY_ESLINT_CONFIG_FILE && mv tmp.eslint.config.js $CANARY_ESLINT_CONFIG_FILE && echo $CANARY_ESLINT_CONFIG_FILE && cat $CANARY_ESLINT_CONFIG_FILE
         working-directory: ./project
 
       - name: run eslint
