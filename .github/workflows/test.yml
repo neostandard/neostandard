@@ -60,20 +60,20 @@ jobs:
     uses: ./.github/workflows/canary.yml
 
   compatibility-semistandard:
-    needs: [lint, test]
+    needs: [lint, test, canary]
     uses: ./.github/workflows/compatibility.yml
     with:
       moduleSet: semistandard-filtered
       flags: --semi
 
   compatibility-standard:
-    needs: [lint, test]
+    needs: [lint, test, canary]
     uses: ./.github/workflows/compatibility.yml
     with:
       moduleSet: standard-filtered
 
   compatibility-ts-standard:
-    needs: [lint, test]
+    needs: [lint, test, canary]
     uses: ./.github/workflows/compatibility.yml
     with:
       moduleSet: ts-standard-filtered
