@@ -10,10 +10,6 @@ on:
         required: false
 
     inputs:
-      npm-diff-script:
-        description: 'The name of a script to run as the diff mechanism.'
-        required: false
-        type: string
       npm-sync-script:
         description: 'The name of the script to run as the sync.'
         required: true
@@ -66,22 +62,31 @@ jobs:
       - run: npm ci
 
       # Actual syncing
+      - name: Prepare for diff
+        run: >
+          for PROJECT in $(jq -r 'join(\" \")' dependents-data/projects.json); do
+            cp \"dependents-data/$PROJECT.json\" \"dependents-data/$PROJECT-old.json\"
+          done
 
       - name: Run npm sync script
         run: npm run ${{ inputs.npm-sync-script }}
 
-      - name: Run npm diff script
-        if: inputs.npm-diff-script
-        id: diff-script
-        continue-on-error: true
-        run: npm run ${{ inputs.npm-diff-script }}
+      - name: Diff
+        id: diff
+        run: |
+          for PROJECT in $(jq -r 'join(" ")' dependents-data/projects.json); do
+            if ! diff "dependents-data/$PROJECT-old.json" "dependents-data/$PROJECT.json"; then
+              echo "- Dependents in $PROJECT are diffing" >> "$GITHUB_STEP_SUMMARY"
+              echo "hasDiff=true" >> "$GITHUB_OUTPUT"
+            fi
+          done
 
       # Commit, push and open a PR if that's the need
 
       # Inspired by https://github.com/actions/toolkit/blob/0db3029fcfcb1393a2b3ccd14caecd7a3460af4e/.github/workflows/update-github.yaml#L22-L23
       # And by https://github.com/actions/deploy-pages/blob/ff669327f73994ba35f45d1cd2fc81d82d1c852c/.github/workflows/rebuild-dependabot-prs.yml#L43-L44
       - name: Commit and push any changes
-        if: steps.diff-script.outcome == 'skipped' || steps.diff-script.outcome == 'failure'
+        if: steps.diff.outputs.hasDiff
         id: push-changes
         run: |
           if [[ "$(git status --porcelain)" != "" ]]; then

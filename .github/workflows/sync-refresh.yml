@@ -21,7 +21,6 @@ jobs:
     uses: ./.github/workflows/sync-reusable.yml
     secrets: inherit
     with:
-      npm-diff-script: 'sync-diff'
       npm-sync-script: 'sync-refresh'
       branch-name: 'automated/refresh'
       commit-message: 'chore(dependents): refresh npm data'
