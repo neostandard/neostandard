@@ -50,6 +50,10 @@ jobs:
     with:
       command: check-peer-compatibility
 
+  canary:
+    needs: [lint, test]
+    uses: ./.github/workflows/canary.yml
+
   compatibility-semistandard:
     needs: [lint, test]
     uses: ./.github/workflows/compatibility.yml
