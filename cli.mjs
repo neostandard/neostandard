@@ -44,6 +44,11 @@ let {
       multiple: true,
       short: 'i',
     },
+    'no-jsx': {
+      listGroup: 'Config options',
+      description: 'Deactivates all jsx support',
+      type: 'boolean',
+    },
     'no-style': {
       listGroup: 'Config options',
       description: 'Deactivates all style linting',
@@ -77,6 +82,7 @@ const flagMapping = /** @satisfies {Record<keyof typeof flags, keyof import('./i
   env: 'env',
   global: 'globals',
   ignore: 'ignores',
+  'no-jsx': 'noJsx',
   'no-style': 'noStyle',
   semi: 'semi',
   ts: 'ts',
