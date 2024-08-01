@@ -48,7 +48,7 @@ jobs:
     uses: ./.github/workflows/canary.yml
 
   compatibility:
-    needs: [lint, test, canary]
+    needs: [canary]
     strategy:
       fail-fast: false
       matrix:
