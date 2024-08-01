@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.3](https://github.com/neostandard/neostandard/compare/v0.11.2...v0.11.3) (2024-08-01)
+
+
+### 🩹 Fixes
+
+* **deps:** add `eslint-plugin-react` to eslint deps handling ([#127](https://github.com/neostandard/neostandard/issues/127)) ([3f65825](https://github.com/neostandard/neostandard/commit/3f65825582520709ac2900d17049340b5d9256a2))
+
 ## [0.11.2](https://github.com/neostandard/neostandard/compare/v0.11.1...v0.11.2) (2024-08-01)
 
 
