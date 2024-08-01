@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.11.2](https://github.com/neostandard/neostandard/compare/v0.11.1...v0.11.2) (2024-08-01)
+
+
+### 🌟 Features
+
+* port jsx support from `standard` ([#118](https://github.com/neostandard/neostandard/issues/118)) ([f1c24a2](https://github.com/neostandard/neostandard/commit/f1c24a2c5b80036e8c5506642994b224e62242d1))
+
+
+### 🩹 Fixes
+
+* **deps:** move all dependencies to `@types/eslint@^9` ([#116](https://github.com/neostandard/neostandard/issues/116)) ([7047941](https://github.com/neostandard/neostandard/commit/70479410ab9b03bb23195fcb7222102ddf9d3368))
+* **deps:** update dependencies ([#125](https://github.com/neostandard/neostandard/issues/125)) ([a678003](https://github.com/neostandard/neostandard/commit/a678003cfb85a20db13e4a9b3fceab0fead90d14))
+* **deps:** update dependency @stylistic/eslint-plugin to ^2.6.0 ([#123](https://github.com/neostandard/neostandard/issues/123)) ([366bf51](https://github.com/neostandard/neostandard/commit/366bf51b09fce95566f444b28b9d5b983e093473))
+* lazy load typescript and style options ([#126](https://github.com/neostandard/neostandard/issues/126)) ([78d9ff8](https://github.com/neostandard/neostandard/commit/78d9ff878c2fc214d6b308b68dec0a015b89155b)), closes [#124](https://github.com/neostandard/neostandard/issues/124)
+
 ## [0.11.1](https://github.com/neostandard/neostandard/compare/v0.11.0...v0.11.1) (2024-07-15)
 
 
