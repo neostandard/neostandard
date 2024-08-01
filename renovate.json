@@ -51,7 +51,8 @@
         "@stylistic/eslint-plugin",
         "typescript-eslint",
         "eslint-plugin-n",
-        "eslint-plugin-promise"
+        "eslint-plugin-promise",
+        "eslint-plugin-react"
       ],
       "matchUpdateTypes": ["major"],
       "semanticCommitScope": "",
@@ -66,7 +67,8 @@
         "@stylistic/eslint-plugin",
         "typescript-eslint",
         "eslint-plugin-n",
-        "eslint-plugin-promise"
+        "eslint-plugin-promise",
+        "eslint-plugin-react"
       ],
       "matchUpdateTypes": ["minor"],
       "semanticCommitType": "feat"
