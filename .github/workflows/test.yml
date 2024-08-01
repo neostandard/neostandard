@@ -25,27 +25,15 @@ jobs:
       command: check
 
   test:
-    name: Test on Node 18
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [18, 20, 22]
+    name: Test on Node ${{ matrix.target }}
     uses: ./.github/workflows/reusable-npm-run.yml
     with:
       command: test-ci
-      node-version: 18
-
-  test-20:
-    name: Test on Node 20
-    if: github.event_name != 'schedule'
-    uses: ./.github/workflows/reusable-npm-run.yml
-    with:
-      command: test-ci
-      node-version: 20
-
-  test-22:
-    name: Test on Node 22
-    if: github.event_name != 'schedule'
-    uses: ./.github/workflows/reusable-npm-run.yml
-    with:
-      command: test-ci
-      node-version: 22
+      node-version: ${{ matrix.target }}
 
   peer:
     needs: [lint, test]
@@ -59,23 +47,18 @@ jobs:
     needs: [lint, test]
     uses: ./.github/workflows/canary.yml
 
-  compatibility-semistandard:
+  compatibility:
     needs: [lint, test, canary]
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - moduleSet: semistandard-filtered
+            flags: --semi
+          - moduleSet: standard-filtered
+          - moduleSet: ts-standard-filtered
+            flags: --ts
     uses: ./.github/workflows/compatibility.yml
     with:
-      moduleSet: semistandard-filtered
-      flags: --semi
-
-  compatibility-standard:
-    needs: [lint, test, canary]
-    uses: ./.github/workflows/compatibility.yml
-    with:
-      moduleSet: standard-filtered
-
-  compatibility-ts-standard:
-    needs: [lint, test, canary]
-    uses: ./.github/workflows/compatibility.yml
-    with:
-      moduleSet: ts-standard-filtered
-      flags: '--ts'
-
+      moduleSet: ${{ matrix.moduleSet }}
+      flags: ${{ matrix.flags }}
