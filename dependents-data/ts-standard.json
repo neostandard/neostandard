@@ -1,0 +1,12 @@
+[
+  "Trott/cumberbatch-name",
+  "grandom-library/fnv1a",
+  "grandom-library/mt19937",
+  "intradoc/core",
+  "jsdoc-type-pratt-parser/jsdoc-type-pratt-parser",
+  "juanelas/bigint-mod-arith",
+  "juanelas/object-sha",
+  "juanelas/paillier-bigint",
+  "juanelas/pbkdf2-hmac",
+  "mojaloop/central-services-metrics"
+]
