@@ -77,7 +77,7 @@ Lead Maintainer and with agreement from the rest of Lead Maintainers.
 ## Consensus seeking process
 
 The Neostandard organization follows a Lazy [Consensus Seeking][] decision-making model,
-inspired by the ASF
+inspired by the ASF.
 
 Lazy means that silence is consent if an appropriate amount of time has passed
 (most of the time: at least a week) since the suggestion was made and no objections

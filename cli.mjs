@@ -110,7 +110,7 @@ if (migrate) {
   try {
     sourcePkg = JSON.parse(await readFile(join(process.cwd(), 'package.json'), 'utf8'))
   } catch (cause) {
-    console.log('Failed to read package.json:', cause)
+    console.error('Failed to read package.json:', cause)
     process.exit(1)
   }
 
@@ -129,7 +129,7 @@ if (migrate) {
         } else if (Array.isArray(value) && isStringArray(value)) {
           flagsFromMigration[key] = value
         } else {
-          console.log(`Invalid migration value for "standard.${key}". Expected an array of strings, got:`, value)
+          console.error(`Invalid migration value for "standard.${key}". Expected an array of strings, got:`, value)
           process.exit(1)
         }
 
