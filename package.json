@@ -62,12 +62,12 @@
     "test": "run-s check test:*"
   },
   "devDependencies": {
-    "@types/node": "^18.19.42",
+    "@types/node": "^18.19.44",
     "@voxpelli/tsconfig": "^13.0.0",
-    "eslint": "^9.8.0",
+    "eslint": "^9.9.0",
     "husky": "^9.1.4",
     "installed-check": "^9.3.0",
-    "knip": "^5.27.0",
+    "knip": "^5.27.2",
     "list-dependents-cli": "^2.4.0",
     "npm-run-all2": "^6.2.2",
     "type-coverage": "^2.29.1",
