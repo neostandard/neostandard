@@ -7,7 +7,7 @@ on:
     secrets:
       APP_PEM:
         description: 'The private key of the GitHub App to use for the PR creation.'
-        required: true
+        required: false
 
     inputs:
       npm-sync-script:
@@ -39,38 +39,38 @@ permissions:
   pull-requests: write
 
 jobs:
-  token:
-    name: App Token
+  diff:
+    name: Sync ${{ inputs.npm-sync-script }}
     environment: sync
     runs-on: ubuntu-latest
     outputs:
-      app-slug: ${{ steps.app-token.outputs.app-slug }}
-      token: ${{ steps.app-token.outputs.token }}
-      user-id: ${{ steps.get-user-id.outputs.user-id }}
-    steps:
-      - uses: actions/create-github-app-token@v1
-        id: app-token
-        with:
-          app-id: ${{ vars.APP_ID }}
-          private-key: ${{ secrets.APP_PEM }}
-
-      - name: Retrieve GitHub App User ID
-        id: get-user-id
-        run: echo "user-id=$(gh api "/users/${{ steps.app-token.outputs.app-slug }}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
-        env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
-
-  diff:
-    name: Sync ${{ inputs.npm-sync-script }}
-    needs: [token]
-    runs-on: ubuntu-latest
+      createPR: ${{ steps.push-changes.outputs.createPR }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          show-progress: false
       - uses: actions/setup-node@v4
         with:
-          cache: 'npm'
           node-version: lts/*
-      - run: npm ci
+
+      # New prefix generated every 120 days, to ensure npm cache doesn't grow too large
+      - name: Get npm cache timed expiration
+        id: npm-timed-expiration
+        run: echo "prefix=$(( $(date +%s) / 60 / 60 / 24 / 120 ))" >> $GITHUB_OUTPUT
+
+      - name: Determine npm cache directory
+        id: npm-cache-dir
+        run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ steps.npm-timed-expiration.outputs.prefix }}-${{ hashFiles('main/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ steps.npm-timed-expiration.outputs.prefix }}-
+
+      - run: npm ci --ignore-scripts --force --no-fund --no-audit
 
       # Actual syncing
       - name: Prepare for diff
@@ -94,6 +94,18 @@ jobs:
 
       # Commit, push and open a PR if that's the need
 
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PEM }}
+
+      - name: Retrieve GitHub App User ID
+        id: get-user-id
+        run: echo "user-id=$(gh api "/users/${{ steps.app-token.outputs.app-slug }}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+
       # Inspired by https://github.com/actions/toolkit/blob/0db3029fcfcb1393a2b3ccd14caecd7a3460af4e/.github/workflows/update-github.yaml#L22-L23
       # And by https://github.com/actions/deploy-pages/blob/ff669327f73994ba35f45d1cd2fc81d82d1c852c/.github/workflows/rebuild-dependabot-prs.yml#L43-L44
       - name: Commit and push any changes
@@ -101,8 +113,8 @@ jobs:
         id: push-changes
         run: |
           if [[ "$(git status --porcelain)" != "" ]]; then
-            git config --global user.name '${{ needs.token.outputs.app-slug }}[bot]'
-            git config --global user.email '${{ needs.token.outputs.user-id }}+${{ needs.token.outputs.app-slug }}[bot]@users.noreply.github.com>'
+            git config --global user.name '${{steps.app-token.outputs.app-slug}}[bot]'
+            git config --global user.email '${{steps.get-user-id.outputs.user-id}}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com>'
             git checkout -b ${{ inputs.branch-name }}
             git add .
             if (! git show-ref origin/${{ inputs.branch-name }} -q) || [[ "$(git diff origin/${{ inputs.branch-name }} --stat)" != "" ]]; then
@@ -117,4 +129,4 @@ jobs:
         continue-on-error: true
         run: gh pr create --head ${{ inputs.branch-name }} --title " ${{ inputs.pr-title }}" --body "${{ inputs.pr-body }}"
         env:
-          GH_TOKEN: ${{ needs.token.outputs.token }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
