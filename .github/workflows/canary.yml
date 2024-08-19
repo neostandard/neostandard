@@ -143,7 +143,7 @@ jobs:
         working-directory: ./project
 
       - name: install project
-        run: npm ci --ignore-scripts --force --no-fund --no-audit
+        run: npm install --ignore-scripts --force --no-fund --no-audit
         working-directory: ./project
 
       - name: run eslint
