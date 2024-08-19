@@ -206,7 +206,6 @@ Full list in [1.0.0 milestone](https://github.com/neostandard/neostandard/milest
 
 * Some plugins are not yet supporting ESLint 9 or flat configs and has thus not yet been added. These are:
   - `eslint-plugin-import`
-* JSX parsing is not supported out of the box
 
 ## Config helper
 
