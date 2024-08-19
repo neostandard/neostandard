@@ -18,4 +18,5 @@ jobs:
           ignore-authors: |
             renovate
             renovate[bot]
+            neostandard[bot]
           ignore-team-members: false
