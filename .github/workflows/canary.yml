@@ -1,0 +1,142 @@
+name: Canary
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  read_direct_dependents:
+    name: Read list of direct dependents
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: set-matrix
+        run: echo "matrix=$(jq -s -c '[.[].repositoryUrl | sub("https://github.com/";"";"i")] | unique | sort' dependents-data/neostandard-*.ndjson)" >> $GITHUB_OUTPUT
+  test_direct_dependents:
+    needs: read_direct_dependents
+    name: Test ${{ matrix.project }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJson(needs.read_direct_dependents.outputs.matrix) }}
+    steps:
+      - name: Checkout main project
+        uses: actions/checkout@v4
+        with:
+          path: main
+          show-progress: false
+
+      - name: Checkout ${{ matrix.project }}
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ matrix.project }}
+          path: project
+          show-progress: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      # New prefix generated every 120 days, to ensure npm cache doesn't grow too large
+      - name: Get npm cache timed expiration
+        id: npm-timed-expiration
+        run: echo "prefix=$(( $(date +%s) / 60 / 60 / 24 / 120 ))" >> $GITHUB_OUTPUT
+
+      - name: Determine npm cache directory
+        id: npm-cache-dir
+        run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ steps.npm-timed-expiration.outputs.prefix }}-${{ hashFiles('main/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ steps.npm-timed-expiration.outputs.prefix }}-
+
+      - name: install main
+        run: 'npm ci --ignore-scripts --force'
+        working-directory: ./main
+      - name: install project
+        run: '[ -f package-lock.json ] && npm ci --ignore-scripts --force || npm install --ignore-scripts --force'
+        working-directory: ./project
+
+      - name: modify project eslint config
+        run: CANARY_ESLINT_CONFIG_FILE=$([ -f eslint.config.mjs ] && echo "eslint.config.mjs" || ([ -f eslint.config.cjs ] && echo "eslint.config.cjs" || echo "eslint.config.js")) && sed "s/'neostandard'/'..\/main\/index.js'/" $CANARY_ESLINT_CONFIG_FILE > tmp.eslint.config.js && rm $CANARY_ESLINT_CONFIG_FILE && mv tmp.eslint.config.js $CANARY_ESLINT_CONFIG_FILE && ([[ -z "$RUNNER_DEBUG" ]] || (echo $CANARY_ESLINT_CONFIG_FILE && cat $CANARY_ESLINT_CONFIG_FILE))
+        working-directory: ./project
+
+      - name: run eslint
+        run: ../main/node_modules/.bin/eslint
+        working-directory: ./project
+
+  read_indirect_dependents:
+    name: Read list of indirect dependents
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: set-matrix
+        run: echo "matrix=$(cat dependents-data/dependents.json | jq -c '.indirect')" >> $GITHUB_OUTPUT
+  test_indirect_dependents:
+    needs: read_indirect_dependents
+    name: Test ${{ matrix.project }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node_version: [lts/*]
+        project: ${{ fromJson(needs.read_indirect_dependents.outputs.matrix) }}
+    steps:
+      - name: Checkout main project
+        uses: actions/checkout@v4
+        with:
+          path: main
+
+      - name: Checkout ${{ matrix.project }}
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ matrix.project }}
+          path: project
+
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      # New prefix generated every 120 days, to ensure npm cache doesn't grow too large
+      - name: Get npm cache timed expiration
+        id: npm-timed-expiration
+        run: echo "prefix=$(( $(date +%s) / 60 / 60 / 24 / 120 ))" >> $GITHUB_OUTPUT
+
+      - name: Determine npm cache directory
+        id: npm-cache-dir
+        run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ steps.npm-timed-expiration.outputs.prefix }}-${{ hashFiles('main/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ steps.npm-timed-expiration.outputs.prefix }}-
+
+      - name: install main
+        run: 'npm ci --ignore-scripts --force'
+        working-directory: ./main
+
+      - name: modify project neostandard version
+        run: "jq '. + { overrides: (.overrides + {neostandard: \"file:${{ github.workspace }}/main\"}) }' package.json > tmp.package.json && rm package.json && mv tmp.package.json package.json"
+        working-directory: ./project
+
+      - name: install project
+        run: 'npm install --ignore-scripts --force'
+        working-directory: ./project
+
+      - name: run eslint
+        run: npx eslint
+        working-directory: ./project

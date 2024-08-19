@@ -7,6 +7,8 @@ on:
   pull_request:
     branches:
       - main
+  schedule:
+    - cron: '14 5 * * 1,3,5'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -18,68 +20,45 @@ permissions:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          cache: 'npm'
-          node-version: lts/*
-      - run: npm ci
-      - run: npm run check
+    uses: ./.github/workflows/reusable-npm-run.yml
+    with:
+      command: check
 
   test:
-    name: Node.js ${{ matrix.node-version }}
-    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        node-version:
-          - 22
-          - 20
-          - 18
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          cache: 'npm'
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run test-ci
+        target: [18, 20, 22]
+    name: Test on Node ${{ matrix.target }}
+    uses: ./.github/workflows/reusable-npm-run.yml
+    with:
+      command: test-ci
+      node-version: ${{ matrix.target }}
 
   peer:
     needs: [lint, test]
+    if: github.event_name != 'schedule'
     name: Check peerDependencies issues
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          cache: 'npm'
-          node-version: lts/*
-      - run: npm run check-peer-compatibility
+    uses: ./.github/workflows/reusable-npm-run.yml
+    with:
+      command: check-peer-compatibility
 
-  types:
+  canary:
     needs: [lint, test]
-    uses: ./.github/workflows/ts-internal.yml
+    uses: ./.github/workflows/canary.yml
 
-  compatibility-semistandard:
-    needs: [lint, test]
+  compatibility:
+    needs: [canary]
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - moduleSet: semistandard
+            flags: --semi
+          - moduleSet: standard
+          - moduleSet: ts-standard
+            flags: --ts
     uses: ./.github/workflows/compatibility.yml
     with:
-      moduleSet: semistandard
-      flags: --semi
-
-  compatibility-standard:
-    needs: [lint, test]
-    uses: ./.github/workflows/compatibility.yml
-    with:
-      moduleSet: standard
-
-  compatibility-ts-standard:
-    needs: [lint, test]
-    uses: ./.github/workflows/compatibility.yml
-    with:
-      moduleSet: ts-standard
-      flags: '--ts'
-
+      moduleSet: ${{ matrix.moduleSet }}
+      flags: ${{ matrix.flags }}

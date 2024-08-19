@@ -1,0 +1,21 @@
+{
+  "indirect": [
+    "voxpelli/buffered-async-iterable",
+    "voxpelli/linemod-core",
+    "voxpelli/linemod",
+    "voxpelli/list-dependents-cli",
+    "voxpelli/list-dependents",
+    "voxpelli/list-installed",
+    "voxpelli/markdown-or-chalk",
+    "voxpelli/node-github-publish",
+    "voxpelli/node-test-pretty-reporter",
+    "voxpelli/peowly-commands",
+    "voxpelli/peowly",
+    "voxpelli/plugin-importer",
+    "voxpelli/read-workspaces",
+    "voxpelli/typed-utils",
+    "voxpelli/umzeption",
+    "voxpelli/validate-conventional-commit",
+    "voxpelli/webring-opml"
+  ]
+}

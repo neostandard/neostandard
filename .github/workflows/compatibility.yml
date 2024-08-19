@@ -55,7 +55,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node_version: [lts/*]
         project: ${{ fromJson(needs.read_repos.outputs.matrix) }}
 
     steps:
@@ -63,27 +62,35 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: main
+          show-progress: false
 
       - name: Checkout ${{ matrix.project }}
         uses: actions/checkout@v4
         with:
           repository: ${{ matrix.project }}
           path: project
+          show-progress: false
 
-      - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node_version }}
+          node-version: lts/*
+
+      # New prefix generated every 120 days, to ensure npm cache doesn't grow too large
+      # See https://github.com/actions/setup-node/pull/702
+      - name: Get npm cache timed expiration
+        id: npm-timed-expiration
+        run: echo "prefix=$(( $(date +%s) / 60 / 60 / 24 / 120 ))" >> $GITHUB_OUTPUT
 
       - name: Determine npm cache directory
         id: npm-cache-dir
         run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
+
       - uses: actions/cache@v4
         with:
           path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('main/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ steps.npm-timed-expiration.outputs.prefix }}-${{ hashFiles('main/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-node-${{ steps.npm-timed-expiration.outputs.prefix }}-
 
       - name: install main
         run: 'npm ci --ignore-scripts --force'
