@@ -5,7 +5,7 @@ name: Reusable Sync
 on:
   workflow_call:
     secrets:
-      GITHUB_TOKEN_OVERRIDE:
+      PR_CREATE_GITHUB_PAT:
         description: 'If you need to override the GITHUB_TOKEN used with the "gh" cli, then do so with this one'
         required: false
 
@@ -52,6 +52,7 @@ permissions:
 jobs:
   sync:
     name: Sync ${{ inputs.npm-sync-script }}
+    environment: sync
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -106,4 +107,4 @@ jobs:
         continue-on-error: true
         run: gh pr create --head ${{ inputs.branch-name }} --title " ${{ inputs.pr-title }}" --body "${{ inputs.pr-body }}"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN_OVERRIDE || secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PR_CREATE_GITHUB_PAT || secrets.GITHUB_TOKEN }}
