@@ -5,9 +5,9 @@ name: Reusable Sync
 on:
   workflow_call:
     secrets:
-      PR_CREATE_GITHUB_PAT:
-        description: 'If you need to override the GITHUB_TOKEN used with the "gh" cli, then do so with this one'
-        required: false
+      APP_PEM:
+        description: 'The private key of the GitHub App to use for the PR creation.'
+        required: true
 
     inputs:
       npm-sync-script:
@@ -34,25 +34,35 @@ on:
         required: true
         type: string
 
-      commit-user:
-        description: 'The name to use in the commit.'
-        required: false
-        default: "github-actions[bot]"
-        type: string
-      commit-email:
-        description: 'The email to use in the commit.'
-        required: false
-        default: "41898282+github-actions[bot]@users.noreply.github.com"
-        type: string
-
 permissions:
   contents: write
   pull-requests: write
 
 jobs:
-  sync:
-    name: Sync ${{ inputs.npm-sync-script }}
+  token:
+    name: App Token
     environment: sync
+    runs-on: ubuntu-latest
+    outputs:
+      app-slug: ${{ steps.app-token.outputs.app-slug }}
+      token: ${{ steps.app-token.outputs.token }}
+      user-id: ${{ steps.get-user-id.outputs.user-id }}
+    steps:
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PEM }}
+
+      - name: Retrieve GitHub App User ID
+        id: get-user-id
+        run: echo "user-id=$(gh api "/users/${{ steps.app-token.outputs.app-slug }}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+
+  diff:
+    name: Sync ${{ inputs.npm-sync-script }}
+    needs: [token]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -91,8 +101,8 @@ jobs:
         id: push-changes
         run: |
           if [[ "$(git status --porcelain)" != "" ]]; then
-            git config --global user.name "${{ inputs.commit-user }}"
-            git config --global user.email "${{ inputs.commit-email }}"
+            git config --global user.name '${{ needs.token.outputs.app-slug }}[bot]'
+            git config --global user.email '${{ needs.token.outputs.user-id }}+${{ needs.token.outputs.app-slug }}[bot]@users.noreply.github.com>'
             git checkout -b ${{ inputs.branch-name }}
             git add .
             if (! git show-ref origin/${{ inputs.branch-name }} -q) || [[ "$(git diff origin/${{ inputs.branch-name }} --stat)" != "" ]]; then
@@ -107,4 +117,4 @@ jobs:
         continue-on-error: true
         run: gh pr create --head ${{ inputs.branch-name }} --title " ${{ inputs.pr-title }}" --body "${{ inputs.pr-body }}"
         env:
-          GH_TOKEN: ${{ secrets.PR_CREATE_GITHUB_PAT || secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ needs.token.outputs.token }}
