@@ -16,3 +16,4 @@
 
 # Library specific ones
 /install-test-*
+/dependents-data/*-old.json

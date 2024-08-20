@@ -1,0 +1,31 @@
+name: Refresh dependents data
+
+on:
+  schedule:
+    # At 5:28 on Monday: https://crontab.guru/#28_5_*_*_1
+    - cron: '28 5 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    name: Refresh dependents data
+    uses: ./.github/workflows/sync-reusable.yml
+    secrets: inherit
+    with:
+      npm-sync-script: 'sync-refresh'
+      branch-name: 'automated/refresh'
+      commit-message: 'chore(dependents): refresh npm data'
+      pr-title: 'chore(dependents): refresh npm data'
+      pr-body: |
+        The dependents data is outdated and needs to be refreshed.
+
+        This PR contains refreshed dependents data. Verify that everything looks alright and that tests passes, then merge.
+
+        _Do not push to this PR. It's handled by [a workflow](/${{ github.repository }}/actions/runs/${{ github.run_id }}) which keeps it up to date at a schedule._

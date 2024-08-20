@@ -53,10 +53,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - moduleSet: semistandard-filtered
+          - moduleSet: semistandard
             flags: --semi
-          - moduleSet: standard-filtered
-          - moduleSet: ts-standard-filtered
+          - moduleSet: standard
+          - moduleSet: ts-standard
             flags: --ts
     uses: ./.github/workflows/compatibility.yml
     with:

@@ -22,9 +22,9 @@ on:
         default: 'standard-filtered'
         type: choice
         options:
-        - semistandard-filtered
-        - standard-filtered
-        - ts-standard-filtered
+        - semistandard
+        - standard
+        - ts-standard
       flags:
         description: 'Flags'
         type: string
@@ -45,7 +45,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: set-matrix
-        run: echo "matrix=$(jq -s -c '[.[].repositoryUrl | sub("https://github.com/";"";"i")] | unique | sort' dependents-data/${{ inputs.moduleSet || github.event.inputs.moduleSet }}.ndjson)" >> $GITHUB_OUTPUT
+        run: echo "matrix=$(jq -c '.' dependents-data/${{ inputs.moduleSet || github.event.inputs.moduleSet }}.json)" >> $GITHUB_OUTPUT
 
   test_external:
     needs: read_repos
@@ -62,6 +62,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: main
+          persist-credentials: false
           show-progress: false
 
       - name: Checkout ${{ matrix.project }}
@@ -69,6 +70,7 @@ jobs:
         with:
           repository: ${{ matrix.project }}
           path: project
+          persist-credentials: false
           show-progress: false
 
       - uses: actions/setup-node@v4
@@ -93,10 +95,10 @@ jobs:
             ${{ runner.os }}-node-${{ steps.npm-timed-expiration.outputs.prefix }}-
 
       - name: install main
-        run: 'npm ci --ignore-scripts --force'
+        run: npm ci --ignore-scripts --force --no-fund --no-audit
         working-directory: ./main
       - name: install project
-        run: '[ -f package-lock.json ] && npm ci --ignore-scripts --force || npm install --ignore-scripts --force'
+        run: '[ -f package-lock.json ] && npm ci --ignore-scripts --force --no-fund --no-audit || npm install --ignore-scripts --force --no-fund --no-audit'
         working-directory: ./project
 
       - name: generate config
