@@ -1,8 +1,6 @@
 name: Refresh dependents data
 
 on:
-  # FIXME: Remove before merging
-  push:
   schedule:
     # At 5:28 on Monday: https://crontab.guru/#28_5_*_*_1
     - cron: '28 5 * * 1'
