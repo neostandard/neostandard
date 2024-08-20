@@ -1,5 +1,7 @@
 [
+  "Meteor-Community-Packages/meteor-desktop",
   "attentif/unix-timestamp-js",
+  "dekelev/feathers-opentracing",
   "erdtman/COSE-JS",
   "feathersjs-ecosystem/feathers-swagger",
   "feathersjs-ecosystem/feathers-sync",
