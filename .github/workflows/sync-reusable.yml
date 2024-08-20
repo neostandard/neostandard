@@ -93,12 +93,14 @@ jobs:
 
       # Generate bot token
       - uses: actions/create-github-app-token@v1
+        if: steps.diff.outputs.hasDiff
         id: app-token
         with:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.APP_PEM }}
 
       - name: Retrieve GitHub App User ID
+        if: steps.diff.outputs.hasDiff
         id: get-user-id
         run: echo "user-id=$(gh api "/users/${{ steps.app-token.outputs.app-slug }}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
         env:
