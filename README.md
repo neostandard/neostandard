@@ -195,12 +195,9 @@ Full list in [1.0.0 milestone](https://github.com/neostandard/neostandard/milest
   * `semi` option enforces rather than ban semicolons (used to be handled by [`semistandard`](https://github.com/standard/semistandard))
   * `noStyle` option deactivates style rules (used to require something like [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier))
 
-### Changed rules
-
-* [`@stylistic/comma-dangle`](https://eslint.org/docs/rules/comma-dangle) – *changed* – set to prefer dangling commas in everything but functions and is it set to `warn` rather than `error`
-
 ### Relaxed rules
 
+* [`@stylistic/comma-dangle`](https://eslint.org/docs/rules/comma-dangle) – *changed* – set to ignore dangling commas in arrays, objects, imports, exports and is it set to `warn` rather than `error`
 * [`@stylistic/no-multi-spaces`](https://eslint.org/docs/rules/no-multi-spaces) – *changed* – sets `ignoreEOLComments` to `true`, useful for aligning comments across multiple line
 * [`dot-notation`](https://eslint.org/docs/rules/dot-notation) – *deactivated* – clashes with the [`noPropertyAccessFromIndexSignature`](https://www.typescriptlang.org/tsconfig#noPropertyAccessFromIndexSignature) check in TypeScript
 * [`n/no-deprecated-api`](https://github.com/eslint-community/eslint-plugin-n/blob/master/docs/rules/no-deprecated-api.md) – *changed* – changed to `warn` instead of `error` as they are not urgent to fix
@@ -209,7 +206,6 @@ Full list in [1.0.0 milestone](https://github.com/neostandard/neostandard/milest
 
 * Some plugins are not yet supporting ESLint 9 or flat configs and has thus not yet been added. These are:
   - `eslint-plugin-import`
-* JSX parsing is not supported out of the box
 
 ## Config helper
 
