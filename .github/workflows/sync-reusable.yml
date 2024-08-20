@@ -34,22 +34,31 @@ on:
         required: true
         type: string
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   diff:
     name: Sync ${{ inputs.npm-sync-script }}
     environment: sync
     runs-on: ubuntu-latest
-    outputs:
-      createPR: ${{ steps.push-changes.outputs.createPR }}
     steps:
+      # Generate bot token
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PEM }}
+
+      - name: Retrieve GitHub App User ID
+        id: get-user-id
+        run: echo "user-id=$(gh api "/users/${{ steps.app-token.outputs.app-slug }}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+
+      # Set up repository
       - uses: actions/checkout@v4
         with:
-          persist-credentials: true
+          persist-credentials: false
           show-progress: false
+          token: ${{ steps.app-token.outputs.token }}
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
@@ -94,18 +103,6 @@ jobs:
 
       # Commit, push and open a PR if that's the need
 
-      - uses: actions/create-github-app-token@v1
-        id: app-token
-        with:
-          app-id: ${{ vars.APP_ID }}
-          private-key: ${{ secrets.APP_PEM }}
-
-      - name: Retrieve GitHub App User ID
-        id: get-user-id
-        run: echo "user-id=$(gh api "/users/${{ steps.app-token.outputs.app-slug }}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
-        env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
-
       # Inspired by https://github.com/actions/toolkit/blob/0db3029fcfcb1393a2b3ccd14caecd7a3460af4e/.github/workflows/update-github.yaml#L22-L23
       # And by https://github.com/actions/deploy-pages/blob/ff669327f73994ba35f45d1cd2fc81d82d1c852c/.github/workflows/rebuild-dependabot-prs.yml#L43-L44
       - name: Commit and push any changes
@@ -113,6 +110,7 @@ jobs:
         id: push-changes
         run: |
           if [[ "$(git status --porcelain)" != "" ]]; then
+            gh auth setup-git
             git config --global user.name '${{steps.app-token.outputs.app-slug}}[bot]'
             git config --global user.email '${{steps.get-user-id.outputs.user-id}}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com>'
             git checkout -b ${{ inputs.branch-name }}
@@ -123,6 +121,8 @@ jobs:
               git push origin ${{ inputs.branch-name }} -fu --no-verify
             fi
           fi
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
       - name: Open a PR for the sync
         if: steps.push-changes.outputs.createPR
