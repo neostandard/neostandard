@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.11.3](https://github.com/neostandard/neostandard/compare/v0.11.2...v0.11.3) (2024-08-20)
+
+
+### 🌟 Features
+
+* **deps:** update dependency eslint-plugin-promise to ^7.1.0 ([#135](https://github.com/neostandard/neostandard/issues/135)) ([34074ac](https://github.com/neostandard/neostandard/commit/34074acd84a1ac593d446c7df0863454d279ceb9))
+* partly disable `@stylistic/comma-dangle` ([#139](https://github.com/neostandard/neostandard/issues/139)) ([09339ec](https://github.com/neostandard/neostandard/commit/09339ec61529d47f8e9da3f5d993d67ea6cdf679))
+
+
+### 🩹 Fixes
+
+* **deps:** add `eslint-plugin-react` to eslint deps handling ([#127](https://github.com/neostandard/neostandard/issues/127)) ([3f65825](https://github.com/neostandard/neostandard/commit/3f65825582520709ac2900d17049340b5d9256a2))
+* **deps:** update dependency @stylistic/eslint-plugin to ^2.6.2 ([#133](https://github.com/neostandard/neostandard/issues/133)) ([f53dd67](https://github.com/neostandard/neostandard/commit/f53dd67e10bf4b7ccd82628639724ae5fb7ada49))
+* **deps:** update dependency @stylistic/eslint-plugin to ^2.6.3 ([#137](https://github.com/neostandard/neostandard/issues/137)) ([afe1387](https://github.com/neostandard/neostandard/commit/afe1387846c973de6ba0e5be60e0286a08133e24))
+* **deps:** update dependency eslint-plugin-n to ^17.10.2 ([#134](https://github.com/neostandard/neostandard/issues/134)) ([e23e413](https://github.com/neostandard/neostandard/commit/e23e413cb1e553c8789b8fffc93d43deaf290a40))
+
+
+### 🧹 Chores
+
+* **cli:** use console log level ([#136](https://github.com/neostandard/neostandard/issues/136)) ([bb370d2](https://github.com/neostandard/neostandard/commit/bb370d2cec486eecd0f6057621b95628507eff5d))
+
 ## [0.11.2](https://github.com/neostandard/neostandard/compare/v0.11.1...v0.11.2) (2024-08-01)
 
 
