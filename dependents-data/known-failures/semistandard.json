@@ -4,5 +4,6 @@
   "https://github.com/compwright/split-human-name": "Fails due to /* eslint-env mocha */ and has a minified file that for some reason gets included in check",
   "https://github.com/gabrielcsapo/tap-html": "Correct failure",
   "https://github.com/lisb/hubot-direct": "Correct failure",
-  "https://github.com/freecycle/swig-templates": "Fails due to weird npm auth error?"
+  "https://github.com/freecycle/swig-templates": "Fails due to weird npm auth error?",
+  "https://github.com/Meteor-Community-Packages/meteor-desktop": "Doesn't actually use semistandard, but still includes it"
 }
