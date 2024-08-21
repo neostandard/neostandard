@@ -13,5 +13,8 @@
   "https://github.com/web3-storage/w3name": "Monorepo with ts-standard added in each individual package",
   "https://github.com/zacanger/shrink-string": "Fails because the ts-standard command is fed a list of files to test, rather than using an ignore",
   "https://github.com/zce/caz": "Fails because @stylistic/ rule does not match @typescript-eslint/no-extra-parens",
-  "https://github.com/intradoc/intradoc": "Fails with: 'replace' is defined but only used as a type @typescript-eslint/no-unused-vars at https://github.com/intradoc/intradoc/blob/f8c89bdfe6013666d9e58cddacf3a5e697e23e36/src/index.ts#L17 using latest neostandard dependencies"
+  "https://github.com/intradoc/intradoc": "Fails with: 'replace' is defined but only used as a type @typescript-eslint/no-unused-vars at https://github.com/intradoc/intradoc/blob/f8c89bdfe6013666d9e58cddacf3a5e697e23e36/src/index.ts#L17 using latest neostandard dependencies",
+  "https://github.com/KonnorRogers/mrujs": "Fails because the ts-standard command is fed a list of files to test, rather than using an ignore",
+  "https://github.com/holmok/pino-tiny": "Fails because the ts-standard command is fed a list of files to test, rather than using an ignore",
+  "https://github.com/joserick/v-money-spinner": "Likely fails because the ts-standard command is fed a list of files to test, rather than using an ignore, but there is no indication in the project as to how ts-standard is being run"
 }

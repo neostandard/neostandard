@@ -1,5 +1,4 @@
 [
-  "Meteor-Community-Packages/meteor-desktop",
   "attentif/unix-timestamp-js",
   "dekelev/feathers-opentracing",
   "erdtman/COSE-JS",
