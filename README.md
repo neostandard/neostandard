@@ -47,6 +47,7 @@ alt="platformatic"
 * [Mission statement](#mission-statement)
   * [Rule guidelines](#rule-guidelines)
 * [Governance](#governance)
+* [Used by](#used-by)
 
 ## Quick Start
 
@@ -277,3 +278,13 @@ _Prior to the `1.0.0` release we are still rapidly evolving with fixes and impro
 `neostandard` is a community project with open governance.
 
 See [GOVERNANCE.md](./GOVERNANCE.md) for specifics.
+
+## Used by
+
+A subset of some of the projects that rely on `neostandard`:
+
+* [`bcomnes/npm-run-all2`](https://github.com/bcomnes/npm-run-all2) (https://github.com/bcomnes/npm-run-all2/pull/142)
+* [`fastify/fastify`](https://github.com/fastify/fastify) (https://github.com/fastify/fastify/pull/5509)
+* [`nodejs/undici`](https://github.com/nodejs/undici) (https://github.com/nodejs/undici/pull/3485)
+* [`poolifier/poolifier`](https://github.com/poolifier/poolifier)
+* [`uuidjs/uuid`](https://github.com/uuidjs/uuid) (https://github.com/uuidjs/uuid/pull/752)
