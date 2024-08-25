@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.11.4](https://github.com/neostandard/neostandard/compare/v0.11.3...v0.11.4) (2024-08-25)
+
+
+### 🩹 Fixes
+
+* ignore dangle comma in TS enums ([#152](https://github.com/neostandard/neostandard/issues/152)) ([22a99fa](https://github.com/neostandard/neostandard/commit/22a99faac4919677fa3070bdb1194f165a89b33c))
+
+
+### 📚 Documentation
+
+* add a `Used by` section to the README ([#148](https://github.com/neostandard/neostandard/issues/148)) ([3b17f4f](https://github.com/neostandard/neostandard/commit/3b17f4f187bfc4115a3dc3e9cbcc8e6748ad0a4c))
+
 ## [0.11.3](https://github.com/neostandard/neostandard/compare/v0.11.2...v0.11.3) (2024-08-20)
 
 
