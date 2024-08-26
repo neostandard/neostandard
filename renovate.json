@@ -44,15 +44,9 @@
     },
     {
       "enabled": true,
-      "matchPackagePrefixes": [
-        "@typescript-eslint"
-      ],
       "matchPackageNames": [
-        "@stylistic/eslint-plugin",
-        "typescript-eslint",
-        "eslint-plugin-n",
-        "eslint-plugin-promise",
-        "eslint-plugin-react"
+        "/typescript-eslint/",
+        "/eslint-plugin/"
       ],
       "matchUpdateTypes": ["major"],
       "semanticCommitScope": "",
@@ -60,15 +54,9 @@
     },
     {
       "enabled": true,
-      "matchPackagePrefixes": [
-        "@typescript-eslint"
-      ],
       "matchPackageNames": [
-        "@stylistic/eslint-plugin",
-        "typescript-eslint",
-        "eslint-plugin-n",
-        "eslint-plugin-promise",
-        "eslint-plugin-react"
+        "/typescript-eslint/",
+        "/eslint-plugin/"
       ],
       "matchUpdateTypes": ["minor"],
       "semanticCommitType": "feat"
