@@ -14,15 +14,28 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       releaseCreated: ${{ steps.release.outputs.release_created }}
-    permissions:
-      contents: write
-      pull-requests: write
+    environment: sync
     steps:
+      # Generate bot token
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PEM }}
+
+      - name: Retrieve GitHub App User ID
+        id: get-user-id
+        run: echo "user-id=$(gh api "/users/${{ steps.app-token.outputs.app-slug }}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+
+      # Release please
       - uses: googleapis/release-please-action@v4
         id: release
         with:
           config-file: .github/release-please/config.json
           manifest-file: .github/release-please/manifest.json
+          token: ${{ steps.app-token.outputs.token }}
 
   npm_publish:
     name: Publish to npm
