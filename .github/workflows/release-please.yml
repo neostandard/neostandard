@@ -12,6 +12,7 @@ jobs:
   release_please:
     name: release-please
     runs-on: ubuntu-latest
+    if: github.repository == 'neostandard/neostandard'
     outputs:
       releaseCreated: ${{ steps.release.outputs.release_created }}
     environment: sync
