@@ -4,9 +4,6 @@
     "index.js",
     "index.d.ts"
   ],
-  "ignoreBinaries": [
-    "pwd"
-  ],
   "ignore": [
     "test/should-*/**/*",
     "test/ts-extension-eslint.config.mjs"
