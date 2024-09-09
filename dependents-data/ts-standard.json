@@ -8,5 +8,6 @@
   "juanelas/object-sha",
   "juanelas/paillier-bigint",
   "juanelas/pbkdf2-hmac",
-  "mojaloop/central-services-metrics"
+  "mojaloop/central-services-metrics",
+  "termosa/use-ref-callback"
 ]
