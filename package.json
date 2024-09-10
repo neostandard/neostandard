@@ -67,7 +67,7 @@
   "devDependencies": {
     "@types/node": "^18.19.50",
     "@voxpelli/tsconfig": "^13.0.0",
-    "eslint": "^9.9.1",
+    "eslint": "^9.10.0",
     "husky": "^9.1.5",
     "installed-check": "^9.3.0",
     "knip": "^5.29.2",
@@ -79,7 +79,6 @@
   "dependencies": {
     "@humanwhocodes/gitignore-to-minimatch": "^1.0.2",
     "@stylistic/eslint-plugin": "^2.6.4",
-    "@types/eslint": "^9.6.0",
     "eslint-plugin-n": "^17.10.2",
     "eslint-plugin-promise": "^7.1.0",
     "eslint-plugin-react": "^7.35.0",
