@@ -16,6 +16,7 @@ permissions:
 jobs:
   sync:
     name: Update dependents data
+    if: (github.event_name == 'schedule' && github.repository == 'neostandard/neostandard') || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/sync-reusable.yml
     secrets: inherit
     with:
