@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.11.5](https://github.com/neostandard/neostandard/compare/v0.11.4...v0.11.5) (2024-09-12)
+
+
+### 🩹 Fixes
+
+* **deps:** types are bundled with ESLint &gt;=9.10 ([#164](https://github.com/neostandard/neostandard/issues/164)) ([13af181](https://github.com/neostandard/neostandard/commit/13af181b683a9138d3a6a0f9c65e2414240a423e))
+* **deps:** update dependency @stylistic/eslint-plugin to ^2.6.4 ([#154](https://github.com/neostandard/neostandard/issues/154)) ([40d8445](https://github.com/neostandard/neostandard/commit/40d844514649ae55f1a63fc6582733472a0a69eb))
+* ignore jsx-rules in non-jsx files ([#169](https://github.com/neostandard/neostandard/issues/169)) ([c9cef42](https://github.com/neostandard/neostandard/commit/c9cef42cbf0756397640c45b40d3eaa93459e793))
+
+
+### 🤖 Automation
+
+* **ci:** only run release-please workflow on upstream repo ([#157](https://github.com/neostandard/neostandard/issues/157)) ([08dd476](https://github.com/neostandard/neostandard/commit/08dd476f70a6d45deffed97380a44099186b1c9b))
+
 ## [0.11.4](https://github.com/neostandard/neostandard/compare/v0.11.3...v0.11.4) (2024-08-25)
 
 
