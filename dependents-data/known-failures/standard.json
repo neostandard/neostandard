@@ -17,5 +17,6 @@
   "https://github.com/clinicjs/node-clinic-flame": "Fails for issue that should have existed with latest standard as well",
   "https://github.com/bitcoinjs/bolt11": "Fails for issue that should have existed with latest standard as well",
   "https://github.com/nvuillam/njre": "Fails because while it includes standard it also includes a vanilla ESLint 9 setup and megalinter, with megalinter being configured to use prettier and being the one that runs on CI",
-  "https://github.com/rom1504/node-mojangson": "Fails due to /* eslint-env mocha */"
+  "https://github.com/rom1504/node-mojangson": "Fails due to /* eslint-env mocha */",
+  "https://github.com/lquixada/cross-fetch": "Contains JSX-syntax in .js files"
 }
