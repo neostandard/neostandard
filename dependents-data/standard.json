@@ -47,7 +47,6 @@
   "juliangruber/builtins",
   "keycloak/keycloak-nodejs-connect",
   "laurengarcia/url-metadata",
-  "lquixada/cross-fetch",
   "mafintosh/cyclist",
   "mafintosh/fast-fifo",
   "mafintosh/stream-composer",
