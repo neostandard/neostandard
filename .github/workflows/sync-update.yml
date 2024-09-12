@@ -1,4 +1,4 @@
-name: Refresh dependents data
+name: Update dependents data
 
 on:
   schedule:
