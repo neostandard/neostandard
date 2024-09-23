@@ -3,6 +3,5 @@
   "erdtman/COSE-JS",
   "feathersjs-ecosystem/feathers-sync",
   "lovell/icc",
-  "onigoetz/postcss-lightningcss",
-  "sharekey/meteor-desktop"
+  "onigoetz/postcss-lightningcss"
 ]
