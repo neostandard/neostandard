@@ -68,7 +68,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.19.50",
-    "@voxpelli/tsconfig": "^14.0.0",
+    "@voxpelli/tsconfig": "^15.0.0",
     "eslint": "^9.10.0",
     "husky": "^9.1.5",
     "installed-check": "^9.3.0",
@@ -76,7 +76,7 @@
     "list-dependents-cli": "^2.5.0",
     "npm-run-all2": "^6.2.2",
     "type-coverage": "^2.29.1",
-    "typescript": "~5.5.4"
+    "typescript": "~5.6.2"
   },
   "dependencies": {
     "@humanwhocodes/gitignore-to-minimatch": "^1.0.2",
