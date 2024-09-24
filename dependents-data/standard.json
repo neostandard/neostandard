@@ -66,6 +66,7 @@
   "mercurius-js/mercurius-federation",
   "mike182uk/timestring",
   "onlxltd/bonjour-service",
+  "orangewise/s3-files",
   "pinojs/pino-abstract-transport",
   "pinojs/pino-http",
   "pinojs/pino-std-serializers",

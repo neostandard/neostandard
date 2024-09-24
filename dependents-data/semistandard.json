@@ -1,7 +1,6 @@
 [
   "attentif/unix-timestamp-js",
   "erdtman/COSE-JS",
-  "feathersjs-ecosystem/feathers-swagger",
   "feathersjs-ecosystem/feathers-sync",
   "lovell/icc",
   "onigoetz/postcss-lightningcss"
