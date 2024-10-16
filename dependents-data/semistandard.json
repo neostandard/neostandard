@@ -1,5 +1,5 @@
 [
-  "attentif/unix-timestamp-js",
-  "erdtman/COSE-JS",
-  "onigoetz/postcss-lightningcss"
+  "juliangruber/parse-apache-directory-index",
+  "nowsecure/node-applesign",
+  "unassert-js/unassert"
 ]
