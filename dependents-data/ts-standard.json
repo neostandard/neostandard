@@ -1,10 +1,11 @@
 [
-  "Trott/cumberbatch-name",
-  "grandom-library/fnv1a",
-  "grandom-library/mt19937",
-  "juanelas/bigint-mod-arith",
-  "juanelas/object-sha",
-  "juanelas/paillier-bigint",
-  "juanelas/pbkdf2-hmac",
-  "mojaloop/central-services-metrics"
+  "Bugs5382/fastify-hl7",
+  "Bugs5382/node-hl7-client",
+  "Level/abstract-level",
+  "TooTallNate/spotify-uri",
+  "electron/node-rcedit",
+  "juanelas/bigint-crypto-utils",
+  "leorossi/dotenv-tool",
+  "microlinkhq/nanoclamp",
+  "reactory/reactory"
 ]
