@@ -3,8 +3,6 @@
   "grandom-library/fnv1a",
   "grandom-library/mt19937",
   "juanelas/bigint-mod-arith",
-  "juanelas/object-sha",
   "juanelas/paillier-bigint",
-  "juanelas/pbkdf2-hmac",
   "mojaloop/central-services-metrics"
 ]
