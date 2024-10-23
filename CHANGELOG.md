@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.11.7](https://github.com/neostandard/neostandard/compare/v0.11.6...v0.11.7) (2024-10-23)
+
+
+### 🌟 Features
+
+* **deps:** update dependency @stylistic/eslint-plugin to ^2.9.0 ([#186](https://github.com/neostandard/neostandard/issues/186)) ([a5008be](https://github.com/neostandard/neostandard/commit/a5008be39e885147e1fd4d8c627e04e357550053))
+* **deps:** update dependency eslint-plugin-n to ^17.11.1 ([#187](https://github.com/neostandard/neostandard/issues/187)) ([3315b41](https://github.com/neostandard/neostandard/commit/3315b4175e9dbad773aefb508f7fc50fd910e1f5))
+* **deps:** update dependency typescript-eslint to ^8.10.0 ([#177](https://github.com/neostandard/neostandard/issues/177)) ([fbf36ef](https://github.com/neostandard/neostandard/commit/fbf36efb43b80167ddb86feb91b541fd8259275d))
+
+
+### 🩹 Fixes
+
+* **deps:** update dependency globals to ^15.11.0 ([#182](https://github.com/neostandard/neostandard/issues/182)) ([4e25750](https://github.com/neostandard/neostandard/commit/4e25750a00f7c1384b79f3edeea7920ba09fd0e4))
+
 ## [0.11.6](https://github.com/neostandard/neostandard/compare/v0.11.5...v0.11.6) (2024-09-24)
 
 
