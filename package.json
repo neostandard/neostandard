@@ -85,7 +85,7 @@
     "eslint-plugin-promise": "^7.1.0",
     "eslint-plugin-react": "^7.36.1",
     "find-up": "^5.0.0",
-    "globals": "^15.9.0",
+    "globals": "^15.11.0",
     "peowly": "^1.3.2",
     "typescript-eslint": "^8.10.0"
   },
