@@ -4,6 +4,9 @@
     "index.js",
     "index.d.ts"
   ],
+  "ignoreDependencies": [
+    "eslint-import-resolver-typescript"
+  ],
   "ignore": [
     "test/should-*/**/*",
     "test/ts-extension-eslint.config.mjs"
