@@ -159,6 +159,7 @@ module.exports = require('neostandard')({
 #### List of exported plugins
 
 * `@stylistic` - export of [`@stylistic/eslint-plugin`](https://npmjs.com/package/@stylistic/eslint-plugin)
+* `import-x` - export of [`eslint-plugin-import-x`](https://npmjs.com/package/eslint-plugin-import-x)
 * `n` - export of [`eslint-plugin-n`](https://npmjs.com/package/eslint-plugin-n)
 * `promise` - export of [`eslint-plugin-promise`](https://npmjs.com/package/eslint-plugin-promise)
 * `react` - export of [`eslint-plugin-react`](https://npmjs.com/package/eslint-plugin-react)
@@ -179,7 +180,6 @@ export default [
 
 ## Missing for 1.0.0 release
 
-* Migrate `eslint-plugin-import` rules from `standard`: [#15](https://github.com/neostandard/neostandard/issues/15)
 * Investigate a dedicated `neostandard` runner: [#33](https://github.com/neostandard/neostandard/issues/33) / [#2](https://github.com/neostandard/neostandard/issues/2)
 
 Full list in [1.0.0 milestone](https://github.com/neostandard/neostandard/milestone/1)
@@ -202,11 +202,6 @@ Full list in [1.0.0 milestone](https://github.com/neostandard/neostandard/milest
 * [`@stylistic/no-multi-spaces`](https://eslint.org/docs/rules/no-multi-spaces) – *changed* – sets `ignoreEOLComments` to `true`, useful for aligning comments across multiple line
 * [`dot-notation`](https://eslint.org/docs/rules/dot-notation) – *deactivated* – clashes with the [`noPropertyAccessFromIndexSignature`](https://www.typescriptlang.org/tsconfig#noPropertyAccessFromIndexSignature) check in TypeScript
 * [`n/no-deprecated-api`](https://github.com/eslint-community/eslint-plugin-n/blob/master/docs/rules/no-deprecated-api.md) – *changed* – changed to `warn` instead of `error` as they are not urgent to fix
-
-### Missing bits
-
-* Some plugins are not yet supporting ESLint 9 or flat configs and has thus not yet been added. These are:
-  - `eslint-plugin-import`
 
 ## Config helper
 
