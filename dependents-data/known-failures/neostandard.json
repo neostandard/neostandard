@@ -1,4 +1,3 @@
 {
-  "https://github.com/poolifier/poolifier": "Needs a more complex canary setup, see: https://github.com/neostandard/neostandard/pull/85#discussion_r1662247445",
-  "https://github.com/nodejs/undici": "Import rules failures"
+  "https://github.com/poolifier/poolifier": "Needs a more complex canary setup, see: https://github.com/neostandard/neostandard/pull/85#discussion_r1662247445"
 }
