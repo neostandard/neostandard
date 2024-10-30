@@ -21,20 +21,23 @@
     "schedule:weekly",
     "workarounds:all"
   ],
-  "supportPolicy": [
-    "all"
-  ],
   "packageRules": [
     {
-      "matchPackagePatterns": ["*"],
+      "rangeStrategy": "bump",
+      "matchPackageNames": [
+        "*"
+      ]
+    },
+    {
+      "matchDepTypes": [
+        "devDependencies"
+      ],
       "rangeStrategy": "bump"
     },
     {
-      "matchDepTypes": ["devDependencies"],
-      "rangeStrategy": "bump"
-    },
-    {
-      "matchDepTypes": ["devDependencies"],
+      "matchDepTypes": [
+        "devDependencies"
+      ],
       "groupName": "all non-major dev dependencies",
       "groupSlug": "all-dev",
       "matchUpdateTypes": [
@@ -48,7 +51,9 @@
         "/typescript-eslint/",
         "/eslint-plugin/"
       ],
-      "matchUpdateTypes": ["major"],
+      "matchUpdateTypes": [
+        "major"
+      ],
       "semanticCommitScope": "",
       "semanticCommitType": "feat!"
     },
@@ -58,17 +63,25 @@
         "/typescript-eslint/",
         "/eslint-plugin/"
       ],
-      "matchUpdateTypes": ["minor"],
+      "matchUpdateTypes": [
+        "minor"
+      ],
       "semanticCommitType": "feat"
     },
     {
       "enabled": false,
-      "matchDepTypes": ["peerDependencies"]
+      "matchDepTypes": [
+        "peerDependencies"
+      ]
     },
     {
       "enabled": true,
-      "matchDepTypes": ["peerDependencies"],
-      "matchUpdateTypes": ["major"],
+      "matchDepTypes": [
+        "peerDependencies"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
       "semanticCommitScope": "",
       "semanticCommitType": "feat!"
     },
