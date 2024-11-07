@@ -74,7 +74,7 @@
     "installed-check": "^9.3.0",
     "knip": "^5.33.3",
     "list-dependents-cli": "^2.6.1",
-    "npm-run-all2": "^6.2.4",
+    "npm-run-all2": "^7.0.1",
     "type-coverage": "^2.29.7",
     "typescript": "~5.6.3"
   },
