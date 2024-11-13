@@ -10,5 +10,8 @@
   "ignore": [
     "test/should-*/**/*",
     "test/ts-extension-eslint.config.mjs"
+  ],
+  "ignoreBinaries": [
+    "diff"
   ]
 }

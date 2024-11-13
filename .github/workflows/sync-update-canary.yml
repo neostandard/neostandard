@@ -1,0 +1,38 @@
+name: Update canary data
+
+on:
+  schedule:
+    # At 5:28 on Wednesday: https://crontab.guru/#28_5_*_*_3
+    - cron: '28 5 * * 3'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    name: Update canary data
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (
+        github.event_name == 'schedule' &&
+        github.repository == 'neostandard/neostandard'
+      )
+    uses: ./.github/workflows/sync-reusable.yml
+    secrets: inherit
+    with:
+      diff-file: 'neostandard-filtered.ndjson'
+      npm-sync-script: 'sync-update-canary'
+      branch-name: 'automated/update-canary'
+      commit-message: 'chore(dependents): update canary npm data'
+      pr-title: 'chore(dependents): update canary npm data'
+      pr-body: |
+        The canary dependents data is outdated and needs to be updated.
+
+        This PR contains updated dependents data. Verify that everything looks alright and that tests passes, then merge.
+
+        _Do not push to this PR. It's handled by [a workflow](/${{ github.repository }}/actions/runs/${{ github.run_id }}) which keeps it up to date at a schedule._
