@@ -25,6 +25,7 @@ jobs:
     uses: ./.github/workflows/sync-reusable.yml
     secrets: inherit
     with:
+      diff-file: 'neostandard-additional.ndjson'
       npm-sync-script: 'sync-update-canary'
       branch-name: 'automated/update-canary'
       commit-message: 'chore(dependents): update canary npm data'
