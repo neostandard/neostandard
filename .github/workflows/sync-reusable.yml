@@ -79,8 +79,7 @@ jobs:
       # Actual syncing
       - name: Prepare for diff
         run: >
-          for PROJECT in ${{ inputs.diff-file || '$(jq -r "join(\".json \") + \".json\"" dependents-data/projects.json)' }}
-          do
+          for PROJECT in ${{ inputs.diff-file || '$(jq -r "join(\".json \") + \".json\"" dependents-data/projects.json)' }}; do
             cp "dependents-data/$PROJECT" "dependents-data/$PROJECT-old"
           done
 
@@ -90,8 +89,7 @@ jobs:
       - name: Diff
         id: diff
         run: |
-          for PROJECT in ${{ inputs.diff-file || '$(jq -r "join(\".json \") + \".json\"" dependents-data/projects.json)' }}
-          do
+          for PROJECT in ${{ inputs.diff-file || '$(jq -r "join(\".json \") + \".json\"" dependents-data/projects.json)' }}; do
             if ! diff "dependents-data/$PROJECT-old" "dependents-data/$PROJECT"; then
               echo "- Dependents in $PROJECT are diffing" >> "$GITHUB_STEP_SUMMARY"
               echo "hasDiff=true" >> "$GITHUB_OUTPUT"
