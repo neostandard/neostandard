@@ -34,6 +34,11 @@ on:
         required: true
         type: string
 
+      diff-file:
+        description: 'The file to diff.'
+        required: false
+        type: string
+
 # Push and PR permissions are handled using a bot app, see the "actions/create-github-app-token" step
 permissions:
   contents: read
@@ -74,8 +79,8 @@ jobs:
       # Actual syncing
       - name: Prepare for diff
         run: >
-          for PROJECT in $(jq -r 'join(" ")' dependents-data/projects.json); do
-            cp "dependents-data/$PROJECT.json" "dependents-data/$PROJECT-old.json"
+          for PROJECT in ${{ inputs.diff-file || '$(jq -r "join(\".json \") + \".json\"" dependents-data/projects.json)' }}; do
+            cp "dependents-data/$PROJECT" "dependents-data/$PROJECT-old"
           done
 
       - name: Run npm sync script
@@ -84,8 +89,8 @@ jobs:
       - name: Diff
         id: diff
         run: |
-          for PROJECT in $(jq -r 'join(" ")' dependents-data/projects.json); do
-            if ! diff "dependents-data/$PROJECT-old.json" "dependents-data/$PROJECT.json"; then
+          for PROJECT in ${{ inputs.diff-file || '$(jq -r "join(\".json \") + \".json\"" dependents-data/projects.json)' }} do
+            if ! diff "dependents-data/$PROJECT-old" "dependents-data/$PROJECT"; then
               echo "- Dependents in $PROJECT are diffing" >> "$GITHUB_STEP_SUMMARY"
               echo "hasDiff=true" >> "$GITHUB_OUTPUT"
             fi
