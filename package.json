@@ -70,10 +70,10 @@
   "devDependencies": {
     "@types/node": "^18.19.64",
     "@voxpelli/tsconfig": "^15.0.0",
-    "eslint": "^9.14.0",
-    "husky": "^9.1.6",
+    "eslint": "^9.15.0",
+    "husky": "^9.1.7",
     "installed-check": "^9.3.0",
-    "knip": "^5.36.3",
+    "knip": "^5.37.1",
     "list-dependents-cli": "^2.6.1",
     "npm-run-all2": "^7.0.1",
     "type-coverage": "^2.29.7",
