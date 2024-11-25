@@ -1,3 +1,6 @@
+// Needed to avoid TypeScript complaining
+const React = {}
+
 function MainButton () {}
 
 module.exports = function TodoList () {
