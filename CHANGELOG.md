@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.11.9](https://github.com/neostandard/neostandard/compare/v0.11.8...v0.11.9) (2024-11-25)
+
+
+### 🌟 Features
+
+* **deps:** update dependency @stylistic/eslint-plugin to ^2.11.0 ([#216](https://github.com/neostandard/neostandard/issues/216)) ([50254ae](https://github.com/neostandard/neostandard/commit/50254ae1fbd36b66dae65989f240637f428d5794))
+* **deps:** update dependency eslint-plugin-n to ^17.14.0 ([#215](https://github.com/neostandard/neostandard/issues/215)) ([b86e638](https://github.com/neostandard/neostandard/commit/b86e638503c53d01adedfaa7ef188cd2e04bcf80))
+* **deps:** update dependency typescript-eslint to ^8.15.0 ([#213](https://github.com/neostandard/neostandard/issues/213)) ([23d362b](https://github.com/neostandard/neostandard/commit/23d362bb6b9b9a621133a27f341ca166b4ab0352))
+
+
+### 🩹 Fixes
+
+* lazy load jsx options ([#210](https://github.com/neostandard/neostandard/issues/210)) ([9cfe41c](https://github.com/neostandard/neostandard/commit/9cfe41c33eebc74110b3558d867d9798ca7ccb53))
+
 ## [0.11.8](https://github.com/neostandard/neostandard/compare/v0.11.7...v0.11.8) (2024-11-12)
 
 
