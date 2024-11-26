@@ -10,6 +10,10 @@ module.exports.plugins = /** @type {const} */ ({
   get '@stylistic' () {
     return require('@stylistic/eslint-plugin')
   },
+  get import () {
+    // @ts-ignore
+    return require('eslint-plugin-import')
+  },
   get n () {
     return require('eslint-plugin-n')
   },
