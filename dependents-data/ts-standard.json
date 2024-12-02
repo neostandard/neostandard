@@ -1,7 +1,10 @@
 [
+  "Level/read-stream",
   "Trott/cumberbatch-name",
+  "extremeheat/bedrock-provider",
   "grandom-library/fnv1a",
   "grandom-library/mt19937",
+  "jsdoc-type-pratt-parser/jsdoc-type-pratt-parser",
   "juanelas/bigint-mod-arith",
   "juanelas/paillier-bigint",
   "mojaloop/central-services-metrics"
