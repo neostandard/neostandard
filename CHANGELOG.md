@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.12.0](https://github.com/neostandard/neostandard/compare/v0.11.9...v0.12.0) (2024-12-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* re-enabled import rules are breaking change
+
+### 🌟 Features
+
+* **deps:** update dependency eslint-plugin-promise to ^7.2.1 ([#223](https://github.com/neostandard/neostandard/issues/223)) ([33184e8](https://github.com/neostandard/neostandard/commit/33184e8ae25bb9c3df06ffb47cd4c30fcb112f59))
+* **deps:** update dependency eslint-plugin-react to ^7.37.2 ([#179](https://github.com/neostandard/neostandard/issues/179)) ([11380cb](https://github.com/neostandard/neostandard/commit/11380cb9349fbf8a1e011a6b39dbe41ace9e8028))
+* **deps:** update dependency typescript-eslint to ^8.17.0 ([#224](https://github.com/neostandard/neostandard/issues/224)) ([a2d3577](https://github.com/neostandard/neostandard/commit/a2d3577fa19bfda9e0767aeb41e5ecd93068bd2f))
+* re-enabled import rules are breaking change ([dcf46c8](https://github.com/neostandard/neostandard/commit/dcf46c83aefa3aa36bac3d63087c4324a29cd639))
+* reenabled import checking rules (eslint-plugin-import) ([#197](https://github.com/neostandard/neostandard/issues/197)) ([629e936](https://github.com/neostandard/neostandard/commit/629e936c52965120270e0fd7efe94b5ad66f1018))
+
+
+### 🩹 Fixes
+
+* **deps:** update dependency globals to ^15.13.0 ([#225](https://github.com/neostandard/neostandard/issues/225)) ([cb93f15](https://github.com/neostandard/neostandard/commit/cb93f15880dc8152d28aeca3c833386f4f559b4c))
+* pin `@stylistic/eslint-plugin` to `2.11.0` ([#230](https://github.com/neostandard/neostandard/issues/230)) ([5828bac](https://github.com/neostandard/neostandard/commit/5828bac6392c00422120e0dae65c0bc3a991be07))
+* swap to `import-x/` to improve TS resolver ([#231](https://github.com/neostandard/neostandard/issues/231)) ([10bf1ab](https://github.com/neostandard/neostandard/commit/10bf1abd9498b9c6c2dd793c8abe7ced7627a8b0))
+
 ## [0.11.9](https://github.com/neostandard/neostandard/compare/v0.11.8...v0.11.9) (2024-11-25)
 
 
