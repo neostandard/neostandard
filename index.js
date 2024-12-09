@@ -10,9 +10,8 @@ module.exports.plugins = /** @type {const} */ ({
   get '@stylistic' () {
     return require('@stylistic/eslint-plugin')
   },
-  get import () {
-    // @ts-ignore
-    return require('eslint-plugin-import')
+  get 'import-x' () {
+    return require('eslint-plugin-import-x')
   },
   get n () {
     return require('eslint-plugin-n')
@@ -22,7 +21,6 @@ module.exports.plugins = /** @type {const} */ ({
     return require('eslint-plugin-promise')
   },
   get react () {
-    // @ts-ignore
     return require('eslint-plugin-react')
   },
   get 'typescript-eslint' () {
