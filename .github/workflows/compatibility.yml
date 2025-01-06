@@ -108,3 +108,9 @@ jobs:
       - name: run eslint
         run: ../main/node_modules/.bin/eslint -c eslint.config.js ${{(inputs.quiet || github.event.inputs.quiet) && '--quiet' || ''}}
         working-directory: ./project
+  test_external_completed:
+    needs: test_external
+    name: Compatibility tests successful
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo Success!

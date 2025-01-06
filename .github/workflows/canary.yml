@@ -149,3 +149,9 @@ jobs:
       - name: run eslint
         run: npx eslint
         working-directory: ./project
+  tests_completed:
+    needs: [test_direct_dependents, test_indirect_dependents]
+    name: Canary tests successful
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo Success!
