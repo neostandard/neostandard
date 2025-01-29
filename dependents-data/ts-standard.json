@@ -1,8 +1,5 @@
 [
-  "Trott/cumberbatch-name",
   "grandom-library/fnv1a",
   "grandom-library/mt19937",
-  "juanelas/bigint-mod-arith",
-  "juanelas/paillier-bigint",
   "mojaloop/central-services-metrics"
 ]
