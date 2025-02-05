@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.1](https://github.com/neostandard/neostandard/compare/v0.12.0...v0.12.1) (2025-02-05)
+
+
+### 🩹 Fixes
+
+* include ts config filenames ([#253](https://github.com/neostandard/neostandard/issues/253)) ([f90fd7a](https://github.com/neostandard/neostandard/commit/f90fd7a7b7f8ff99329153a64a0b7d7d0af71767))
+
 ## [0.12.0](https://github.com/neostandard/neostandard/compare/v0.11.9...v0.12.0) (2024-12-09)
 
 
