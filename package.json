@@ -68,7 +68,7 @@
     "test": "run-s check test:*"
   },
   "devDependencies": {
-    "@types/node": "^18.19.74",
+    "@types/node": "^18.19.75",
     "@voxpelli/tsconfig": "^15.1.1",
     "eslint": "^9.19.0",
     "husky": "^9.1.7",
