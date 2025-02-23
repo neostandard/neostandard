@@ -31,7 +31,6 @@
   "mcollina/mqemitter",
   "mcollina/mqemitter-redis",
   "mcollina/on-exit-or-gc",
-  "mcollina/retimer",
   "mcollina/single-user-cache",
   "mcollina/thread-stream",
   "mercurius-js/mercurius-federation",
