@@ -20,7 +20,6 @@
   "jkeam/reduxsauce",
   "juliangruber/builtins",
   "keycloak/keycloak-nodejs-connect",
-  "mafintosh/fast-fifo",
   "mafintosh/tar-stream",
   "martianboy/postgres-range",
   "martinheidegger/ip-codec",
