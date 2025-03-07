@@ -1,5 +1,8 @@
 [
-  "attentif/unix-timestamp-js",
+  "achingbrain/chai-bites",
+  "credful/aws-credful",
   "erdtman/COSE-JS",
-  "onigoetz/postcss-lightningcss"
+  "nowsecure/node-applesign",
+  "perki/source-licenser",
+  "schema-inspector/schema-inspector"
 ]
