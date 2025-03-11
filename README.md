@@ -28,7 +28,6 @@ alt="platformatic"
 
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
 - [Quick Start](#quick-start)
   - [Migrate from `standard`](#migrate-from-standard)
   - [Add to new project](#add-to-new-project)
