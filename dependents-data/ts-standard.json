@@ -1,5 +1,24 @@
 [
+  "TooTallNate/spotify-uri",
+  "bitcoinjs/bip66",
+  "bitcoinjs/bs58check",
+  "bitcoinjs/wif",
+  "cookpete/react-player",
+  "cryptocoinjs/bs58",
+  "elastic/elasticsearch-js",
+  "elastic/enterprise-search-js",
+  "electron/node-rcedit",
+  "extremeheat/bedrock-provider",
   "grandom-library/fnv1a",
+  "grandom-library/grandom-js",
   "grandom-library/mt19937",
-  "mojaloop/central-services-metrics"
+  "juanelas/base64",
+  "juanelas/bigint-conversion",
+  "leorossi/dotenv-tool",
+  "longshotlabs/simpl-schema",
+  "matthewdowns/shapefile.js",
+  "mysql/mysql-connector-nodejs",
+  "reactory/reactory",
+  "zacanger/koa-cookies",
+  "zacanger/styled-reset"
 ]
