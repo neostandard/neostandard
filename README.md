@@ -112,7 +112,7 @@ All examples below use **ESM (ECMAScript Modules)** syntax. If you're using **Co
   module.exports = neostandard({ /* options */ })
   ```
 
-Here's a basic example of how to configure NeoStandard:
+Here's a basic example of how to configure `neostandard`:
 
   ```js
   import neostandard from 'neostandard'
@@ -123,7 +123,7 @@ Here's a basic example of how to configure NeoStandard:
   })
   ```
 
-The options below allow you to customize NeoStandard for your project. Use them to add global variables, ignore files, enable TypeScript support, and more.
+The options below allow you to customize `neostandard` for your project. Use them to add global variables, ignore files, enable TypeScript support, and more.
 
 * `env` - *`string[]`* - adds additional globals by importing them from the [globals](https://www.npmjs.com/package/globals) npm module
   
@@ -131,7 +131,7 @@ The options below allow you to customize NeoStandard for your project. Use them 
   import neostandard from 'neostandard'
 
   export default neostandard({
-    env: ['browser', 'node']  // Add browser and Node.js global variables
+    env: ['browser', 'mocha']  // Add browser and mocha global variables
   })
   ```
 
@@ -158,7 +158,7 @@ The options below allow you to customize NeoStandard for your project. Use them 
   
 * `globals` - *`string[] | object`* - an array of names of globals or an object of the same shape as ESLint [`languageOptions.globals`](https://eslint.org/docs/latest/use/configure/language-options#using-configuration-files)
   
-  Using an Array:
+  Using an array:
 
   ```js
   import neostandard from 'neostandard'
