@@ -118,7 +118,7 @@ Here's a basic example of how to configure `neostandard`:
   import neostandard from 'neostandard'
 
   export default neostandard({
-    ts: true  // an option
+    ts: true,  // an option
     // Add other options here
   })
   ```
@@ -131,7 +131,7 @@ The options below allow you to customize `neostandard` for your project. Use the
   import neostandard from 'neostandard'
 
   export default neostandard({
-    env: ['browser', 'mocha']  // Add browser and mocha global variables
+    env: ['browser', 'mocha'],  // Add browser and mocha global variables
   })
   ```
 
@@ -141,7 +141,7 @@ The options below allow you to customize `neostandard` for your project. Use the
   import neostandard from 'neostandard'
 
   export default neostandard({
-    files: ['src/**/*.js', 'tests/**/*.js']  // Lint only files in src/ and tests/ directories
+    files: ['src/**/*.js', 'tests/**/*.js'],  // Lint only files in src/ and tests/ directories
   })
   ```
 
@@ -152,7 +152,7 @@ The options below allow you to customize `neostandard` for your project. Use the
 
   export default neostandard({
     ts: true,   // Enable TypeScript support
-    filesTs: ['src/**/*.ts', 'tests/**/*.ts']  // Lint only TypeScript files in src/ and tests/ directories
+    filesTs: ['src/**/*.ts', 'tests/**/*.ts'],  // Lint only TypeScript files in src/ and tests/ directories
   })
   ```
   
@@ -164,7 +164,7 @@ The options below allow you to customize `neostandard` for your project. Use the
   import neostandard from 'neostandard'
 
   export default neostandard({
-    globals: ['$', 'jQuery']  // Treat $ and jQuery as global variables
+    globals: ['$', 'jQuery'],  // Treat $ and jQuery as global variables
   })
   ```
 
@@ -177,8 +177,8 @@ The options below allow you to customize `neostandard` for your project. Use the
     globals: {
       $: 'readonly',  // $ is a read-only global
       jQuery: 'writable',  // jQuery can be modified
-      localStorage: 'off'  // Disable the localStorage global
-    }
+      localStorage: 'off',  // Disable the localStorage global
+    },
   })
   ```
 
@@ -188,7 +188,7 @@ The options below allow you to customize `neostandard` for your project. Use the
   import neostandard from 'neostandard'
 
   export default neostandard({
-    ignores: ['dist/**/*', 'tests/**']  // Ignore files in dist/ and tests/ directories
+    ignores: ['dist/**/*', 'tests/**'],  // Ignore files in dist/ and tests/ directories
   })
   ```
 
@@ -198,7 +198,7 @@ The options below allow you to customize `neostandard` for your project. Use the
   import neostandard from 'neostandard'
 
   export default neostandard({
-    noJsx: true  // Disable JSX-specific rules
+    noJsx: true,  // Disable JSX-specific rules
   })
   ```
 
@@ -208,7 +208,7 @@ The options below allow you to customize `neostandard` for your project. Use the
   import neostandard from 'neostandard'
 
   export default neostandard({
-    noStyle: true  // Disable style-related rules (useful with Prettier or dprint)
+    noStyle: true,  // Disable style-related rules (useful with Prettier or dprint)
   })
   ```
 
@@ -218,7 +218,7 @@ The options below allow you to customize `neostandard` for your project. Use the
   import neostandard from 'neostandard'
 
   export default neostandard({
-    semi: true  // Enforce semicolons (like semistandard)
+    semi: true,  // Enforce semicolons (like semistandard)
   })
   ```
   
@@ -228,7 +228,7 @@ The options below allow you to customize `neostandard` for your project. Use the
   import neostandard from 'neostandard'
 
   export default neostandard({
-    ts: true  // Enable TypeScript support and lint .ts files
+    ts: true,  // Enable TypeScript support and lint .ts files
   })
   ```
 
