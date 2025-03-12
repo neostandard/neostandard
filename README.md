@@ -28,26 +28,26 @@ alt="platformatic"
 
 ## Table of Contents
 
-* [Quick Start](#quick-start)
-  * [Migrate from `standard`](#migrate-from-standard)
-  * [Add to new project](#add-to-new-project)
-* [Configuration options](#configuration-options)
-* [Extending](#extending)
-* [Additional exports](#additional-exports)
-  * [resolveIgnoresFromGitignore()](#resolveignoresfromgitignore)
-  * [Exported plugins](#exported-plugins)
-* [Missing for 1.0.0 release](#missing-for-100-release)
-* [Differences to standard / eslint-config-standard 17.x](#differences-to-standard--eslint-config-standard-17x)
-  * [Changed rules](#changed-rules)
-  * [Relaxed rules](#relaxed-rules)
-  * [Missing bits](#missing-bits)
-* [Config helper](#config-helper)
-  * [Config migration](#config-migration)
-* [Readme badges](#readme-badges)
-* [Mission statement](#mission-statement)
-  * [Rule guidelines](#rule-guidelines)
-* [Governance](#governance)
-* [Used by](#used-by)
+- [Quick Start](#quick-start)
+  - [Migrate from `standard`](#migrate-from-standard)
+  - [Add to new project](#add-to-new-project)
+- [Configuration options](#configuration-options)
+- [Extending](#extending)
+- [Additional exports](#additional-exports)
+  - [resolveIgnoresFromGitignore()](#resolveignoresfromgitignore)
+  - [Exported plugins](#exported-plugins)
+    - [List of exported plugins](#list-of-exported-plugins)
+    - [Usage of exported plugin](#usage-of-exported-plugin)
+- [Missing for 1.0.0 release](#missing-for-100-release)
+- [Differences to standard / eslint-config-standard 17.x](#differences-to-standard--eslint-config-standard-17x)
+  - [Relaxed rules](#relaxed-rules)
+- [Config helper](#config-helper)
+  - [Config migration](#config-migration)
+- [Readme badges](#readme-badges)
+- [Mission statement](#mission-statement)
+  - [Rule guidelines](#rule-guidelines)
+- [Governance](#governance)
+- [Used by](#used-by)
 
 ## Quick Start
 
@@ -101,15 +101,137 @@ alt="platformatic"
 
 ## Configuration options
 
+All examples below use **ESM (ECMAScript Modules)** syntax. If you're using **CommonJS (CJS)**, replace the `import`/`export` statements with the following:
+
+  ```js
+  // Replace
+  import neostandard from 'neostandard'
+  export default neostandard({ /* options */ })
+
+  // With
+  const neostandard = require('neostandard')
+  module.exports = neostandard({ /* options */ })
+  ```
+
+Here's a basic example of how to configure `neostandard`:
+
+  ```js
+  import neostandard from 'neostandard'
+
+  export default neostandard({
+    ts: true,  // an option
+    // Add other options here
+  })
+  ```
+
+The options below allow you to customize `neostandard` for your project. Use them to add global variables, ignore files, enable TypeScript support, and more.
+
 * `env` - *`string[]`* - adds additional globals by importing them from the [globals](https://www.npmjs.com/package/globals) npm module
+  
+  ```js
+  import neostandard from 'neostandard'
+
+  export default neostandard({
+    env: ['browser', 'mocha'],  // Add browser and mocha global variables
+  })
+  ```
+
 * `files` - *`string[]`* - additional file patterns to match. Uses the same shape as ESLint [`files`](https://eslint.org/docs/latest/use/configure/configuration-files#specifying-files-and-ignores)
+  
+  ```js
+  import neostandard from 'neostandard'
+
+  export default neostandard({
+    files: ['src/**/*.js', 'tests/**/*.js'],  // Lint only files in src/ and tests/ directories
+  })
+  ```
+
 * `filesTs` - *`string[]`* - additional file patterns for the TypeScript configs to match. Uses the same shape as ESLint [`files`](https://eslint.org/docs/latest/use/configure/configuration-files#specifying-files-and-ignores)
+  
+  ```js
+  import neostandard from 'neostandard'
+
+  export default neostandard({
+    ts: true,   // Enable TypeScript support
+    filesTs: ['src/**/*.ts', 'tests/**/*.ts'],  // Lint only TypeScript files in src/ and tests/ directories
+  })
+  ```
+  
 * `globals` - *`string[] | object`* - an array of names of globals or an object of the same shape as ESLint [`languageOptions.globals`](https://eslint.org/docs/latest/use/configure/language-options#using-configuration-files)
+  
+  Using an array:
+
+  ```js
+  import neostandard from 'neostandard'
+
+  export default neostandard({
+    globals: ['$', 'jQuery'],  // Treat $ and jQuery as global variables
+  })
+  ```
+
+  Using an object:
+
+  ```js
+  import neostandard from 'neostandard'
+
+  export default neostandard({
+    globals: {
+      $: 'readonly',  // $ is a read-only global
+      jQuery: 'writable',  // jQuery can be modified
+      localStorage: 'off',  // Disable the localStorage global
+    },
+  })
+  ```
+
 * `ignores` - *`string[]`* - an array of glob patterns for files that the config should not apply to, see [ESLint documentation](https://eslint.org/docs/latest/use/configure/ignore) for details
+  
+  ```js
+  import neostandard from 'neostandard'
+
+  export default neostandard({
+    ignores: ['dist/**/*', 'tests/**'],  // Ignore files in dist/ and tests/ directories
+  })
+  ```
+
 * `noJsx` - *`boolean`* - if set, no jsx rules will be added. Useful if for some reason its clashing with your use of JSX-style syntax
+  
+  ```js
+  import neostandard from 'neostandard'
+
+  export default neostandard({
+    noJsx: true,  // Disable JSX-specific rules
+  })
+  ```
+
 * `noStyle` - *`boolean`* - if set, no style rules will be added. Especially useful when combined with [Prettier](https://prettier.io/), [dprint](https://dprint.dev/) or similar
+  
+  ```js
+  import neostandard from 'neostandard'
+
+  export default neostandard({
+    noStyle: true,  // Disable style-related rules (useful with Prettier or dprint)
+  })
+  ```
+
 * `semi` - *`boolean`* - if set, enforce rather than forbid semicolons (same as `semistandard` did)
+  
+  ```js
+  import neostandard from 'neostandard'
+
+  export default neostandard({
+    semi: true,  // Enforce semicolons (like semistandard)
+  })
+  ```
+  
 * `ts` - *`boolean`* - if set, TypeScript syntax will be supported and `*.ts` (including `*.d.ts`) will be checked. To add additional file patterns to the TypeScript checks, use `filesTs`
+  
+  ```js
+  import neostandard from 'neostandard'
+
+  export default neostandard({
+    ts: true,  // Enable TypeScript support and lint .ts files
+  })
+  ```
 
 ## Extending
 
