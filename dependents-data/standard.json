@@ -9,7 +9,6 @@
   "davidmarkclements/rfdc",
   "delvedor/find-my-way",
   "dhershman1/vue-debounce",
-  "fastify/fastify-error",
   "fastify/openapi-schema-diff",
   "feross/arch",
   "feross/cross-zip",
