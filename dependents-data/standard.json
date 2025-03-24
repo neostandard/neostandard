@@ -38,7 +38,6 @@
   "pinojs/pino-std-serializers",
   "pinojs/sonic-boom",
   "platformatic/tail-file-stream",
-  "pnpm/encode-registry",
   "qgustavor/mega",
   "ream88/stylelint-config-idiomatic-order",
   "rvagg/bl",
