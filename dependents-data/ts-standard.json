@@ -1,5 +1,3 @@
 [
-  "grandom-library/fnv1a",
-  "grandom-library/mt19937",
   "mojaloop/central-services-metrics"
 ]
