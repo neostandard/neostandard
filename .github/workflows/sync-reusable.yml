@@ -97,7 +97,7 @@ jobs:
           done
 
       # Generate bot token
-      - uses: actions/create-github-app-token@v1
+      - uses: actions/create-github-app-token@v2
         if: steps.diff.outputs.hasDiff
         id: app-token
         with:
