@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.2](https://github.com/neostandard/neostandard/compare/v0.12.1...v0.12.2) (2025-04-28)
+
+
+### 📚 Documentation
+
+* add examples for all configuration options, CJS note, base example and a better table of content ([#268](https://github.com/neostandard/neostandard/issues/268)) ([3f76650](https://github.com/neostandard/neostandard/commit/3f7665040eed2ef7dbcc9250f857ee072b7685af))
+
 ## [0.12.1](https://github.com/neostandard/neostandard/compare/v0.12.0...v0.12.1) (2025-02-05)
 
 
