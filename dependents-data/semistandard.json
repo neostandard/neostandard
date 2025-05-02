@@ -1,4 +1,7 @@
 [
-  "attentif/unix-timestamp-js",
-  "onigoetz/postcss-lightningcss"
+  "achingbrain/chai-bites",
+  "credful/aws-credful",
+  "nordluf/signal-debug",
+  "nowsecure/node-applesign",
+  "perki/source-licenser"
 ]
