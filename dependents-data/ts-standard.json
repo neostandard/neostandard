@@ -1,3 +1,19 @@
 [
-  "mojaloop/central-services-metrics"
+  "TooTallNate/spotify-uri",
+  "bitcoinjs/bip66",
+  "bitcoinjs/bs58check",
+  "bitcoinjs/wif",
+  "cookpete/react-player",
+  "cryptocoinjs/bs58",
+  "elastic/elasticsearch-js",
+  "electron/node-rcedit",
+  "extremeheat/bedrock-provider",
+  "juanelas/base64",
+  "juanelas/bigint-conversion",
+  "leorossi/dotenv-tool",
+  "longshotlabs/simpl-schema",
+  "matthewdowns/shapefile.js",
+  "net-tech/env-cmd-fixed",
+  "zacanger/koa-cookies",
+  "zacanger/styled-reset"
 ]
