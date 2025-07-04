@@ -27,7 +27,6 @@
   "pinojs/pino-std-serializers",
   "pinojs/sonic-boom",
   "qgustavor/mega",
-  "ream88/stylelint-config-idiomatic-order",
   "rvagg/bl",
   "rvagg/bole",
   "tediousjs/node-mssql",
