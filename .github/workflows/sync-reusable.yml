@@ -121,7 +121,7 @@ jobs:
         run: |
           if [[ "$(git status --porcelain)" != "" ]]; then
             git config --global user.name '${{steps.app-token.outputs.app-slug}}[bot]'
-            git config --global user.email '${{steps.get-user-id.outputs.user-id}}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com>'
+            git config --global user.email '${{steps.get-user-id.outputs.user-id}}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com'
             git checkout -b ${{ inputs.branch-name }}
             git add .
             if (! git show-ref origin/${{ inputs.branch-name }} -q) || [[ "$(git diff origin/${{ inputs.branch-name }} --stat)" != "" ]]; then

@@ -51,6 +51,7 @@ jobs:
     needs: read_repos
     name: Test ${{ matrix.project }}
     runs-on: ubuntu-latest
+    if: needs.read_repos.outputs.matrix != '[]'
 
     strategy:
       fail-fast: false
