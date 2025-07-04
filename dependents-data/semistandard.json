@@ -1,4 +1,6 @@
 [
-  "attentif/unix-timestamp-js",
-  "onigoetz/postcss-lightningcss"
+  "achingbrain/chai-bites",
+  "perki/source-licenser",
+  "pryv/rec.la",
+  "radareorg/radare2-r2pipe"
 ]

@@ -1,1 +1,14 @@
-[]
+[
+  "TooTallNate/spotify-uri",
+  "bitcoinjs/bip66",
+  "bitcoinjs/bs58check",
+  "bitcoinjs/wif",
+  "cryptocoinjs/bs58",
+  "elastic/elasticsearch-js",
+  "extremeheat/bedrock-provider",
+  "leorossi/dotenv-tool",
+  "longshotlabs/simpl-schema",
+  "matthewdowns/shapefile.js",
+  "zacanger/koa-cookies",
+  "zacanger/styled-reset"
+]
