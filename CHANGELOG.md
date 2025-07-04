@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.12.2](https://github.com/neostandard/neostandard/compare/v0.12.1...v0.12.2) (2025-07-04)
+
+
+### 🩹 Fixes
+
+* **deps:** update dependency eslint-plugin-n to ^17.20.0 ([#238](https://github.com/neostandard/neostandard/issues/238)) ([70fc310](https://github.com/neostandard/neostandard/commit/70fc310a3f70a2745eb13ff6bca014b5a390513c))
+* **deps:** update dependency eslint-plugin-react to ^7.37.5 ([#245](https://github.com/neostandard/neostandard/issues/245)) ([dfb5f6c](https://github.com/neostandard/neostandard/commit/dfb5f6ce006bed376abd151373a29a4769a063d0))
+* **deps:** update dependency globals to ^15.15.0 ([#244](https://github.com/neostandard/neostandard/issues/244)) ([d4825fa](https://github.com/neostandard/neostandard/commit/d4825fa497b2e062917ef6eea34d0f91dda9aa88))
+* **deps:** update dependency typescript-eslint to ^8.35.1 ([#239](https://github.com/neostandard/neostandard/issues/239)) ([da922e8](https://github.com/neostandard/neostandard/commit/da922e81b7ea34bf0560e9747d7972cbce8c01bb))
+* **deps:** update eslint-plugin-import etc. ([#290](https://github.com/neostandard/neostandard/issues/290)) ([cd398d4](https://github.com/neostandard/neostandard/commit/cd398d487201d50b90693f6a16d97b7427aaaa52))
+
+
+### 📚 Documentation
+
+* add examples for all configuration options, CJS note, base example and a better table of content ([#268](https://github.com/neostandard/neostandard/issues/268)) ([3f76650](https://github.com/neostandard/neostandard/commit/3f7665040eed2ef7dbcc9250f857ee072b7685af))
+
 ## [0.12.1](https://github.com/neostandard/neostandard/compare/v0.12.0...v0.12.1) (2025-02-05)
 
 
