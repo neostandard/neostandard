@@ -243,7 +243,9 @@ import neostandard from 'neostandard'
 import jsdoc from 'eslint-plugin-jsdoc';
 
 export default defineConfig([
-  ...neostandard(),
+  {
+    extends: [neostandard()],
+  },
   jsdoc.configs['flat/recommended-typescript-flavor'],
 ])
 ```
@@ -298,7 +300,9 @@ import { defineConfig } from 'eslint/config'
 import neostandard, { plugins } from 'neostandard'
 
 export default defineConfig([
-  ...neostandard(),
+  {
+    extends: [neostandard()],
+  },
   plugins.n.configs['flat/recommended'],
 ])
 ```
