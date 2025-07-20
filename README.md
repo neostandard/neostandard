@@ -238,13 +238,14 @@ The options below allow you to customize `neostandard` for your project. Use the
 The `neostandard()` function returns an ESLint config array which is intended to be exported directly or, if you want to modify or extend the config, can be [combined with other configs](https://eslint.org/docs/latest/use/configure/combine-configs) like any other ESLint config array:
 
 ```js
+import { defineConfig } from 'eslint/config'
 import neostandard from 'neostandard'
 import jsdoc from 'eslint-plugin-jsdoc';
 
-export default [
+export default defineConfig([
   ...neostandard(),
   jsdoc.configs['flat/recommended-typescript-flavor'],
-]
+])
 ```
 
 Do note that `neostandard()` is intended to be a complete linting config in itself, only extend it if you have needs that goes beyond what `neostandard` provides, and [open an issue](https://github.com/neostandard/neostandard/issues) if you believe `neostandard` itself should be extended or changed in that direction.
@@ -293,12 +294,13 @@ module.exports = require('neostandard')({
 If one eg. wants to add the `eslint-plugin-n` recommended config, then one can do:
 
 ```js
+import { defineConfig } from 'eslint/config'
 import neostandard, { plugins } from 'neostandard'
 
-export default [
+export default defineConfig([
   ...neostandard(),
   plugins.n.configs['flat/recommended'],
-]
+])
 ```
 
 ## Missing for 1.0.0 release
