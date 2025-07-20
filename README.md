@@ -248,6 +248,27 @@ export default defineConfig([
 ])
 ```
 
+You can also use the [`extends`](https://eslint.org/docs/latest/use/configure/combine-configs#apply-a-config-array-to-a-subset-of-files) mechanism to apply configurations to specific file patterns or override options:
+
+```js
+import { defineConfig } from 'eslint/config'
+import neostandard from 'neostandard'
+
+export default defineConfig([
+  {
+    extends: [neostandard()],
+    ignores: ['**/*.css'],
+  },
+  {
+    files: ['**/*.test.js'],
+    extends: [neostandard()],
+    rules: {
+      'no-console': 'off', // Allow console.log in test files
+    },
+  },
+])
+```
+
 Do note that `neostandard()` is intended to be a complete linting config in itself, only extend it if you have needs that goes beyond what `neostandard` provides, and [open an issue](https://github.com/neostandard/neostandard/issues) if you believe `neostandard` itself should be extended or changed in that direction.
 
 It's recommended to stay compatible with the plain config when extending and only make your config stricter, not relax any of the rules, as your project would then still pass when using just the plain `neostandard`-config, which helps people know what baseline to expect from your project.
