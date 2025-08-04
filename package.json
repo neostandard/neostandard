@@ -68,16 +68,16 @@
     "test": "run-s check test:*"
   },
   "devDependencies": {
-    "@types/node": "^18.19.113",
+    "@types/node": "^18.19.121",
     "@voxpelli/tsconfig": "^15.1.2",
-    "eslint": "^9.30.0",
+    "eslint": "^9.32.0",
     "husky": "^9.1.7",
     "installed-check": "^9.3.0",
-    "knip": "^5.61.3",
+    "knip": "^5.62.0",
     "list-dependents-cli": "^2.7.1",
     "npm-run-all2": "^7.0.2",
     "type-coverage": "^2.29.7",
-    "typescript": "~5.8.3"
+    "typescript": "~5.9.2"
   },
   "dependencies": {
     "@humanwhocodes/gitignore-to-minimatch": "^1.0.2",
