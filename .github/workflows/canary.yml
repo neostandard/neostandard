@@ -14,7 +14,7 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - id: set-matrix
         run: echo "matrix=$(jq -s -c '[.[].repositoryUrl | sub("https://github.com/";"";"i")] | unique | sort' dependents-data/neostandard-*.ndjson)" >> $GITHUB_OUTPUT
   test_direct_dependents:
@@ -27,14 +27,14 @@ jobs:
         project: ${{ fromJson(needs.read_direct_dependents.outputs.matrix) }}
     steps:
       - name: Checkout main project
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: main
           persist-credentials: false
           show-progress: false
 
       - name: Checkout ${{ matrix.project }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: ${{ matrix.project }}
           path: project
@@ -82,7 +82,7 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           persist-credentials: false
           show-progress: false
@@ -99,14 +99,14 @@ jobs:
         project: ${{ fromJson(needs.read_indirect_dependents.outputs.matrix) }}
     steps:
       - name: Checkout main project
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: main
           persist-credentials: false
           show-progress: false
 
       - name: Checkout ${{ matrix.project }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: ${{ matrix.project }}
           path: project
