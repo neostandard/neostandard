@@ -43,7 +43,7 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - id: set-matrix
         run: echo "matrix=$(jq -c '.' dependents-data/${{ inputs.moduleSet || github.event.inputs.moduleSet }}.json)" >> $GITHUB_OUTPUT
 
@@ -60,14 +60,14 @@ jobs:
 
     steps:
       - name: Checkout main project
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: main
           persist-credentials: false
           show-progress: false
 
       - name: Checkout ${{ matrix.project }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: ${{ matrix.project }}
           path: project
