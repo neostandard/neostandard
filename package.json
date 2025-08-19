@@ -77,7 +77,8 @@
     "list-dependents-cli": "^2.7.1",
     "npm-run-all2": "^7.0.2",
     "type-coverage": "^2.29.7",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "@typescript-eslint/utils": "^8.40.0"
   },
   "dependencies": {
     "@humanwhocodes/gitignore-to-minimatch": "^1.0.2",
