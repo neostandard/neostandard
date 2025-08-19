@@ -90,7 +90,7 @@
     "find-up": "^5.0.0",
     "globals": "^15.15.0",
     "peowly": "^1.3.2",
-    "typescript-eslint": "^8.35.1"
+    "typescript-eslint": "^8.40.0"
   },
   "peerDependencies": {
     "eslint": "^9.0.0"
