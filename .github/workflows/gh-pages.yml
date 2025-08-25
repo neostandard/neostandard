@@ -56,7 +56,7 @@ jobs:
       - name: Build
         run: node cli.mjs | sed "s/'neostandard'/'.\/'/" > eslint.config.js && npx --yes @eslint/config-inspector build --base /neostandard/
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./.eslint-config-inspector
 
