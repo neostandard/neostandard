@@ -1,4 +1,3 @@
 [
-  "attentif/unix-timestamp-js",
-  "onigoetz/postcss-lightningcss"
+  "achingbrain/chai-bites"
 ]
