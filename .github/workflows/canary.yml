@@ -41,7 +41,7 @@ jobs:
           persist-credentials: false
           show-progress: false
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: lts/*
 
@@ -114,7 +114,7 @@ jobs:
           show-progress: false
 
       - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node_version }}
 
