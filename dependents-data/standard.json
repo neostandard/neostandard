@@ -7,11 +7,9 @@
   "davidmarkclements/rfdc",
   "delvedor/find-my-way",
   "dhershman1/vue-debounce",
-  "holepunchto/b4a",
   "jkeam/reduxsauce",
   "juliangruber/builtins",
   "keycloak/keycloak-nodejs-connect",
-  "martinheidegger/ip-codec",
   "mcollina/autocannon",
   "mcollina/close-with-grace",
   "mcollina/thread-stream",
@@ -24,7 +22,5 @@
   "rvagg/bl",
   "rvagg/bole",
   "tediousjs/node-mssql",
-  "testdouble/quibble",
-  "testdouble/testdouble.js",
   "yjs/y-prosemirror"
 ]
