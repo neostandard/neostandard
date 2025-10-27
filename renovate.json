@@ -100,14 +100,6 @@
       "matchUpdateTypes": [
         "major"
       ]
-    },
-    {
-      "groupName": "eslint-plugin-import etc.",
-      "groupSlug": "eslint-plugin-import",
-      "matchPackageNames": [
-        "eslint-import-resolver-typescript",
-        "eslint-plugin-import-x"
-      ]
     }
   ]
 }
