@@ -14,6 +14,5 @@
   "qgustavor/mega",
   "rvagg/bl",
   "rvagg/bole",
-  "tediousjs/node-mssql",
-  "yjs/y-prosemirror"
+  "tediousjs/node-mssql"
 ]
