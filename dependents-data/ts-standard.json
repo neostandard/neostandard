@@ -1,1 +1,7 @@
-[]
+[
+  "TheDudeFromCI/mineflayer-collectblock",
+  "extremeheat/bedrock-provider",
+  "storacha/w3name",
+  "termosa/use-ref-callback",
+  "zautumnz/shrink-string"
+]

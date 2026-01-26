@@ -1,1 +1,18 @@
-[]
+[
+  "MetaMask/react-native-actionsheet",
+  "NYPL-discovery/node-nypl-data-api-client",
+  "aldis-ameriks/pino-postgres",
+  "bendrucker/creditcards",
+  "bendrucker/creditcards-types",
+  "bitcoinjs/bs58check",
+  "davidmarkclements/rfdc",
+  "feross/express-sitemap-xml",
+  "holepunchto/listen-async",
+  "istanbuljs/v8-to-istanbul",
+  "lukasoppermann/html5sortable",
+  "mmomtchev/prebuild-install",
+  "nbesli/pdf-merger-js",
+  "screepers/node-screeps-api",
+  "wraithgar/spawk",
+  "yjs/y-quill"
+]
