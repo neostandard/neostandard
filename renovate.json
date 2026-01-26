@@ -16,7 +16,7 @@
     ":separateMajorReleases",
     "group:typescript-eslintMonorepo",
     "helpers:disableTypesNodeMajor",
-    "npm:unpublishSafe",
+    "security:minimumReleaseAgeNpm",
     "replacements:all",
     "schedule:weekly",
     "workarounds:all"
