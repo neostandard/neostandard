@@ -33,7 +33,7 @@
     "build:1-declaration": "tsc -p declaration.tsconfig.json",
     "build": "run-s build:*",
     "check-peer-compatibility": "NEOSTANDARD_PATH=`pwd` && cd $(mktemp -d -p $NEOSTANDARD_PATH install-test-XXXXXXXXXX) && npm init -y && npm install --no-legacy-peer-deps --package-lock-only --strict-peer-deps --install-links eslint $NEOSTANDARD_PATH",
-    "check:installed-check": "installed-check --engine-check --version-check -i list-dependents-cli",
+    "check:installed-check": "installed-check --engine-check --version-check -i list-dependents-cli -i eslint",
     "check:knip": "knip",
     "check:lint": "eslint --report-unused-disable-directives .",
     "check:tsc": "tsc",
@@ -70,7 +70,7 @@
   "devDependencies": {
     "@types/node": "^18.19.130",
     "@voxpelli/tsconfig": "^16.1.0",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.0-rc.1",
     "husky": "^9.1.7",
     "installed-check": "^9.3.0",
     "knip": "^5.82.1",
@@ -91,6 +91,6 @@
     "typescript-eslint": "^8.35.1"
   },
   "peerDependencies": {
-    "eslint": "^9.0.0"
+    "eslint": "^9.0.0 || ^10.0.0-rc.1"
   }
 }
