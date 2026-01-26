@@ -1,1 +1,4 @@
-[]
+[
+  "achingbrain/chai-bites",
+  "rnegron/noticias-pr-cli"
+]

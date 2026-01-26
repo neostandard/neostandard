@@ -1,0 +1,2 @@
+{"dependentCount":3,"downloads":13000,"firstRelease":"2021-12-13T20:05:28.492Z","latestRelease":"2024-05-01T11:39:13.751Z","latestVersion":"0.2.0","repositoryUrl":"https://github.com/achingbrain/chai-bites","name":"chai-bites","targetVersion":"^17.0.0","pkg":{"engines":{"node":">=10"}}}
+{"dependentCount":1,"downloads":1000,"firstRelease":"2019-02-14T01:23:24.214Z","latestRelease":"2024-04-21T12:05:22.486Z","latestVersion":"0.14.1","repositoryUrl":"https://github.com/rnegron/noticias-pr-cli","name":"noticias-pr","targetVersion":"^17.0.0","pkg":{"engines":{"node":">=18"}}}
