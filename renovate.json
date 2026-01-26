@@ -49,7 +49,8 @@
       "enabled": true,
       "matchPackageNames": [
         "/typescript-eslint/",
-        "/eslint-plugin/"
+        "/eslint-plugin/",
+        "globals"
       ],
       "matchUpdateTypes": [
         "major"
@@ -61,7 +62,8 @@
       "enabled": true,
       "matchPackageNames": [
         "/typescript-eslint/",
-        "/eslint-plugin/"
+        "/eslint-plugin/",
+        "globals"
       ],
       "matchUpdateTypes": [
         "minor"
