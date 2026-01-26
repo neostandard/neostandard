@@ -52,31 +52,11 @@ jobs:
 
         _Do not push to this PR. It's handled by [a workflow](/${{ github.repository }}/actions/runs/${{ github.run_id }}) which keeps it up to date at a schedule._
 
-  sync-standard:
-    name: Update standard dependents data
-    needs:
-      - timeCheck
-      - sync-semistandard
-    uses: ./.github/workflows/sync-reusable.yml
-    secrets: inherit
-    with:
-      diff-file: 'standard.json standard-filtered.ndjson'
-      npm-sync-script: 'sync-update:standard'
-      branch-name: 'automated/update-standard'
-      commit-message: 'chore(dependents): update standard npm data'
-      pr-title: 'chore(dependents): update standard npm data'
-      pr-body: |
-        The standard dependents data is outdated and needs to be updated.
-
-        This PR contains updated standard dependents data. Verify that everything looks alright and that tests passes, then merge.
-
-        _Do not push to this PR. It's handled by [a workflow](/${{ github.repository }}/actions/runs/${{ github.run_id }}) which keeps it up to date at a schedule._
-
   sync-ts-standard:
     name: Update ts-standard dependents data
     needs:
       - timeCheck
-      - sync-standard
+      - sync-semistandard
     uses: ./.github/workflows/sync-reusable.yml
     secrets: inherit
     with:
@@ -89,5 +69,25 @@ jobs:
         The ts-standard dependents data is outdated and needs to be updated.
 
         This PR contains updated ts-standard dependents data. Verify that everything looks alright and that tests passes, then merge.
+
+        _Do not push to this PR. It's handled by [a workflow](/${{ github.repository }}/actions/runs/${{ github.run_id }}) which keeps it up to date at a schedule._
+
+  sync-standard:
+    name: Update standard dependents data
+    needs:
+      - timeCheck
+      - sync-ts-standard
+    uses: ./.github/workflows/sync-reusable.yml
+    secrets: inherit
+    with:
+      diff-file: 'standard.json standard-filtered.ndjson'
+      npm-sync-script: 'sync-update:standard'
+      branch-name: 'automated/update-standard'
+      commit-message: 'chore(dependents): update standard npm data'
+      pr-title: 'chore(dependents): update standard npm data'
+      pr-body: |
+        The standard dependents data is outdated and needs to be updated.
+
+        This PR contains updated standard dependents data. Verify that everything looks alright and that tests passes, then merge.
 
         _Do not push to this PR. It's handled by [a workflow](/${{ github.repository }}/actions/runs/${{ github.run_id }}) which keeps it up to date at a schedule._
