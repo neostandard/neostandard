@@ -251,6 +251,74 @@ Do note that `neostandard()` is intended to be a complete linting config in itse
 
 It's recommended to stay compatible with the plain config when extending and only make your config stricter, not relax any of the rules, as your project would then still pass when using just the plain `neostandard`-config, which helps people know what baseline to expect from your project.
 
+### Adding back import checking
+
+As of neostandard v1.0.0, `eslint-plugin-import-x` has been removed to reduce dependency weight and installation complexity. For most projects, TypeScript's compiler (`tsc`) provides superior import/export checking with full project context.
+
+If you still need ESLint-based import checking, you can add it back manually:
+
+```js
+import neostandard from 'neostandard'
+import importX from 'eslint-plugin-import-x'
+
+export default [
+  ...neostandard(),
+  {
+    plugins: {
+      'import-x': importX
+    },
+    rules: {
+      'import-x/export': 'error',
+      'import-x/first': 'error',
+      'import-x/no-absolute-path': ['error', { esmodule: true, commonjs: true, amd: false }],
+      'import-x/no-duplicates': 'error',
+      'import-x/no-named-default': 'error',
+      'import-x/no-webpack-loader-syntax': 'error',
+    }
+  }
+]
+```
+
+For TypeScript projects, you may also want to add the TypeScript resolver:
+
+```js
+import neostandard from 'neostandard'
+import importX from 'eslint-plugin-import-x'
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
+
+export default [
+  ...neostandard(),
+  {
+    plugins: {
+      'import-x': importX
+    },
+    settings: {
+      'import-x/resolver-next': [
+        createTypeScriptImportResolver({
+          project: './tsconfig.json'
+        })
+      ]
+    },
+    rules: {
+      'import-x/export': 'error',
+      'import-x/first': 'error',
+      'import-x/no-absolute-path': ['error', { esmodule: true, commonjs: true, amd: false }],
+      'import-x/no-duplicates': 'error',
+      'import-x/no-named-default': 'error',
+      'import-x/no-webpack-loader-syntax': 'error',
+    }
+  }
+]
+```
+
+**Recommended alternative:** Use TypeScript's compiler for import checking instead:
+
+```bash
+tsc --noEmit
+```
+
+This provides more comprehensive checking including type imports, module resolution, and cross-file validation.
+
 ## Additional exports
 
 ### resolveIgnoresFromGitignore()
@@ -282,7 +350,6 @@ module.exports = require('neostandard')({
 #### List of exported plugins
 
 * `@stylistic` - export of [`@stylistic/eslint-plugin`](https://npmjs.com/package/@stylistic/eslint-plugin)
-* `import-x` - export of [`eslint-plugin-import-x`](https://npmjs.com/package/eslint-plugin-import-x)
 * `n` - export of [`eslint-plugin-n`](https://npmjs.com/package/eslint-plugin-n)
 * `promise` - export of [`eslint-plugin-promise`](https://npmjs.com/package/eslint-plugin-promise)
 * `react` - export of [`eslint-plugin-react`](https://npmjs.com/package/eslint-plugin-react)
