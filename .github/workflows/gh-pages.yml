@@ -28,9 +28,10 @@ jobs:
         with:
           persist-credentials: false
           show-progress: false
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: 'lts/*'
+          package-manager-cache: false
 
       # New prefix generated every 120 days, to ensure npm cache doesn't grow too large
       - name: Get npm cache timed expiration

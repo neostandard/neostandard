@@ -27,9 +27,10 @@ jobs:
           show-progress: false
 
       - name: Use Node.js ${{ inputs.node-version }}
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ inputs.node-version }}
+          package-manager-cache: false
 
       # New prefix generated every 120 days, to ensure npm cache doesn't grow too large
       # See https://github.com/actions/setup-node/pull/702

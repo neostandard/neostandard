@@ -51,9 +51,10 @@ jobs:
         with:
           persist-credentials: false
           show-progress: false
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: lts/*
+          package-manager-cache: false
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
