@@ -10,7 +10,7 @@
   "keywords": [],
   "license": "MIT",
   "engines": {
-    "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+    "node": "^20.19.0 || ^22.13.0 || >=24"
   },
   "bin": {
     "neostandard": "cli.mjs"
@@ -73,7 +73,7 @@
     "test": "run-s check test:*"
   },
   "devDependencies": {
-    "@types/node": "^18.19.130",
+    "@types/node": "^20.19.30",
     "@voxpelli/tsconfig": "^16.1.0",
     "eslint": "^9.39.2",
     "husky": "^9.1.7",
