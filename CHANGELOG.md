@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.13.0](https://github.com/neostandard/neostandard/compare/v0.12.2...v0.13.0) (2026-02-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* eslint-plugin-import-x is no longer included by default. Projects relying on import-x rules will need to manually install and configure eslint-plugin-import-x. See the "Adding back import checking" section in the README for migration instructions. As an alternative, we recommend using TypeScript's compiler (tsc --noEmit) for import validation, which provides more comprehensive checking.
+* update dependency globals to v17 ([#335](https://github.com/neostandard/neostandard/issues/335))
+
+### 🌟 Features
+
+* **deps:** update dependency globals to ^17.2.0 ([#347](https://github.com/neostandard/neostandard/issues/347)) ([66d504e](https://github.com/neostandard/neostandard/commit/66d504e42c6ceecf5c36cf679a33d269f255e2e1))
+* **deps:** update dependency typescript-eslint to ^8.54.0 ([#348](https://github.com/neostandard/neostandard/issues/348)) ([2cdd443](https://github.com/neostandard/neostandard/commit/2cdd4434bc1c27be08852452dc352b2962c59fc0))
+* remove eslint-plugin-import-x and related dependencies ([#330](https://github.com/neostandard/neostandard/issues/330)) ([248de35](https://github.com/neostandard/neostandard/commit/248de3588817b5dd9334dee43f14312e02679c16))
+* update dependency globals to v17 ([#335](https://github.com/neostandard/neostandard/issues/335)) ([a856b81](https://github.com/neostandard/neostandard/commit/a856b811fc6956100e447dfebfecf79564039194))
+
+
+### 🩹 Fixes
+
+* **deps:** update dependency eslint-plugin-n to ^17.23.2 ([#303](https://github.com/neostandard/neostandard/issues/303)) ([76d50ed](https://github.com/neostandard/neostandard/commit/76d50edcd4e655878922f5633e39dd50f6e004a9))
+* **deps:** update dependency typescript-eslint to ^8.53.1 ([#322](https://github.com/neostandard/neostandard/issues/322)) ([6beb36b](https://github.com/neostandard/neostandard/commit/6beb36bdd1494e078cb31b12070bae7643e106ef))
+
+
+### 🧹 Chores
+
+* properly apply filter ([#336](https://github.com/neostandard/neostandard/issues/336)) ([bd1ad55](https://github.com/neostandard/neostandard/commit/bd1ad55af7317470b10376526a10117d4f862ec3))
+
 ## [0.12.2](https://github.com/neostandard/neostandard/compare/v0.12.1...v0.12.2) (2025-07-04)
 
 
