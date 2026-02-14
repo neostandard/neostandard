@@ -28,7 +28,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [18, 20, 22, 24]
+        target: [20, 22, 24]
     name: Test on Node ${{ matrix.target }}
     uses: ./.github/workflows/reusable-npm-run.yml
     with:
