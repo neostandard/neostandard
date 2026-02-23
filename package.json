@@ -10,7 +10,7 @@
   "keywords": [],
   "license": "MIT",
   "engines": {
-    "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+    "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
   },
   "bin": {
     "neostandard": "cli.mjs"
@@ -73,9 +73,9 @@
     "test": "run-s check test:*"
   },
   "devDependencies": {
-    "@types/node": "^18.19.130",
+    "@types/node": "^20.19.33",
     "@voxpelli/tsconfig": "^16.1.0",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.0",
     "husky": "^9.1.7",
     "installed-check": "^9.3.0",
     "knip": "^5.82.1",
@@ -86,7 +86,7 @@
   },
   "dependencies": {
     "@humanwhocodes/gitignore-to-minimatch": "^1.0.2",
-    "@stylistic/eslint-plugin": "2.11.0",
+    "@stylistic/eslint-plugin": "^5.8.0",
     "eslint-plugin-n": "^17.23.2",
     "eslint-plugin-promise": "^7.2.1",
     "eslint-plugin-react": "^7.37.5",
@@ -96,6 +96,6 @@
     "typescript-eslint": "^8.54.0"
   },
   "peerDependencies": {
-    "eslint": "^9.0.0"
+    "eslint": "^10.0.0"
   }
 }
