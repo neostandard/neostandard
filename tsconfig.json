@@ -1,5 +1,5 @@
 {
-  "extends": "@voxpelli/tsconfig/node18.json",
+  "extends": "@voxpelli/tsconfig/node20.json",
   "files": [
     "cli.mjs",
     "eslint.config.js",
