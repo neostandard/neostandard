@@ -92,7 +92,7 @@
     "eslint-plugin-react": "^7.37.5",
     "find-up": "^5.0.0",
     "globals": "^17.2.0",
-    "peowly": "^1.3.2",
+    "peowly": "^1.3.3",
     "typescript-eslint": "^8.54.0"
   },
   "peerDependencies": {
