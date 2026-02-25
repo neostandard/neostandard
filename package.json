@@ -77,7 +77,7 @@
     "@voxpelli/tsconfig": "^16.1.0",
     "eslint": "^9.39.2",
     "husky": "^9.1.7",
-    "installed-check": "^9.3.0",
+    "installed-check": "^10.0.0",
     "knip": "^5.82.1",
     "list-dependents-cli": "^2.7.1",
     "npm-run-all2": "^7.0.2",
