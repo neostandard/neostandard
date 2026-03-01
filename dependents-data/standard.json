@@ -1,18 +1,1 @@
-[
-  "Eomm/fastify-raw-body",
-  "Level/supports",
-  "bencevans/screenshot-desktop",
-  "delvedor/find-my-way",
-  "dhershman1/vue-debounce",
-  "keycloak/keycloak-nodejs-connect",
-  "mcollina/autocannon",
-  "mcollina/close-with-grace",
-  "onlxltd/bonjour-service",
-  "pinojs/pino-abstract-transport",
-  "pinojs/pino-http",
-  "pinojs/sonic-boom",
-  "qgustavor/mega",
-  "rvagg/bl",
-  "rvagg/bole",
-  "tediousjs/node-mssql"
-]
+[]
