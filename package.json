@@ -75,7 +75,7 @@
   "devDependencies": {
     "@types/node": "^20.19.33",
     "@voxpelli/tsconfig": "^16.1.0",
-    "eslint": "^9.39.3",
+    "eslint": "^10.0.2",
     "husky": "^9.1.7",
     "installed-check": "^10.0.1",
     "knip": "^5.85.0",
