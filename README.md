@@ -33,6 +33,7 @@ alt="platformatic"
   - [Add to new project](#add-to-new-project)
 - [Configuration options](#configuration-options)
 - [Extending](#extending)
+  - [Adding back import checking](#adding-back-import-checking)
 - [Additional exports](#additional-exports)
   - [resolveIgnoresFromGitignore()](#resolveignoresfromgitignore)
   - [Exported plugins](#exported-plugins)
@@ -253,7 +254,7 @@ It's recommended to stay compatible with the plain config when extending and onl
 
 ### Adding back import checking
 
-As of neostandard v1.0.0, `eslint-plugin-import-x` has been removed to reduce dependency weight and installation complexity. For most projects, TypeScript's compiler (`tsc`) provides superior import/export checking with full project context.
+As of neostandard v0.13.0, `eslint-plugin-import-x` has been removed to reduce dependency weight and installation complexity. For most projects, TypeScript's compiler (`tsc`) provides superior import/export checking with full project context.
 
 If you still need ESLint-based import checking, you can add it back manually:
 
