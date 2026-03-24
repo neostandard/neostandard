@@ -28,6 +28,7 @@ alt="platformatic"
 
 ## Table of Contents
 
+- [Mission](#mission)
 - [Quick Start](#quick-start)
   - [Migrate from `standard`](#migrate-from-standard)
   - [Add to new project](#add-to-new-project)
@@ -49,6 +50,12 @@ alt="platformatic"
   - [Rule guidelines](#rule-guidelines)
 - [Governance](#governance)
 - [Used by](#used-by)
+
+## Mission
+
+Our _divine mission_ is to put behind the pain of configuring and maintaining eslint with all its plugins for you.
+
+With the spiritual path to coordinate a large amount of configuration, plugins and update churns in one place, consumers reach Nirvana sooner than when configuring raw eslint themselves, and can instead focus on writing code and improving the world with it.
 
 ## Quick Start
 
