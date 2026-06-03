@@ -2,6 +2,7 @@
 
 const test = require('node:test')
 const { RuleTester } = require('eslint')
+const { parser: tsParser } = require('typescript-eslint')
 
 const rule = require('../../lib/plugin/rules/jsx-key')
 
@@ -45,6 +46,11 @@ test('neostandard/jsx-key', () => {
       'items.map()', // no callback
       'Array.from(items)', // no mapper
       'foo(x => <li />)', // not .map / Array.from
+      'notArray.from(items, x => <li />)', // only the literal `Array` identifier is matched
+      // out-of-scope array-literal gaps (parity with upstream react/jsx-key — array
+      // elements are not unwrapped the way iterator-callback returns are):
+      'const a = [x || <li />]', // LogicalExpression element
+      'const a = [x ? <li /> : <span />]', // ConditionalExpression element
     ],
     invalid: [
       {
@@ -101,6 +107,58 @@ test('neostandard/jsx-key', () => {
         code: 'items.map(x => <></>)',
         options: [{ checkFragmentShorthand: true }],
         errors: [{ messageId: 'missingIterKeyWithFragment' }],
+      },
+      // a spread attribute is NOT treated as an implicit key — parity with
+      // upstream react/jsx-key (jsx-ast-utils `hasProp` is spreadStrict by default)
+      {
+        code: 'const a = [<li {...x} />]',
+        errors: [{ messageId: 'missingArrayKey' }],
+      },
+      {
+        code: 'items.map(x => <li {...x} />)',
+        errors: [{ messageId: 'missingIterKey' }],
+      },
+      // nested ternary in an iterator callback: every leaf is checked
+      {
+        code: 'items.map(x => x ? (y ? <li /> : <li />) : <li />)',
+        errors: [
+          { messageId: 'missingIterKey' },
+          { messageId: 'missingIterKey' },
+          { messageId: 'missingIterKey' },
+        ],
+      },
+    ],
+  })
+})
+
+// The rule reaches .tsx only because lib/main.js scopes the jsx layer to include
+// `**/*.tsx`; the TS block from typescriptify() does NOT carry the rule. Run the
+// matrix through the typescript-eslint parser to guard that .tsx wiring (the rule
+// is parser-agnostic — JSXElement/JSXFragment nodes are identical).
+const ruleTesterTsx = new RuleTester({
+  languageOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    parser: tsParser,
+    parserOptions: {
+      ecmaFeatures: { jsx: true },
+    },
+  },
+})
+
+test('neostandard/jsx-key — typescript-eslint parser (.tsx wiring)', () => {
+  ruleTesterTsx.run('jsx-key (tsx)', rule, {
+    valid: [
+      'items.map(x => <li key={x.id} />)',
+    ],
+    invalid: [
+      {
+        code: 'items.map(x => <li />)',
+        errors: [{ messageId: 'missingIterKey' }],
+      },
+      {
+        code: 'const a = [<li />, <li />]',
+        errors: [{ messageId: 'missingArrayKey' }, { messageId: 'missingArrayKey' }],
       },
     ],
   })
