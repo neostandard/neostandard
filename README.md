@@ -232,16 +232,17 @@ The options below allow you to customize `neostandard` for your project. Use the
 
 ## Extending
 
-The `neostandard()` function returns an ESLint config array which is intended to be exported directly or, if you want to modify or extend the config, can be [combined with other configs](https://eslint.org/docs/latest/use/configure/combine-configs) like any other ESLint config array:
+The `neostandard()` function returns an ESLint config array which is intended to be exported directly or, if you want to modify or extend the config, can be [combined with other configs](https://eslint.org/docs/latest/use/configure/combine-configs) using ESLint's `defineConfig` helper (from `eslint/config`, included since ESLint 9):
 
 ```js
+import { defineConfig } from 'eslint/config'
 import neostandard from 'neostandard'
-import jsdoc from 'eslint-plugin-jsdoc';
+import jsdoc from 'eslint-plugin-jsdoc'
 
-export default [
+export default defineConfig([
   ...neostandard(),
   jsdoc.configs['flat/recommended-typescript-flavor'],
-]
+])
 ```
 
 Do note that `neostandard()` is intended to be a complete linting config in itself, only extend it if you have needs that goes beyond what `neostandard` provides, and [open an issue](https://github.com/neostandard/neostandard/issues) if you believe `neostandard` itself should be extended or changed in that direction.
@@ -253,15 +254,16 @@ It's recommended to stay compatible with the plain config when extending and onl
 `neostandard` scopes all of its rules to the JavaScript and TypeScript files it owns (`.js`, `.cjs`, `.mjs`, `.jsx`, `.ts`, `.tsx`, plus whatever you add through the [`files`](#configuration-options) / `filesTs` options). It will not apply its rules to other languages, so it composes directly with the official ESLint language plugins:
 
 ```js
+import { defineConfig } from 'eslint/config'
 import neostandard from 'neostandard'
 import markdown from '@eslint/markdown'
 import json from '@eslint/json'
 
-export default [
+export default defineConfig([
   ...neostandard(),
   ...markdown.configs.recommended,
   { ...json.configs.recommended, files: ['**/*.json'], language: 'json/json' },
-]
+])
 ```
 
 Fenced code blocks inside Markdown (the virtual `*.md/*.js` files produced by `@eslint/markdown`'s processor) are intentionally **not** linted by `neostandard` for now — see [#296](https://github.com/neostandard/neostandard/issues/296). To lint them yourself, add your own config block scoped to `**/*.md/**`.
@@ -284,10 +286,11 @@ As of neostandard v0.13.0, `eslint-plugin-import-x` has been removed to reduce d
 If you still need ESLint-based import checking, you can add it back manually:
 
 ```js
+import { defineConfig } from 'eslint/config'
 import neostandard from 'neostandard'
 import importX from 'eslint-plugin-import-x'
 
-export default [
+export default defineConfig([
   ...neostandard(),
   {
     plugins: {
@@ -302,17 +305,18 @@ export default [
       'import-x/no-webpack-loader-syntax': 'error',
     }
   }
-]
+])
 ```
 
 For TypeScript projects, you may also want to add the TypeScript resolver:
 
 ```js
+import { defineConfig } from 'eslint/config'
 import neostandard from 'neostandard'
 import importX from 'eslint-plugin-import-x'
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
 
-export default [
+export default defineConfig([
   ...neostandard(),
   {
     plugins: {
@@ -334,7 +338,7 @@ export default [
       'import-x/no-webpack-loader-syntax': 'error',
     }
   }
-]
+])
 ```
 
 **Recommended alternative:** Use TypeScript's compiler for import checking instead:
