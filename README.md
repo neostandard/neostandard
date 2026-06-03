@@ -391,12 +391,13 @@ module.exports = require('neostandard')({
 If one eg. wants to add the `eslint-plugin-n` recommended config, then one can do:
 
 ```js
+import { defineConfig } from 'eslint/config'
 import neostandard, { plugins } from 'neostandard'
 
-export default [
+export default defineConfig([
   ...neostandard(),
   plugins.n.configs['flat/recommended'],
-]
+])
 ```
 
 ## Missing for 1.0.0 release
