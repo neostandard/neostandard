@@ -147,7 +147,7 @@ The options below allow you to customize `neostandard` for your project. Use the
   import neostandard from 'neostandard'
 
   export default neostandard({
-    files: ['src/**/*.js', 'tests/**/*.js'],  // Lint only files in src/ and tests/ directories
+    files: ['src/**/*.js', 'tests/**/*.js'],  // Also lint these patterns (neostandard's built-in JS/TS patterns still apply)
   })
   ```
 
@@ -158,7 +158,7 @@ The options below allow you to customize `neostandard` for your project. Use the
 
   export default neostandard({
     ts: true,   // Enable TypeScript support
-    filesTs: ['src/**/*.ts', 'tests/**/*.ts'],  // Lint only TypeScript files in src/ and tests/ directories
+    filesTs: ['src/**/*.ts', 'tests/**/*.ts'],  // Also lint these as TypeScript (neostandard's built-in TS patterns still apply)
   })
   ```
   
@@ -232,7 +232,7 @@ The options below allow you to customize `neostandard` for your project. Use the
 
 ## Extending
 
-The `neostandard()` function returns an ESLint config array which is intended to be exported directly or, if you want to modify or extend the config, can be [combined with other configs](https://eslint.org/docs/latest/use/configure/combine-configs) using ESLint's `defineConfig` helper (from `eslint/config`, included since ESLint 9):
+The `neostandard()` function returns an ESLint config array which is intended to be exported directly or, if you want to modify or extend the config, can be [combined with other configs](https://eslint.org/docs/latest/use/configure/combine-configs) using ESLint's `defineConfig` helper (from `eslint/config`):
 
 ```js
 import { defineConfig } from 'eslint/config'
