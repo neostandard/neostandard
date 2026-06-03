@@ -19,10 +19,16 @@ module.exports.plugins = /** @type {const} */ ({
     // @ts-ignore
     return require('eslint-plugin-promise')
   },
-  // JSX support temporarily removed for ESLint 10 (issue #350); `react` plugin export disabled.
+  // The `react` plugin export remains disabled while the React *logic* rules are
+  // paused for ESLint 10 (issue #350); the one reimplemented rule is exposed via
+  // the internal `neostandard` plugin below (`neostandard/jsx-key`).
   // get react () {
   //   return require('eslint-plugin-react')
   // },
+  /** @returns {import('eslint').ESLint.Plugin} */
+  get neostandard () {
+    return require('./lib/plugin/index')
+  },
   get 'typescript-eslint' () {
     return require('typescript-eslint')
   },

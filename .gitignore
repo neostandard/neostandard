@@ -13,6 +13,8 @@
 /lib/**/*.d.ts.map
 /index.d.ts
 /index.d.ts.map
+# ...but keep hand-authored type declarations (mirrors clean:declarations-lib)
+!/lib/**/*-types.d.ts
 
 # Library specific ones
 /install-test-*
