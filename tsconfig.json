@@ -14,6 +14,9 @@
   ],
   "compilerOptions": {
     "jsx": "preserve",
+    // Enable require(esm) type resolution for the ESM-only @stylistic/eslint-plugin v5
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     // Temporary: Until typescript-eslint passes without it
     "skipLibCheck": true
   }

@@ -26,6 +26,9 @@ alt="platformatic"
 
 </div>
 
+> [!IMPORTANT]
+> **ESLint 10 + JSX:** This release supports ESLint 10 (while keeping ESLint 9 support). JSX/TSX files are still parsed and the JSX **style** rules still apply, but the React-specific **logic** rules (from `eslint-plugin-react`) are temporarily removed because `eslint-plugin-react` is not yet compatible with ESLint 10 ([jsx-eslint/eslint-plugin-react#3977](https://github.com/jsx-eslint/eslint-plugin-react/issues/3977)). They return once a v10-compatible React plugin is adopted. Tracking: [#350](https://github.com/neostandard/neostandard/issues/350).
+
 ## Table of Contents
 
 - [Quick Start](#quick-start)
@@ -194,15 +197,7 @@ The options below allow you to customize `neostandard` for your project. Use the
   })
   ```
 
-* `noJsx` - *`boolean`* - if set, no jsx rules will be added. Useful if for some reason its clashing with your use of JSX-style syntax
-  
-  ```js
-  import neostandard from 'neostandard'
-
-  export default neostandard({
-    noJsx: true,  // Disable JSX-specific rules
-  })
-  ```
+* `noJsx` - *`boolean`* - if set, skips JSX parsing and the JSX style rules. (Note: the React-specific *logic* rules are currently not included regardless — pending ESLint 10 support; see the note at the top and [#350](https://github.com/neostandard/neostandard/issues/350))
 
 * `noStyle` - *`boolean`* - if set, no style rules will be added. Especially useful when combined with [Prettier](https://prettier.io/), [dprint](https://dprint.dev/) or similar
   
@@ -353,8 +348,9 @@ module.exports = require('neostandard')({
 * `@stylistic` - export of [`@stylistic/eslint-plugin`](https://npmjs.com/package/@stylistic/eslint-plugin)
 * `n` - export of [`eslint-plugin-n`](https://npmjs.com/package/eslint-plugin-n)
 * `promise` - export of [`eslint-plugin-promise`](https://npmjs.com/package/eslint-plugin-promise)
-* `react` - export of [`eslint-plugin-react`](https://npmjs.com/package/eslint-plugin-react)
 * `typescript-eslint` - export of [`typescript-eslint`](https://npmjs.com/package/typescript-eslint)
+
+(The `react` plugin export is temporarily removed along with the React logic rules — see the note at the top.)
 
 #### Usage of exported plugin
 
@@ -378,10 +374,10 @@ Full list in [1.0.0 milestone](https://github.com/neostandard/neostandard/milest
 ## Differences to standard / eslint-config-standard 17.x
 
 * [Open governance](./GOVERNANCE.md), resolving [governance issue](https://github.com/standard/standard/issues/1948#issuecomment-2138078249)
-* Built for [ESLint 9](https://eslint.org/blog/2024/04/eslint-v9.0.0-released/)
+* Built for [ESLint 9](https://eslint.org/blog/2024/04/eslint-v9.0.0-released/) and [ESLint 10](https://eslint.org/blog/2026/02/eslint-v10.0.0-released/)
 * Relies on [ESLint flat config](https://eslint.org/blog/2023/10/flat-config-rollout-plans/) to bundle plugins rather than custom [`standard-engine`](https://github.com/standard/standard-engine)
 * Replaces [deprecated ESLint style rules](https://eslint.org/blog/2023/10/deprecating-formatting-rules/) with [`eslint-stylistic`](https://eslint.style/) rules
-* Defaults to the `standard` behaviour of bundling JSX-support (ported from [`eslint-config-standard-jsx`](https://github.com/standard/eslint-config-standard-jsx)) with a `noJsx` option that deactivates it to match `eslint-config-standard`
+* Defaults to the `standard` behaviour of bundling JSX-support (ported from [`eslint-config-standard-jsx`](https://github.com/standard/eslint-config-standard-jsx)) with a `noJsx` option that deactivates it; the React-specific *logic* rules are temporarily removed pending ESLint 10 compatibility of the React plugin (see [#350](https://github.com/neostandard/neostandard/issues/350))
 * Built in options replaces need for separate modules
   * `ts` option makes `*.ts` files be checked as well (used to be handled by [`ts-standard`](https://github.com/standard/ts-standard))
   * `semi` option enforces rather than ban semicolons (used to be handled by [`semistandard`](https://github.com/standard/semistandard))

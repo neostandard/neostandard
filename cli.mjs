@@ -46,7 +46,7 @@ let {
     },
     'no-jsx': {
       listGroup: 'Config options',
-      description: 'Deactivates all jsx support',
+      description: 'Deactivates jsx parsing and jsx style rules',
       type: 'boolean',
     },
     'no-style': {
