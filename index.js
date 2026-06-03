@@ -8,7 +8,9 @@ module.exports.resolveIgnoresFromGitignore = require('./lib/resolve-gitignore').
 
 module.exports.plugins = /** @type {const} */ ({
   get '@stylistic' () {
-    // @stylistic v5 is ESM-only; require(esm) returns the module namespace, so unwrap the default export
+    // @stylistic v5 is ESM-only. On the supported Node range require(esm) resolves
+    // to the plugin object directly (no `.default`), so the `?? stylistic` branch is
+    // the one taken; the `.default` unwrap is a fallback for a namespaced shape.
     const stylistic = require('@stylistic/eslint-plugin')
     return stylistic.default ?? stylistic
   },

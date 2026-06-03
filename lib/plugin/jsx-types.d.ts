@@ -41,5 +41,3 @@ export interface JSXElement {
 export interface JSXFragment {
   type: 'JSXFragment'
 }
-
-export type JsxNode = JSXElement | JSXFragment
