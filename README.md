@@ -36,6 +36,7 @@ alt="platformatic"
   - [Add to new project](#add-to-new-project)
 - [Configuration options](#configuration-options)
 - [Extending](#extending)
+  - [Linting other languages (Markdown, JSON, …)](#linting-other-languages-markdown-json-)
   - [Adding back import checking](#adding-back-import-checking)
 - [Additional exports](#additional-exports)
   - [resolveIgnoresFromGitignore()](#resolveignoresfromgitignore)
@@ -246,6 +247,35 @@ export default [
 Do note that `neostandard()` is intended to be a complete linting config in itself, only extend it if you have needs that goes beyond what `neostandard` provides, and [open an issue](https://github.com/neostandard/neostandard/issues) if you believe `neostandard` itself should be extended or changed in that direction.
 
 It's recommended to stay compatible with the plain config when extending and only make your config stricter, not relax any of the rules, as your project would then still pass when using just the plain `neostandard`-config, which helps people know what baseline to expect from your project.
+
+### Linting other languages (Markdown, JSON, …)
+
+`neostandard` scopes all of its rules to the JavaScript and TypeScript files it owns (`.js`, `.cjs`, `.mjs`, `.jsx`, `.ts`, `.tsx`, plus whatever you add through the [`files`](#configuration-options) / `filesTs` options). It will not apply its rules to other languages, so it composes directly with the official ESLint language plugins:
+
+```js
+import neostandard from 'neostandard'
+import markdown from '@eslint/markdown'
+import json from '@eslint/json'
+
+export default [
+  ...neostandard(),
+  ...markdown.configs.recommended,
+  { ...json.configs.recommended, files: ['**/*.json'], language: 'json/json' },
+]
+```
+
+Fenced code blocks inside Markdown (the virtual `*.md/*.js` files produced by `@eslint/markdown`'s processor) are intentionally **not** linted by `neostandard` for now — see [#296](https://github.com/neostandard/neostandard/issues/296). To lint them yourself, add your own config block scoped to `**/*.md/**`.
+
+If you need to apply `neostandard` to a non-default set of files (or scope it to a subdirectory), wrap it with ESLint's [`defineConfig`](https://eslint.org/docs/latest/use/configure/combine-configs) and its `extends` — the parent `files`/`ignores` propagate into every layer:
+
+```js
+import { defineConfig } from 'eslint/config'
+import neostandard from 'neostandard'
+
+export default defineConfig([
+  { files: ['packages/app/**/*.js'], extends: [neostandard()] },
+])
+```
 
 ### Adding back import checking
 

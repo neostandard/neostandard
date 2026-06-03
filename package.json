@@ -69,11 +69,15 @@
     "sync-update": "run-s sync-update:*",
     "test-ci": "run-s test:*",
     "test:eslint": "eslint .",
+    "test:json": "eslint -c test/json-eslint.config.mjs test/should-work-with-json/",
+    "test:markdown": "eslint -c test/markdown-eslint.config.mjs test/should-work-with-markdown/",
     "test:rules": "node --test test/rules/*.test.js",
     "test:tseslint-extension": "eslint -c test/ts-extension-eslint.config.mjs test/test-types.d.ts",
     "test": "run-s check test:*"
   },
   "devDependencies": {
+    "@eslint/json": "^2.0.0",
+    "@eslint/markdown": "^8.0.2",
     "@types/estree": "^1.0.8",
     "@types/node": "^20.19.33",
     "@voxpelli/tsconfig": "^16.1.0",
