@@ -35,8 +35,18 @@ jobs:
       command: test-ci
       node-version: ${{ matrix.target }}
 
+  # The Node matrix above runs against eslint 10 (the lockfile). Cover the peer
+  # floor (eslint 9.22, where eslint/config defineConfig landed) so the lower end
+  # of `^9.22.0 || ^10` stays green.
+  test-eslint9:
+    name: Test on ESLint 9.22
+    uses: ./.github/workflows/reusable-npm-run.yml
+    with:
+      command: test-ci
+      eslint-version: '9.22'
+
   peer:
-    needs: [lint, test]
+    needs: [lint, test, test-eslint9]
     if: github.event_name != 'schedule'
     name: Check peerDependencies issues
     uses: ./.github/workflows/reusable-npm-run.yml
