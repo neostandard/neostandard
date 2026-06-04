@@ -15,7 +15,9 @@ module.exports.plugins = /** @type {const} */ ({
     return stylistic.default ?? stylistic
   },
   get n () {
-    return require('eslint-plugin-n')
+    // eslint-plugin-n v18 is ESM-only; unwrap the default export (see style.js).
+    const n = require('eslint-plugin-n')
+    return n.default ?? n
   },
   get promise () {
     // @ts-ignore
