@@ -3,6 +3,33 @@ import test from 'node:test'
 
 import { neostandard } from '../../index.js'
 
+// The TS block must extend the declared operator-linebreak preferences with
+// ignores for the TS-only `|`/`&` type operators (@stylistic 5 / #805 drift
+// absorption, see lib/ts.js) without touching the JS-declared placements.
+test('ts: true — TS block ignores union/intersection operator placement', () => {
+  const configs = neostandard({ ts: true })
+  const tsBlock = configs.find(config => config.name === 'neostandard/ts')
+  assert.ok(tsBlock, 'has a neostandard/ts block')
+  const entry = tsBlock.rules?.['@stylistic/operator-linebreak']
+  assert.ok(Array.isArray(entry), 'TS block re-declares operator-linebreak')
+  const options = /** @type {{ overrides: Record<string, string> }} */ (entry[2])
+  assert.equal(options.overrides['|'], 'ignore')
+  assert.equal(options.overrides['&'], 'ignore')
+  assert.equal(options.overrides['?'], 'before', 'declared ternary preference preserved')
+  assert.equal(options.overrides[':'], 'before', 'declared ternary preference preserved')
+})
+
+// Without ts, no layer may carry the TS-only operator ignores
+test('default — no TS operator-linebreak adaption leaks into JS layers', () => {
+  for (const config of neostandard()) {
+    const entry = config.rules?.['@stylistic/operator-linebreak']
+    if (Array.isArray(entry) && typeof entry[2] === 'object' && entry[2] !== null) {
+      const overrides = /** @type {{ overrides?: Record<string, string> }} */ (entry[2]).overrides
+      assert.notEqual(overrides?.['|'], 'ignore', `unexpected TS ignore in ${config.name}`)
+    }
+  }
+})
+
 // `filesTs` requires `ts` — runtime guard in lib/main.js
 test('throws when filesTs is used without ts', () => {
   assert.throws(
