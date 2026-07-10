@@ -1,3 +1,9 @@
 {
-  "https://github.com/poolifier/poolifier": "Needs a more complex canary setup, see: https://github.com/neostandard/neostandard/pull/85#discussion_r1662247445"
+  "https://github.com/poolifier/poolifier": "Needs a more complex canary setup, see: https://github.com/neostandard/neostandard/pull/85#discussion_r1662247445",
+  "https://github.com/fastify/fastify": "0.14 breaking-change fallout: @stylistic v5 reformat drift (@stylistic/indent), auto-fixable via eslint --fix — remove once the dependent upgrades past 0.14",
+  "https://github.com/fastify/fastify-multipart": "0.14 breaking-change fallout: @stylistic v5 reformat drift (2 @stylistic/operator-linebreak errors), auto-fixable via eslint --fix — remove once the dependent upgrades past 0.14",
+  "https://github.com/nodejs/undici": "0.14 breaking-change fallout: @stylistic v5 reformat drift (198 errors, mostly @stylistic/operator-linebreak plus indent/comma-style/comma-dangle), all auto-fixable via eslint --fix — remove once the dependent upgrades past 0.14",
+  "https://github.com/bcomnes/npm-run-all2": "0.14 breaking-change fallout: @stylistic v5 reformat drift (5 @stylistic/indent errors), auto-fixable via eslint --fix — remove once the dependent upgrades past 0.14",
+  "https://github.com/mercurius-js/mercurius": "0.14 breaking-change fallout: 15 auto-fixable @stylistic errors (operator-linebreak/indent) plus 1 non-fixable no-unused-vars on 'React' from removed react rules (jsx-uses-react) — remove once the dependent upgrades past 0.14",
+  "https://github.com/voxpelli/peowly": "0.14 breaking-change fallout: @stylistic v5 reformat drift (16 @stylistic/indent errors), auto-fixable via eslint --fix — remove once the dependent upgrades past 0.14"
 }
