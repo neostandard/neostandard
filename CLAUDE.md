@@ -30,7 +30,7 @@ It sits at the **base of a dependency stack** (`eslint → @voxpelli/eslint-conf
 - **`lib/ts.js`** — `typescriptify(jsConfigs, opts)`. Takes the assembled JS configs and produces **one** TS config block: swaps in the typescript-eslint parser/plugin, turns off `ts-redundant` rules, and replaces core rules with their `@typescript-eslint/*` equivalents where one exists. This is why there's no duplicated TS ruleset — the JS rules are transformed, not re-authored.
 - **`lib/plugin/`** — the internal `neostandard` ESLint plugin (`lib/plugin/index.js`). Currently exposes one rule: `neostandard/jsx-key` (`lib/plugin/rules/jsx-key.js`), a dependency-free ESLint-10-native reimplementation of the `jsx-key` rule from `eslint-plugin-react`, covering the common cases (array literals, `.map`/`.flatMap`/`Array.from` callbacks; spread attributes are *not* treated as an implicit key — parity with upstream). Logical/conditional wrappers (`x && <li/>`, ternaries) are unwrapped both in callback returns *and* as array-literal elements — the latter is a deliberate superset of upstream, which only unwraps inside callbacks (see the header comment in `jsx-key.js` for the full parity/superset list). JSX AST node typedefs live in `lib/plugin/jsx-types.d.ts` (named `*-types.d.ts` so `clean:declarations-lib` does not delete it). The plugin instance is also exposed as `plugins.neostandard` on the public surface (`index.js`).
 - **`lib/resolve-gitignore.js`** — `resolveIgnoresFromGitignore()`: walks up to the flat-config dir, converts `.gitignore` lines to minimatch via `@humanwhocodes/gitignore-to-minimatch`. Consumers call it inside their `ignores`.
-- **`cli.mjs`** — the `neostandard` bin is a **config generator, not a linter**. It prints an ESLint flat-config file (CJS or `--esm`) and supports `--migrate` (reads `package.json`, lifts `env`/`globals`/`ignore` from a `standard`/`semistandard`/`ts-standard` config). Built on `peowly` for arg parsing.
+- **`cli.js`** — the `neostandard` bin is a **config generator, not a linter**. It prints an ESLint flat-config file (CJS or `--esm`) and supports `--migrate` (reads `package.json`, lifts `env`/`globals`/`ignore` from a `standard`/`semistandard`/`ts-standard` config). Built on `peowly` for arg parsing.
 
 ## Commands
 
@@ -49,9 +49,9 @@ The test suite has two kinds of tests:
 
 **ESLint-as-tests** (linting IS the assertion):
 - `npm run test:eslint` — runs `eslint .` over the repo. The fixtures in `test/should-work-with-*/` must lint clean and `test/should-be-ignored/` must be skipped. The repo's own `eslint.config.js` is the config under test.
-- `npm run test:json` — lints `test/should-work-with-json/` with `test/json-eslint.config.mjs` via `@eslint/json` (proves neostandard doesn't leak onto `.json`).
-- `npm run test:markdown` — lints `test/should-work-with-markdown/` with `test/markdown-eslint.config.mjs` via `@eslint/markdown` (proves neostandard doesn't leak onto Markdown or its fenced blocks).
-- `npm run test:tseslint-extension` — lints `test/test-types.d.ts` with `test/ts-extension-eslint.config.mjs` to verify neostandard composes with extra typescript-eslint rules.
+- `npm run test:json` — lints `test/should-work-with-json/` with `test/json-eslint.config.js` via `@eslint/json` (proves neostandard doesn't leak onto `.json`).
+- `npm run test:markdown` — lints `test/should-work-with-markdown/` with `test/markdown-eslint.config.js` via `@eslint/markdown` (proves neostandard doesn't leak onto Markdown or its fenced blocks).
+- `npm run test:tseslint-extension` — lints `test/test-types.d.ts` with `test/ts-extension-eslint.config.js` to verify neostandard composes with extra typescript-eslint rules.
 
 **`node:test` unit tests** (for the internal plugin rules + option shape):
 - `npm run test:rules` — `node --test test/rules/*.test.js`. Covers `neostandard/jsx-key` (`test/rules/jsx-key.test.js`) and the `neostandard()` option matrix (`test/rules/options.test.js`). This is the first `node:test` runner in the repo.

@@ -88,7 +88,7 @@ alt="platformatic"
    Or manually create the file as ESM:
 
    ```js
-   import neostandard from 'neostandard'
+   import { neostandard } from 'neostandard'
 
    export default neostandard({
      // options
@@ -110,7 +110,7 @@ All examples below use **ESM (ECMAScript Modules)** syntax. If you're using **Co
 
   ```js
   // Replace
-  import neostandard from 'neostandard'
+  import { neostandard } from 'neostandard'
   export default neostandard({ /* options */ })
 
   // With
@@ -121,7 +121,7 @@ All examples below use **ESM (ECMAScript Modules)** syntax. If you're using **Co
 Here's a basic example of how to configure `neostandard`:
 
   ```js
-  import neostandard from 'neostandard'
+  import { neostandard } from 'neostandard'
 
   export default neostandard({
     ts: true,  // an option
@@ -134,7 +134,7 @@ The options below allow you to customize `neostandard` for your project. Use the
 * `env` - *`string[]`* - adds additional globals by importing them from the [globals](https://www.npmjs.com/package/globals) npm module
   
   ```js
-  import neostandard from 'neostandard'
+  import { neostandard } from 'neostandard'
 
   export default neostandard({
     env: ['browser', 'mocha'],  // Add browser and mocha global variables
@@ -144,7 +144,7 @@ The options below allow you to customize `neostandard` for your project. Use the
 * `files` - *`string[]`* - additional file patterns to match. Uses the same shape as ESLint [`files`](https://eslint.org/docs/latest/use/configure/configuration-files#specifying-files-and-ignores)
   
   ```js
-  import neostandard from 'neostandard'
+  import { neostandard } from 'neostandard'
 
   export default neostandard({
     files: ['src/**/*.js', 'tests/**/*.js'],  // Also lint these patterns (neostandard's built-in JS/TS patterns still apply)
@@ -154,7 +154,7 @@ The options below allow you to customize `neostandard` for your project. Use the
 * `filesTs` - *`string[]`* - additional file patterns for the TypeScript configs to match. Uses the same shape as ESLint [`files`](https://eslint.org/docs/latest/use/configure/configuration-files#specifying-files-and-ignores)
   
   ```js
-  import neostandard from 'neostandard'
+  import { neostandard } from 'neostandard'
 
   export default neostandard({
     ts: true,   // Enable TypeScript support
@@ -167,7 +167,7 @@ The options below allow you to customize `neostandard` for your project. Use the
   Using an array:
 
   ```js
-  import neostandard from 'neostandard'
+  import { neostandard } from 'neostandard'
 
   export default neostandard({
     globals: ['$', 'jQuery'],  // Treat $ and jQuery as global variables
@@ -177,7 +177,7 @@ The options below allow you to customize `neostandard` for your project. Use the
   Using an object:
 
   ```js
-  import neostandard from 'neostandard'
+  import { neostandard } from 'neostandard'
 
   export default neostandard({
     globals: {
@@ -191,7 +191,7 @@ The options below allow you to customize `neostandard` for your project. Use the
 * `ignores` - *`string[]`* - an array of glob patterns for files that the config should not apply to, see [ESLint documentation](https://eslint.org/docs/latest/use/configure/ignore) for details
   
   ```js
-  import neostandard from 'neostandard'
+  import { neostandard } from 'neostandard'
 
   export default neostandard({
     ignores: ['dist/**/*', 'tests/**'],  // Ignore files in dist/ and tests/ directories
@@ -203,7 +203,7 @@ The options below allow you to customize `neostandard` for your project. Use the
 * `noStyle` - *`boolean`* - if set, no style rules will be added. Especially useful when combined with [Prettier](https://prettier.io/), [dprint](https://dprint.dev/) or similar
   
   ```js
-  import neostandard from 'neostandard'
+  import { neostandard } from 'neostandard'
 
   export default neostandard({
     noStyle: true,  // Disable style-related rules (useful with Prettier or dprint)
@@ -213,7 +213,7 @@ The options below allow you to customize `neostandard` for your project. Use the
 * `semi` - *`boolean`* - if set, enforce rather than forbid semicolons (same as `semistandard` did)
   
   ```js
-  import neostandard from 'neostandard'
+  import { neostandard } from 'neostandard'
 
   export default neostandard({
     semi: true,  // Enforce semicolons (like semistandard)
@@ -223,7 +223,7 @@ The options below allow you to customize `neostandard` for your project. Use the
 * `ts` - *`boolean`* - if set, TypeScript syntax will be supported and `*.ts` (including `*.d.ts`) will be checked. To add additional file patterns to the TypeScript checks, use `filesTs`
   
   ```js
-  import neostandard from 'neostandard'
+  import { neostandard } from 'neostandard'
 
   export default neostandard({
     ts: true,  // Enable TypeScript support and lint .ts files
@@ -236,7 +236,7 @@ The `neostandard()` function returns an ESLint config array which is intended to
 
 ```js
 import { defineConfig } from 'eslint/config'
-import neostandard from 'neostandard'
+import { neostandard } from 'neostandard'
 import jsdoc from 'eslint-plugin-jsdoc'
 
 export default defineConfig([
@@ -255,7 +255,7 @@ It's recommended to stay compatible with the plain config when extending and onl
 
 ```js
 import { defineConfig } from 'eslint/config'
-import neostandard from 'neostandard'
+import { neostandard } from 'neostandard'
 import markdown from '@eslint/markdown'
 import json from '@eslint/json'
 
@@ -272,7 +272,7 @@ If you need to apply `neostandard` to a non-default set of files (or scope it to
 
 ```js
 import { defineConfig } from 'eslint/config'
-import neostandard from 'neostandard'
+import { neostandard } from 'neostandard'
 
 export default defineConfig([
   { files: ['packages/app/**/*.js'], extends: [neostandard()] },
@@ -287,7 +287,7 @@ If you still need ESLint-based import checking, you can add it back manually:
 
 ```js
 import { defineConfig } from 'eslint/config'
-import neostandard from 'neostandard'
+import { neostandard } from 'neostandard'
 import importX from 'eslint-plugin-import-x'
 
 export default defineConfig([
@@ -312,7 +312,7 @@ For TypeScript projects, you may also want to add the TypeScript resolver:
 
 ```js
 import { defineConfig } from 'eslint/config'
-import neostandard from 'neostandard'
+import { neostandard } from 'neostandard'
 import importX from 'eslint-plugin-import-x'
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
 
@@ -358,20 +358,16 @@ Finds a `.gitignore` file that resides in the same directory as the ESLint confi
 ESM:
 
 ```js
-import neostandard, { resolveIgnoresFromGitignore } from 'neostandard'
+import { neostandard, resolveIgnoresFromGitignore } from 'neostandard'
 
 export default neostandard({
   ignores: resolveIgnoresFromGitignore(),
 })
 ```
 
-CommonJS:
-
-```js
-module.exports = require('neostandard')({
-  ignores: require('neostandard').resolveIgnoresFromGitignore(),
-})
-```
+CommonJS: `require('neostandard')` returns the `neostandard` function itself, but
+`resolveIgnoresFromGitignore` and `plugins` are only reachable as ESM named exports —
+use an ESM config (eg. `eslint.config.mjs`) when you need them.
 
 ### Exported plugins
 
@@ -392,7 +388,7 @@ If one eg. wants to add the `eslint-plugin-n` recommended config, then one can d
 
 ```js
 import { defineConfig } from 'eslint/config'
-import neostandard, { plugins } from 'neostandard'
+import { neostandard, plugins } from 'neostandard'
 
 export default defineConfig([
   ...neostandard(),

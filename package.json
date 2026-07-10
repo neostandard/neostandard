@@ -9,11 +9,12 @@
   },
   "keywords": [],
   "license": "MIT",
+  "type": "module",
   "engines": {
     "node": "^20.19.0 || ^22.13.0 || >=24"
   },
   "bin": {
-    "neostandard": "cli.mjs"
+    "neostandard": "cli.js"
   },
   "main": "index.js",
   "types": "index.d.ts",
@@ -31,6 +32,7 @@
   "scripts": {
     "build:0": "run-s clean",
     "build:1-declaration": "tsc -p declaration.tsconfig.json",
+    "build:2-quote-interop-export": "node -e \"const fs = require('node:fs'); const file = 'index.d.ts'; fs.writeFileSync(file, fs.readFileSync(file, 'utf8').replace(/as module\\.exports/, \\\"as 'module.exports'\\\"))\"",
     "build": "run-s build:*",
     "check-peer-compatibility": "NEOSTANDARD_PATH=`pwd` && cd $(mktemp -d -p $NEOSTANDARD_PATH install-test-XXXXXXXXXX) && npm init -y && npm install --no-legacy-peer-deps --package-lock-only --strict-peer-deps --install-links eslint@10 $NEOSTANDARD_PATH",
     "check:installed-check": "installed-check --engine-check --version-check -i list-dependents-cli",
@@ -69,10 +71,10 @@
     "sync-update": "run-s sync-update:*",
     "test-ci": "run-s test:*",
     "test:eslint": "eslint .",
-    "test:json": "eslint -c test/json-eslint.config.mjs test/should-work-with-json/",
-    "test:markdown": "eslint -c test/markdown-eslint.config.mjs test/should-work-with-markdown/",
+    "test:json": "eslint -c test/json-eslint.config.js test/should-work-with-json/",
+    "test:markdown": "eslint -c test/markdown-eslint.config.js test/should-work-with-markdown/",
     "test:rules": "node --test test/rules/*.test.js",
-    "test:tseslint-extension": "eslint -c test/ts-extension-eslint.config.mjs test/test-types.d.ts",
+    "test:tseslint-extension": "eslint -c test/ts-extension-eslint.config.js test/test-types.d.ts",
     "test": "run-s check test:*"
   },
   "devDependencies": {

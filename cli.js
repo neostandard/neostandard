@@ -174,7 +174,7 @@ const semiEnding = flags.semi ? ';' : ''
 
 console.log(
   esm
-    ? `import neostandard from 'neostandard'${semiEnding}
+    ? `import { neostandard } from 'neostandard'${semiEnding}
 
 export default neostandard(${formattedConfig})${semiEnding}`
     : `'use strict'${semiEnding}

@@ -104,7 +104,7 @@ jobs:
         working-directory: ./project
 
       - name: generate config
-        run: ../main/cli.mjs --migrate ${{inputs.flags || github.event.inputs.flags || ''}} | sed "s/'neostandard'/'..\/main\/index.js'/" > eslint.config.js && cat eslint.config.js
+        run: ../main/cli.js --migrate ${{inputs.flags || github.event.inputs.flags || ''}} | sed "s/'neostandard'/'..\/main\/index.js'/" > eslint.config.js && cat eslint.config.js
         working-directory: ./project
 
       - name: run eslint

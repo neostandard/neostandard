@@ -1,31 +1,24 @@
-'use strict'
+import { createRequire } from 'node:module'
 
-/** @typedef {import('./lib/main').NeostandardOptions} NeostandardOptions */
+import { neostandard } from './lib/main.js'
+import { resolveIgnoresFromGitignore } from './lib/resolve-gitignore.js'
 
-const neostandard = require('./lib/main').neostandard
+/** @typedef {import('./lib/main.js').NeostandardOptions} NeostandardOptions */
 
-const resolveIgnoresFromGitignore = require('./lib/resolve-gitignore').resolveIgnoresFromGitignore
+// The getters below stay lazy so heavyweight plugin modules only load when
+// accessed. require(esm) shares the ESM module registry, so every getter hands
+// out the exact same plugin instance neostandard's own config layers use.
+const require = createRequire(import.meta.url)
 
-// Assigned onto the callable in a single export assignment below — TypeScript 7
-// no longer synthesizes named exports from the merged `module.exports.prop = …`
-// CommonJS pattern. The getters object is passed by reference; spreading it here
-// would eagerly evaluate every lazy getter.
 const plugins = /** @type {const} */ ({
   get '@stylistic' () {
-    // @stylistic v5 is ESM-only. On the supported Node range require(esm) resolves
-    // to the plugin object directly (no `.default`), so the `?? stylistic` branch is
-    // the one taken; the `.default` unwrap is a fallback for a namespaced shape.
-    const stylistic = require('@stylistic/eslint-plugin')
-    return stylistic.default ?? stylistic
+    return /** @type {typeof import('./lib/configs/style.js')} */ (require('./lib/configs/style.js')).default.plugins['@stylistic']
   },
   get n () {
-    // eslint-plugin-n v18 is ESM-only; unwrap the default export (see style.js).
-    const n = require('eslint-plugin-n')
-    return n.default ?? n
+    return /** @type {typeof import('./lib/configs/base.js')} */ (require('./lib/configs/base.js')).default.plugins.n
   },
   get promise () {
-    // @ts-ignore
-    return require('eslint-plugin-promise')
+    return /** @type {typeof import('./lib/configs/base.js')} */ (require('./lib/configs/base.js')).default.plugins.promise
   },
   // The `react` plugin export remains disabled while the React *logic* rules are
   // paused for ESLint 10 (issue #350); the one reimplemented rule is exposed via
@@ -35,11 +28,26 @@ const plugins = /** @type {const} */ ({
   // },
   /** @returns {import('eslint').ESLint.Plugin} */
   get neostandard () {
-    return require('./lib/plugin/index')
+    return /** @type {typeof import('./lib/plugin/index.js')} */ (require('./lib/plugin/index.js')).default
   },
   get 'typescript-eslint' () {
-    return require('typescript-eslint')
+    return /** @type {typeof import('./lib/tseslint.js')} */ (require('./lib/tseslint.js')).typescriptEslint
   },
 })
 
-module.exports = Object.assign(neostandard, { resolveIgnoresFromGitignore, plugins })
+// Named exports are the primary API.
+export {
+  neostandard,
+  plugins,
+  resolveIgnoresFromGitignore,
+}
+
+// Compat alias for the 0.13-era documented `import neostandard from 'neostandard'`.
+export default neostandard
+
+// require() interop (require(esm), available across the supported Node range):
+// keeps `require('neostandard')` returning the callable, so CJS configs created
+// by `neostandard --migrate` and the 0.13 docs keep working. Unlike 0.13,
+// `resolveIgnoresFromGitignore` and `plugins` are no longer attached to the
+// function — they are named exports (an ESM config is needed to reach them).
+export { neostandard as 'module.exports' }

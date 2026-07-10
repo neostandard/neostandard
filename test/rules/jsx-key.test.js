@@ -1,10 +1,9 @@
-'use strict'
+import test from 'node:test'
 
-const test = require('node:test')
-const { RuleTester } = require('eslint')
-const { parser: tsParser } = require('typescript-eslint')
+import { RuleTester } from 'eslint'
+import { parser as tsParser } from 'typescript-eslint'
 
-const rule = require('../../lib/plugin/rules/jsx-key')
+import rule from '../../lib/plugin/rules/jsx-key.js'
 
 const ruleTester = new RuleTester({
   languageOptions: {

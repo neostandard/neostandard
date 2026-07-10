@@ -55,7 +55,7 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
       - name: Build
-        run: node cli.mjs | sed "s/'neostandard'/'.\/'/" > eslint.config.js && npx --yes @eslint/config-inspector build --base /neostandard/
+        run: node cli.js | sed "s/'neostandard'/'.\/'/" > eslint.config.js && npx --yes @eslint/config-inspector build --base /neostandard/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:

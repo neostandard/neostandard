@@ -1,4 +1,4 @@
-import neostandard, { plugins } from '../index.js'
+import { neostandard, plugins } from '../index.js'
 
 export default [
   ...neostandard({

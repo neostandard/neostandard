@@ -1,9 +1,7 @@
-'use strict'
+import assert from 'node:assert/strict'
+import test from 'node:test'
 
-const test = require('node:test')
-const assert = require('node:assert/strict')
-
-const neostandard = require('../../index.js')
+import { neostandard } from '../../index.js'
 
 // `filesTs` requires `ts` — runtime guard in lib/main.js
 test('throws when filesTs is used without ts', () => {

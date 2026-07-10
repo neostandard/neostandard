@@ -1,6 +1,6 @@
 import markdown from '@eslint/markdown'
 
-import neostandard from '../index.js'
+import { neostandard } from '../index.js'
 
 // Regression test for issue #296: neostandard must compose with @eslint/markdown
 // without leaking its JS rules onto Markdown. neostandard is intentionally NOT
