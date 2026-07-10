@@ -2,11 +2,15 @@
 
 /** @typedef {import('./lib/main').NeostandardOptions} NeostandardOptions */
 
-module.exports = require('./lib/main').neostandard
+const neostandard = require('./lib/main').neostandard
 
-module.exports.resolveIgnoresFromGitignore = require('./lib/resolve-gitignore').resolveIgnoresFromGitignore
+const resolveIgnoresFromGitignore = require('./lib/resolve-gitignore').resolveIgnoresFromGitignore
 
-module.exports.plugins = /** @type {const} */ ({
+// Assigned onto the callable in a single export assignment below — TypeScript 7
+// no longer synthesizes named exports from the merged `module.exports.prop = …`
+// CommonJS pattern. The getters object is passed by reference; spreading it here
+// would eagerly evaluate every lazy getter.
+const plugins = /** @type {const} */ ({
   get '@stylistic' () {
     // @stylistic v5 is ESM-only. On the supported Node range require(esm) resolves
     // to the plugin object directly (no `.default`), so the `?? stylistic` branch is
@@ -37,3 +41,5 @@ module.exports.plugins = /** @type {const} */ ({
     return require('typescript-eslint')
   },
 })
+
+module.exports = Object.assign(neostandard, { resolveIgnoresFromGitignore, plugins })
