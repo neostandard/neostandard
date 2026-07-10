@@ -60,7 +60,7 @@ To exercise a single behaviour, add or edit a fixture under `test/should-work-wi
 
 ## Conventions and gotchas
 
-- **`@stylistic/eslint-plugin` is pinned exactly (`5.10.0`, no caret) — keep it that way.** @stylistic treats *adding rules to shared configs* as non-breaking, so a caret range would silently inject new lint errors into every downstream consumer. Bumping it is a deliberate, tested migration, not a Renovate auto-merge.
+- **`@stylistic/eslint-plugin` is pinned exactly (`5.10.0`, no caret) — keep it that way.** @stylistic treats *adding rules to shared configs* as non-breaking, so a caret range would silently inject new lint errors into every downstream consumer. Bumping it is a deliberate, tested migration, not a Renovate auto-merge. **Bump procedure**: diff the canary dependent corpus before/after, classify every newly-flagged pattern as *declared-preference thoroughness* (the config already declares the preference — keep, dependents fix) vs *undeclared-preference drift* (the rule grew an opinion standard never had — absorb via rule options, with a comment citing the upstream PR and the revisit trigger). See the 0.14 `assignmentOperator: 'off'` (style.js) and TS-block `operator-linebreak` `|`/`&` ignores (lib/ts.js) for the pattern.
 - **JSDoc is the type source.** `type-coverage` enforces ≥95% (tests exempt). Every new param/return needs annotation or `check:type-coverage` fails. Prefer `unknown` + type guards over `any`.
 - **Two-tsconfig split:** `tsconfig.json` checks everything (incl. tests, `jsx: preserve`); `declaration.tsconfig.json` extends it but emits `.d.ts` for `index.js` only. Don't merge them.
 - **`.npmrc` sets `legacy-peer-deps=true`** — installs here tolerate peer mismatches by design.
