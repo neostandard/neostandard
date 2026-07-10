@@ -30,6 +30,16 @@ test('default — no TS operator-linebreak adaption leaks into JS layers', () =>
   }
 })
 
+// 0.13 compat: property access on the default export must keep working —
+// `neostandard.resolveIgnoresFromGitignore()` / `require('neostandard').plugins`
+// were documented patterns (canary: npm-run-all2, fastify-multipart, cpx2).
+test('default export carries compat properties', async () => {
+  const { default: def, plugins, resolveIgnoresFromGitignore } = await import('../../index.js')
+  assert.equal(def.resolveIgnoresFromGitignore, resolveIgnoresFromGitignore)
+  assert.equal(def.plugins, plugins)
+  assert.equal(typeof def, 'function')
+})
+
 // `filesTs` requires `ts` — runtime guard in lib/main.js
 test('throws when filesTs is used without ts', () => {
   assert.throws(

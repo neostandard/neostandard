@@ -42,12 +42,17 @@ export {
   resolveIgnoresFromGitignore,
 }
 
-// Compat alias for the 0.13-era documented `import neostandard from 'neostandard'`.
-export default neostandard
+// 0.13 compat: the default export stays callable and also carries the other two
+// exports as properties — `neostandard.resolveIgnoresFromGitignore()` (and the
+// require() flavor) were the documented patterns and are used in the wild
+// (canary: npm-run-all2, fastify-multipart, cpx2). Harmless in ESM: the CJS-era
+// TS7/cjs-module-lexer conflict that once forbade this shape does not apply.
+const neostandardWithCompatProps = Object.assign(neostandard, { resolveIgnoresFromGitignore, plugins })
+
+export default neostandardWithCompatProps
 
 // require() interop (require(esm), available across the supported Node range):
-// keeps `require('neostandard')` returning the callable, so CJS configs created
-// by `neostandard --migrate` and the 0.13 docs keep working. Unlike 0.13,
-// `resolveIgnoresFromGitignore` and `plugins` are no longer attached to the
-// function — they are named exports (an ESM config is needed to reach them).
-export { neostandard as 'module.exports' }
+// keeps `require('neostandard')` returning the callable with the same attached
+// properties as 0.13, so CJS configs created by `neostandard --migrate` and the
+// 0.13 docs keep working unchanged.
+export { neostandardWithCompatProps as 'module.exports' }
