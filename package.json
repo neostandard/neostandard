@@ -11,7 +11,7 @@
   "license": "MIT",
   "type": "module",
   "engines": {
-    "node": "^20.19.0 || ^22.13.0 || >=24"
+    "node": "^22.13.0 || >=24"
   },
   "bin": {
     "neostandard": "cli.js"
@@ -81,7 +81,7 @@
     "@eslint/json": "^2.0.0",
     "@eslint/markdown": "^8.0.2",
     "@types/estree": "^1.0.8",
-    "@types/node": "^20.19.33",
+    "@types/node": "^22.18.14",
     "@voxpelli/tsconfig": "^16.1.0",
     "eslint": "^10.0.0",
     "husky": "^9.1.7",
