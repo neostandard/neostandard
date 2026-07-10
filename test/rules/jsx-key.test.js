@@ -47,10 +47,11 @@ test('neostandard/jsx-key', () => {
       'Array.from(items)', // no mapper
       'foo(x => <li />)', // not .map / Array.from
       'notArray.from(items, x => <li />)', // only the literal `Array` identifier is matched
-      // out-of-scope array-literal gaps (parity with upstream react/jsx-key — array
-      // elements are not unwrapped the way iterator-callback returns are):
-      'const a = [x || <li />]', // LogicalExpression element
-      'const a = [x ? <li /> : <span />]', // ConditionalExpression element
+      // unwrapped array-literal elements whose JSX leaves all carry keys
+      'const a = [x || <li key="a" />]',
+      'const a = [x ? <li key="a" /> : <span key="b" />]',
+      // spread elements stay out of scope (like imperatively-built arrays)
+      'const a = [...items]',
     ],
     invalid: [
       {
@@ -126,6 +127,26 @@ test('neostandard/jsx-key', () => {
           { messageId: 'missingIterKey' },
           { messageId: 'missingIterKey' },
         ],
+      },
+      // logical/conditional array-literal elements are unwrapped — a deliberate
+      // superset vs upstream react/jsx-key, which only unwraps these inside
+      // iterator callbacks (eslint-plugin-react#3986)
+      {
+        code: 'const a = [x || <li />]',
+        errors: [{ messageId: 'missingArrayKey' }],
+      },
+      {
+        code: 'const a = [x ? <li /> : <span />]',
+        errors: [{ messageId: 'missingArrayKey' }, { messageId: 'missingArrayKey' }],
+      },
+      {
+        code: 'const a = [x ? (y ? <li /> : <li />) : <li key="a" />]',
+        errors: [{ messageId: 'missingArrayKey' }, { messageId: 'missingArrayKey' }],
+      },
+      {
+        code: 'const a = [x && <></>]',
+        options: [{ checkFragmentShorthand: true }],
+        errors: [{ messageId: 'missingArrayKeyWithFragment' }],
       },
     ],
   })
