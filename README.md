@@ -29,6 +29,9 @@ alt="platformatic"
 > [!IMPORTANT]
 > **ESLint 10 + JSX:** This release supports ESLint 10 (while keeping ESLint 9 support). JSX/TSX files are still parsed and the JSX **style** rules still apply, but the React-specific **logic** rules (from `eslint-plugin-react`) are temporarily removed because `eslint-plugin-react` is not yet compatible with ESLint 10 ([jsx-eslint/eslint-plugin-react#3977](https://github.com/jsx-eslint/eslint-plugin-react/issues/3977)). They return once a v10-compatible React plugin is adopted. Tracking: [#350](https://github.com/neostandard/neostandard/issues/350).
 
+> [!NOTE]
+> **ESM, Node.js and TypeScript versions:** neostandard is now an ESM package requiring Node.js `^22.13.0 || >=24`. CommonJS configs keep working — `require('neostandard')` returns the `neostandard` function — but `plugins` and `resolveIgnoresFromGitignore` are ESM named exports only. For the `ts` option, the supported TypeScript range for the installed `typescript` package tops out at 6.0 (typescript-eslint's peer is `<6.1.0`, and TypeScript 7 ships no compiler API for tooling until 7.1) — TypeScript 7 users should install `typescript@npm:@typescript/typescript6` for linting and alias TS7 separately for `tsc`, per [Microsoft's side-by-side guidance](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/).
+
 ## Table of Contents
 
 - [Quick Start](#quick-start)
