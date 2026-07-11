@@ -47,7 +47,12 @@ export {
 // require() flavor) were the documented patterns and are used in the wild
 // (canary: npm-run-all2, fastify-multipart, cpx2). Harmless in ESM: the CJS-era
 // TS7/cjs-module-lexer conflict that once forbade this shape does not apply.
-const neostandardWithCompatProps = Object.assign(neostandard, { resolveIgnoresFromGitignore, plugins })
+const neostandardWithCompatProps = Object.assign(neostandard, {
+  /** @deprecated import the `resolveIgnoresFromGitignore` named export instead */
+  resolveIgnoresFromGitignore,
+  /** @deprecated import the `plugins` named export instead */
+  plugins,
+})
 
 export default neostandardWithCompatProps
 

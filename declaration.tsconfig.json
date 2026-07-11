@@ -1,9 +1,10 @@
 
 {
   "extends": "./tsconfig",
-  "files": [
-    "index.js"
-  ],
+  // Load-bearing empty override (vs the inherited files list): index.d.ts is
+  // hand-authored — with index.js in the declaration build, the emitter would
+  // write over the hand-authored file and silently ship broken/thinner types.
+  "files": [],
   "exclude": [
     "test/**/*"
   ],
