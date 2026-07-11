@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { neostandard } from '../../index.js'
+import { globs, neostandard } from '../../index.js'
 
 // The TS block must extend the declared operator-linebreak preferences with
 // ignores for the TS-only `|`/`&` type operators (@stylistic 5 / #805 drift
@@ -28,6 +28,18 @@ test('default — no TS operator-linebreak adaption leaks into JS layers', () =>
       assert.notEqual(overrides?.['|'], 'ignore', `unexpected TS ignore in ${config.name}`)
     }
   }
+})
+
+// The exported globs must be exactly the scopes neostandard applies to its own
+// rule-bearing layers — extenders rely on them to scope additional layers so
+// their rule tweaks never leak onto other languages (see lib/globs.js).
+test('globs export matches the applied default scopes', () => {
+  const base = neostandard({ ts: true }).find(config => config.name === 'neostandard/base')
+  assert.ok(base, 'has a neostandard/base layer')
+  assert.deepEqual(base.files, [...globs.js, ...globs.jsx, ...globs.ts, ...globs.tsx])
+  assert.deepEqual(base.files, [...globs.all])
+  const baseNoJsx = neostandard({ noJsx: true }).find(config => config.name === 'neostandard/base')
+  assert.deepEqual(baseNoJsx?.files, [...globs.js])
 })
 
 // 0.13 compat: property access on the default export must keep working —

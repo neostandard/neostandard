@@ -252,6 +252,24 @@ Do note that `neostandard()` is intended to be a complete linting config in itse
 
 It's recommended to stay compatible with the plain config when extending and only make your config stricter, not relax any of the rules, as your project would then still pass when using just the plain `neostandard`-config, which helps people know what baseline to expect from your project.
 
+> [!WARNING]
+> **Scope your rule-tweak layers.** neostandard defines its plugins only for the JS/TS files it owns, so a config object that adjusts eg. `@stylistic/*` rules **without a `files` scope** applies to *every* lintable file — and as soon as any other language is linted (`package.json` via `eslint-plugin-package-json`, `@eslint/json`, `@eslint/markdown`, …) that file sees a rule for a plugin that isn't defined there, which is a fatal `could not find plugin` config error. Scope such layers with the exported `globs`:
+>
+> ```js
+> import { defineConfig } from 'eslint/config'
+> import { globs, neostandard } from 'neostandard'
+>
+> export default defineConfig([
+>   ...neostandard(),
+>   {
+>     files: [...globs.all], // the same files neostandard itself touches
+>     rules: {
+>       '@stylistic/comma-dangle': ['warn', { arrays: 'always-multiline' }],
+>     },
+>   },
+> ])
+> ```
+
 ### Linting other languages (Markdown, JSON, …)
 
 `neostandard` scopes all of its rules to the JavaScript and TypeScript files it owns (`.js`, `.cjs`, `.mjs`, `.jsx`, `.ts`, `.tsx`, plus whatever you add through the [`files`](#configuration-options) / `filesTs` options). It will not apply its rules to other languages, so it composes directly with the official ESLint language plugins:

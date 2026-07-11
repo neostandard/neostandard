@@ -36,6 +36,7 @@ const plugins = /** @type {const} */ ({
 })
 
 // Named exports are the primary API.
+export { globs } from './lib/globs.js'
 export {
   neostandard,
   plugins,

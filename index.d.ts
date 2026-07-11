@@ -10,6 +10,8 @@ import { resolveIgnoresFromGitignore } from './lib/resolve-gitignore.js'
 
 export type { NeostandardOptions } from './lib/main.js'
 
+export { globs } from './lib/globs.js'
+
 declare const plugins: {
   readonly '@stylistic': import('eslint').ESLint.Plugin
   readonly n: import('eslint').ESLint.Plugin & { configs: import('eslint-plugin-n').Configs }
