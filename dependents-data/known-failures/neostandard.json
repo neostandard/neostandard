@@ -1,7 +1,3 @@
 {
-  "https://github.com/poolifier/poolifier": "Needs a more complex canary setup, see: https://github.com/neostandard/neostandard/pull/85#discussion_r1662247445",
-  "https://github.com/nodejs/undici": "0.14: intentional new thoroughness on TS constructs — 3 ':' -before on conditional types, 1 comma-first call args, 1 trailing comma in declare-function params; one-line fixes upstream — remove once undici updates",
-  "https://github.com/fastify/fastify": "0.14: intentional new thoroughness on TS constructs in types/*.d.ts — '=' -after on type aliases (~10), '?'/':' on conditional types, 1 comma-style, 1 indent; auto-fixable upstream — remove once fastify updates",
-  "https://github.com/mercurius-js/mercurius": "0.14: 1 no-unused-vars on 'React' from the removed react rules (jsx-uses-react no longer marks it used) — remove once mercurius updates or react rules return (#350)",
-  "https://github.com/voxpelli/peowly": "0.14: 4 residual @stylistic/indent errors on comment lines between a line-broken `type X =` and its RHS (no option escape; needs a 4-line reindent in peowly) — remove once peowly updates"
+  "https://github.com/poolifier/poolifier": "Needs a more complex canary setup, see: https://github.com/neostandard/neostandard/pull/85#discussion_r1662247445"
 }
