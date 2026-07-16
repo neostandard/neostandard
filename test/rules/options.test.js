@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { createRequire } from 'node:module'
 import test from 'node:test'
 
 import { globs, neostandard } from '../../index.js'
@@ -50,6 +51,24 @@ test('default export carries compat properties', async () => {
   assert.equal(def.resolveIgnoresFromGitignore, resolveIgnoresFromGitignore)
   assert.equal(def.plugins, plugins)
   assert.equal(typeof def, 'function')
+})
+
+// require(esm) interop: `require('neostandard')` must resolve to the callable
+// with the 0.13 compat properties attached (the `export { … as 'module.exports' }`
+// path in index.js) — the flavour the CJS configs from `neostandard --migrate`
+// use. Every other test reaches the package via `import`, so this guards the one
+// export the declaration emitter mangles and that no import-based test exercises.
+test('require() interop — module.exports is the callable with compat props', () => {
+  const requireCjs = createRequire(import.meta.url)
+  const required = requireCjs('../../index.js')
+  assert.equal(typeof required, 'function', 'require() yields the callable')
+  assert.ok(Array.isArray(required()), 'the callable returns a config array')
+  assert.equal(typeof required.resolveIgnoresFromGitignore, 'function')
+  assert.ok(required.plugins, 'plugins is attached')
+  // The plugins getters must stay lazy — merely reaching the object must not have
+  // eagerly required the heavyweight plugin modules.
+  const descriptor = Object.getOwnPropertyDescriptor(required.plugins, 'n')
+  assert.equal(typeof descriptor?.get, 'function', 'plugins.n is still a lazy getter')
 })
 
 // `filesTs` requires `ts` — runtime guard in lib/main.js
@@ -113,4 +132,21 @@ test('scoping: no rule-bearing layer matches plain .md or .json', () => {
       assert.ok(!pattern.endsWith('.json'), `layer ${c.name} should not match **/*.json`)
     }
   }
+})
+
+// #296: the globals block is a separately-constructed layer, so it needs its own
+// positive `files` scope and md-block ignore — otherwise resolved globals would
+// leak onto other languages a consumer layers on. It is emitted only when
+// globals/env resolve non-empty, so no other test reaches it.
+test('globals block carries the #296 file scope and md ignore', () => {
+  const configs = neostandard({ globals: ['myGlobal'] })
+  const globalsBlock = configs.find(c => c.name === 'neostandard/globals')
+  assert.ok(globalsBlock, 'emits a neostandard/globals block when globals are set')
+  assert.deepEqual(globalsBlock.files, [...globs.js, ...globs.jsx])
+  assert.deepEqual(globalsBlock.ignores, ['**/*.md/**'])
+  assert.deepEqual(globalsBlock.languageOptions?.['globals'], { myGlobal: true })
+})
+
+test('no globals block without globals/env', () => {
+  assert.ok(!neostandard().some(c => c.name === 'neostandard/globals'))
 })
