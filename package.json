@@ -80,7 +80,7 @@
     "installed-check": "^10.0.1",
     "knip": "^5.85.0",
     "list-dependents-cli": "^2.7.1",
-    "npm-run-all2": "^8.0.4",
+    "npm-run-all2": "^9.0.3",
     "type-coverage": "^2.29.7",
     "typescript": "~5.9.3"
   },
