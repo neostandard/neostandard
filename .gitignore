@@ -11,8 +11,10 @@
 # Generated types
 /lib/**/*.d.ts
 /lib/**/*.d.ts.map
-/index.d.ts
 /index.d.ts.map
+# ...but keep hand-authored type declarations (mirrors the clean:* scripts)
+!/lib/**/*-types.d.ts
+!/index.d.ts
 
 # Library specific ones
 /install-test-*

@@ -12,6 +12,11 @@ on:
         description: 'node version'
         required: false
         type: string
+      eslint-version:
+        default: ''
+        description: 'when set, install this eslint version over the lockfile (e.g. "9.22") to test across the peer range'
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -51,5 +56,11 @@ jobs:
 
       - name: Install dependencies
         run: npm ci --ignore-scripts --force --no-fund --no-audit
+
+      # neostandard supports eslint ^9.22.0 || ^10; CI installs eslint 10 from the
+      # lockfile, so optionally pin a different eslint to cover the rest of the range.
+      - name: Override eslint version
+        if: inputs.eslint-version != ''
+        run: npm install --no-save --no-fund --no-audit eslint@${{ inputs.eslint-version }}
 
       - run: npm run ${{ inputs.command }}

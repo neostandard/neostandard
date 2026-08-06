@@ -1,12 +1,12 @@
-'use strict'
+import { neostandard, resolveIgnoresFromGitignore } from './index.js'
 
-module.exports = require('./')({
+export default neostandard({
   // Added for testing purposes, see test/should-work-with-globals/*
   globals: ['assertsFoo'],
   // Added for testing purposes, see test/should-work-with-globals/*
   env: ['mocha'],
   ignores: [
-    ...require('./').resolveIgnoresFromGitignore(),
+    ...resolveIgnoresFromGitignore(),
     // Added for testing purposes
     '**/should-be-ignored/**',
   ],

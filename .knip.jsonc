@@ -1,10 +1,18 @@
 {
-  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "$schema": "./node_modules/knip/schema-jsonc.json",
+  // lib/main.js and index.js load these lazily via createRequire (require(esm)),
+  // which knip's import graph cannot see — declare them as entries so their
+  // exports count as used.
+  "entry": [
+    "test/*eslint.config.js",
+    "test/rules/*.test.js",
+    "lib/**/*.js",
+  ],
   "ignore": [
-    "test/should-*/**/*",
-    "test/ts-extension-eslint.config.mjs"
+    "test/should-*/**/*"
   ],
   "ignoreBinaries": [
-    "diff"
+    "mktemp",
+    "jq"
   ]
 }

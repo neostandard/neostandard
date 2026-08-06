@@ -1,0 +1,9 @@
+{
+  "name": "fixture",
+  "version": "1.0.0",
+  "nested": {
+    "enabled": true,
+    "count": 3
+  },
+  "list": [1, 2, 3]
+}

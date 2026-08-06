@@ -9,11 +9,12 @@
   },
   "keywords": [],
   "license": "MIT",
+  "type": "module",
   "engines": {
-    "node": "^20.19.0 || ^22.13.0 || >=24"
+    "node": "^22.13.0 || >=24"
   },
   "bin": {
-    "neostandard": "cli.mjs"
+    "neostandard": "cli.js"
   },
   "main": "index.js",
   "types": "index.d.ts",
@@ -32,15 +33,15 @@
     "build:0": "run-s clean",
     "build:1-declaration": "tsc -p declaration.tsconfig.json",
     "build": "run-s build:*",
-    "check-peer-compatibility": "NEOSTANDARD_PATH=`pwd` && cd $(mktemp -d -p $NEOSTANDARD_PATH install-test-XXXXXXXXXX) && npm init -y && npm install --no-legacy-peer-deps --package-lock-only --strict-peer-deps --install-links eslint $NEOSTANDARD_PATH",
-    "check:installed-check": "installed-check --engine-check --version-check -i list-dependents-cli",
+    "check-peer-compatibility": "NEOSTANDARD_PATH=`pwd` && cd $(mktemp -d -p $NEOSTANDARD_PATH install-test-XXXXXXXXXX) && npm init -y && npm install --no-legacy-peer-deps --package-lock-only --strict-peer-deps --install-links eslint@10 $NEOSTANDARD_PATH",
+    "check:installed-check": "installed-check --engine-check --version-check -i npm-run-all2 -i installed-check",
     "check:knip": "knip",
     "check:lint": "eslint --report-unused-disable-directives .",
     "check:tsc": "tsc",
     "check:type-coverage": "type-coverage --detail --strict --at-least 95 --ignore-files 'test/*'",
     "check": "run-s clean && run-p check:*",
     "clean:declarations-lib": "rm -rf $(find lib -type f -name '*.d.ts*' ! -name '*-types.d.ts')",
-    "clean:declarations-top": "rm -rf $(find . -maxdepth 1 -type f -name '*.d.ts*')",
+    "clean:declarations-top": "rm -rf $(find . -maxdepth 1 -type f -name '*.d.ts*' ! -name 'index.d.ts')",
     "clean": "run-p clean:*",
     "dependents-filter-one": "list-dependents filter --max-count=250 --sort-download --max-age=550 --repository-prefix=https://github.com/ $LIST_DEPENDENTS_FILTER_ARGS",
     "dependents-filter:neostandard": "npm run --silent dependents-filter-one -- -i dependents-data/source/neostandard.ndjson -o dependents-data/neostandard-filtered.ndjson --min-downloads=1000 --exclude $(jq -r 'keys | join(\" --exclude \")' dependents-data/known-failures/neostandard.json)",
@@ -69,33 +70,38 @@
     "sync-update": "run-s sync-update:*",
     "test-ci": "run-s test:*",
     "test:eslint": "eslint .",
-    "test:tseslint-extension": "eslint -c test/ts-extension-eslint.config.mjs test/test-types.d.ts",
+    "test:json": "eslint -c test/json-eslint.config.js test/should-work-with-json/",
+    "test:markdown": "eslint -c test/markdown-eslint.config.js test/should-work-with-markdown/",
+    "test:rules": "node --test test/rules/*.test.js",
+    "test:tseslint-extension": "eslint -c test/ts-extension-eslint.config.js test/test-types.d.ts",
     "test": "run-s check test:*"
   },
   "devDependencies": {
-    "@types/node": "^20.19.33",
-    "@voxpelli/tsconfig": "^16.1.0",
-    "eslint": "^9.39.3",
+    "@eslint/json": "^2.0.0",
+    "@eslint/markdown": "^8.0.2",
+    "@types/estree": "^1.0.9",
+    "@types/node": "^22.20.1",
+    "@voxpelli/tsconfig": "^16.2.1",
+    "eslint": "^10.0.0",
     "husky": "^9.1.7",
-    "installed-check": "^10.0.1",
-    "knip": "^5.85.0",
+    "installed-check": "^11.0.0",
+    "knip": "^6.32.0",
     "list-dependents-cli": "^2.7.1",
-    "npm-run-all2": "^8.0.4",
-    "type-coverage": "^2.29.7",
-    "typescript": "~5.9.3"
+    "npm-run-all2": "^9.0.3",
+    "type-coverage": "^2.30.1",
+    "typescript": "~6.0.3"
   },
   "dependencies": {
     "@humanwhocodes/gitignore-to-minimatch": "^1.0.2",
-    "@stylistic/eslint-plugin": "2.11.0",
-    "eslint-plugin-n": "^17.23.2",
-    "eslint-plugin-promise": "^7.2.1",
-    "eslint-plugin-react": "^7.37.5",
+    "@stylistic/eslint-plugin": "5.10.0",
+    "eslint-plugin-n": "^18.0.1",
+    "eslint-plugin-promise": "^7.3.0",
     "find-up": "^8.0.0",
     "globals": "^17.3.0",
     "peowly": "^1.3.3",
     "typescript-eslint": "^8.56.0"
   },
   "peerDependencies": {
-    "eslint": "^9.0.0"
+    "eslint": "^9.22.0 || ^10.0.0"
   }
 }

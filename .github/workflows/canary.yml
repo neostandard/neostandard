@@ -8,23 +8,44 @@ permissions:
   contents: read
 
 jobs:
-  read_direct_dependents:
-    name: Read list of direct dependents
+  read_dependents:
+    name: Read list of dependents
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          show-progress: false
+      # Direct dependents come from the auto-discovered + curated ndjson lists;
+      # indirect ones (consumers via @voxpelli/eslint-config) from dependents.json.
+      # Both are exercised the same way below, so merge into one matrix.
       - id: set-matrix
-        run: echo "matrix=$(jq -s -c '[.[].repositoryUrl | sub("https://github.com/";"";"i")] | unique | sort' dependents-data/neostandard-*.ndjson)" >> $GITHUB_OUTPUT
-  test_direct_dependents:
-    needs: read_direct_dependents
-    name: Test ${{ matrix.project }}
+        run: |
+          {
+            jq -s '[.[].repositoryUrl | sub("https://github.com/";"";"i")]' dependents-data/neostandard-*.ndjson
+            jq '.indirect' dependents-data/dependents.json
+          } | jq -s -c 'add | unique' | sed 's/^/matrix=/' >> "$GITHUB_OUTPUT"
+
+  test_dependents:
+    needs: read_dependents
+    name: Test ${{ matrix.project }} (eslint ${{ matrix.eslint }})
     runs-on: ubuntu-latest
+    # A run-unique marker stamped into main's package.json (below). The guard step
+    # asserts every neostandard copy in the dependent's tree carries it, so a
+    # dependent silently linted against its *published* neostandard (rather than
+    # HEAD) fails loudly instead of reporting a false green.
+    env:
+      CANARY_MARKER: ${{ github.run_id }}-${{ github.sha }}
     strategy:
       fail-fast: false
       matrix:
-        project: ${{ fromJson(needs.read_direct_dependents.outputs.matrix) }}
+        project: ${{ fromJson(needs.read_dependents.outputs.matrix) }}
+        # Both ends of neostandard's `eslint ^9.22.0 || ^10` peer range. main's
+        # eslint devDep is 10 (the lockfile); 9.22 is the floor where
+        # eslint/config's defineConfig landed.
+        eslint: ['9.22', '10']
     steps:
       - name: Checkout main project
         uses: actions/checkout@v6
@@ -65,95 +86,79 @@ jobs:
       - name: install main
         run: npm ci --ignore-scripts --force --no-fund --no-audit
         working-directory: ./main
-      - name: install project
-        run: '[ -f package-lock.json ] && npm ci --ignore-scripts --force --no-fund --no-audit || npm install --ignore-scripts --force --no-fund --no-audit'
+
+      # Cover the chosen end of the peer range: main's binary (run below) is the
+      # engine under test, so pinning eslint here deterministically controls it.
+      - name: pin eslint ${{ matrix.eslint }}
+        run: npm install --no-save --no-fund --no-audit eslint@${{ matrix.eslint }}
+        working-directory: ./main
+
+      # Stamp main's manifest so the guard can prove the dependent loaded HEAD, not
+      # a published copy. An unknown field is inert for npm/tsc, survives both a
+      # symlinked and an install-links=true copy install (package.json is always
+      # packed), and — unlike a version compare — distinguishes HEAD from a
+      # dependent pinned to main's current version. Must run before the project
+      # install so a copy-mode link packs the stamped file.
+      - name: stamp main
+        run: jq '.canary = env.CANARY_MARKER' package.json > tmp.package.json && mv tmp.package.json package.json
+        working-directory: ./main
+
+      # Link neostandard to HEAD through the manifest, not the config text (the old
+      # sed only rewrote one root config file, one quote style — missing nested
+      # workspace configs, transitive imports via @voxpelli/eslint-config, and
+      # double-quoted requires). Rewrite the declared spec AND the override to the
+      # same `file:` string: npm throws EOVERRIDE if an override changes a *root*
+      # dep's spec (and --force does not bypass it), so they must match; the
+      # override also forces any nested/transitive copy to HEAD. Assumes neostandard
+      # is declared in dependencies/devDependencies (true for all current
+      # dependents; a peer/optional declaration would need the same rewrite). A
+      # dependent that dropped neostandard gets nothing rewritten and is caught by
+      # the guard, so do NOT add an absent dependency here.
+      - name: link neostandard to HEAD
+        run: |
+          jq --arg link "file:${{ github.workspace }}/main" '
+              (if .dependencies.neostandard    then .dependencies.neostandard    = $link else . end)
+            | (if .devDependencies.neostandard then .devDependencies.neostandard = $link else . end)
+            | .overrides = ((.overrides // {}) + { neostandard: $link })
+          ' package.json > tmp.package.json && mv tmp.package.json package.json
+          [[ -z "$RUNNER_DEBUG" ]] || cat package.json
         working-directory: ./project
 
-      - name: modify project eslint config
-        run: CANARY_ESLINT_CONFIG_FILE=$([ -f eslint.config.mjs ] && echo "eslint.config.mjs" || ([ -f eslint.config.cjs ] && echo "eslint.config.cjs" || echo "eslint.config.js")) && sed "s/'neostandard'/'..\/main\/index.js'/" $CANARY_ESLINT_CONFIG_FILE > tmp.eslint.config.js && rm $CANARY_ESLINT_CONFIG_FILE && mv tmp.eslint.config.js $CANARY_ESLINT_CONFIG_FILE && ([[ -z "$RUNNER_DEBUG" ]] || (echo $CANARY_ESLINT_CONFIG_FILE && cat $CANARY_ESLINT_CONFIG_FILE))
+      # npm ci would hard-fail (EUSAGE) now that the declared spec no longer matches
+      # the lockfile, so install fresh. --ignore-scripts is safe: neostandard has no
+      # build step (it ships the .js it is authored in).
+      - name: install project
+        run: npm install --ignore-scripts --force --no-fund --no-audit
         working-directory: ./project
+
+      # Make a silent swap-miss impossible: every neostandard in the tree must carry
+      # the marker, or the dependent is being linted against a published copy.
+      - name: verify neostandard resolves to HEAD
+        working-directory: ./project
+        run: |
+          [ -n "$CANARY_MARKER" ] || { echo "::error::CANARY_MARKER is unset — cannot verify the neostandard swap"; exit 1; }
+          # find (not `find node_modules`) so workspace-local, non-hoisted copies are
+          # covered too; it returns the file: link itself without descending, and
+          # excludes the .bin CLI symlink.
+          copies=$(find . -path '*/node_modules/neostandard' \( -type d -o -type l \) -not -path '*/.bin/*')
+          if [ -z "$copies" ]; then
+            echo "::error::${{ matrix.project }} no longer depends on neostandard — refresh dependents-data"
+            exit 1
+          fi
+          while IFS= read -r copy; do
+            if ! grep -q "$CANARY_MARKER" "$copy/package.json"; then
+              echo "::error::$copy is a published neostandard, not HEAD — the override did not apply"
+              exit 1
+            fi
+          done <<< "$copies"
+          echo "verified $(printf '%s\n' "$copies" | grep -c .) neostandard copy/copies carry the canary marker"
 
       - name: run eslint
         run: ../main/node_modules/.bin/eslint
         working-directory: ./project
 
-  read_indirect_dependents:
-    name: Read list of indirect dependents
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-          show-progress: false
-      - id: set-matrix
-        run: echo "matrix=$(cat dependents-data/dependents.json | jq -c '.indirect')" >> $GITHUB_OUTPUT
-  test_indirect_dependents:
-    needs: read_indirect_dependents
-    name: Test ${{ matrix.project }}
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        node_version: [lts/*]
-        project: ${{ fromJson(needs.read_indirect_dependents.outputs.matrix) }}
-    steps:
-      - name: Checkout main project
-        uses: actions/checkout@v6
-        with:
-          path: main
-          persist-credentials: false
-          show-progress: false
-
-      - name: Checkout ${{ matrix.project }}
-        uses: actions/checkout@v6
-        with:
-          repository: ${{ matrix.project }}
-          path: project
-          persist-credentials: false
-          show-progress: false
-
-      - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ matrix.node_version }}
-          package-manager-cache: false
-
-
-      # New prefix generated every 120 days, to ensure npm cache doesn't grow too large
-      - name: Get npm cache timed expiration
-        id: npm-timed-expiration
-        run: echo "prefix=$(( $(date +%s) / 60 / 60 / 24 / 120 ))" >> $GITHUB_OUTPUT
-
-      - name: Determine npm cache directory
-        id: npm-cache-dir
-        run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v5
-        with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ steps.npm-timed-expiration.outputs.prefix }}-${{ hashFiles('main/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ steps.npm-timed-expiration.outputs.prefix }}-
-
-      - name: install main
-        run: npm ci --ignore-scripts --force --no-fund --no-audit
-        working-directory: ./main
-
-      - name: modify project neostandard version
-        run: "jq '. + { overrides: (.overrides + {neostandard: \"file:${{ github.workspace }}/main\"}) }' package.json > tmp.package.json && rm package.json && mv tmp.package.json package.json"
-        working-directory: ./project
-
-      - name: install project
-        run: npm install --ignore-scripts --force --no-fund --no-audit
-        working-directory: ./project
-
-      - name: run eslint
-        run: npx eslint
-        working-directory: ./project
   tests_completed:
-    needs: [test_direct_dependents, test_indirect_dependents]
+    needs: [test_dependents]
     name: Canary tests successful
     runs-on: ubuntu-latest
     steps:
