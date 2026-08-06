@@ -38,7 +38,7 @@ jobs:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
       # Release please
-      - uses: googleapis/release-please-action@v4
+      - uses: googleapis/release-please-action@v5
         id: release
         with:
           config-file: .github/release-please/config.json
