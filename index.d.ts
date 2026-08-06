@@ -6,19 +6,18 @@
 // this file; keep it in sync with index.js.
 
 import { neostandard } from './lib/main.js'
+import { plugins } from './lib/plugins.js'
 import { resolveIgnoresFromGitignore } from './lib/resolve-gitignore.js'
 
-export type { NeostandardOptions } from './lib/main.js'
+export type {
+  NeostandardOptions,
+} from './lib/neostandard-types.d.ts'
 
-export { globs } from './lib/globs.js'
-
-declare const plugins: {
-  readonly '@stylistic': import('@stylistic/eslint-plugin')
-  readonly n: import('eslint-plugin-n')
-  readonly promise: import('eslint').ESLint.Plugin
-  readonly neostandard: typeof import('./lib/plugin/index.js')
-  readonly 'typescript-eslint': typeof import('typescript-eslint')
-}
+export {
+  defaultFileIgnores,
+  defaultFilePatterns,
+  resolveFilePatterns,
+} from './lib/file-patterns.js'
 
 declare const neostandardWithCompatProps: typeof neostandard & {
   /** @deprecated import the `resolveIgnoresFromGitignore` named export instead */
@@ -35,4 +34,5 @@ export {
   resolveIgnoresFromGitignore,
 }
 
+// Interoperability with require()
 export { neostandardWithCompatProps as 'module.exports' }

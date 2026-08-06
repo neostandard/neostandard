@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { createRequire } from 'node:module'
 import test from 'node:test'
 
-import { globs, neostandard } from '../../index.js'
+import { defaultFilePatterns, neostandard } from '../../index.js'
 
 // The TS block must extend the declared operator-linebreak preferences with
 // ignores for the TS-only `|`/`&` type operators (@stylistic 5 / #805 drift
@@ -37,10 +37,10 @@ test('default — no TS operator-linebreak adaption leaks into JS layers', () =>
 test('globs export matches the applied default scopes', () => {
   const base = neostandard({ ts: true }).find(config => config.name === 'neostandard/base')
   assert.ok(base, 'has a neostandard/base layer')
-  assert.deepEqual(base.files, [...globs.js, ...globs.jsx, ...globs.ts, ...globs.tsx])
-  assert.deepEqual(base.files, [...globs.all])
+  assert.deepEqual(base.files, [...defaultFilePatterns.js, ...defaultFilePatterns.jsx, ...defaultFilePatterns.ts, ...defaultFilePatterns.tsx])
+  assert.deepEqual(base.files, [...defaultFilePatterns.all])
   const baseNoJsx = neostandard({ noJsx: true }).find(config => config.name === 'neostandard/base')
-  assert.deepEqual(baseNoJsx?.files, [...globs.js])
+  assert.deepEqual(baseNoJsx?.files, [...defaultFilePatterns.js])
 })
 
 // 0.13 compat: property access on the default export must keep working —
@@ -142,7 +142,7 @@ test('globals block carries the #296 file scope and md ignore', () => {
   const configs = neostandard({ globals: ['myGlobal'] })
   const globalsBlock = configs.find(c => c.name === 'neostandard/globals')
   assert.ok(globalsBlock, 'emits a neostandard/globals block when globals are set')
-  assert.deepEqual(globalsBlock.files, [...globs.js, ...globs.jsx])
+  assert.deepEqual(globalsBlock.files, [...defaultFilePatterns.js, ...defaultFilePatterns.jsx])
   assert.deepEqual(globalsBlock.ignores, ['**/*.md/**'])
   assert.deepEqual(globalsBlock.languageOptions?.['globals'], { myGlobal: true })
 })
