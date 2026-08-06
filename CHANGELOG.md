@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.14.0-next](https://github.com/neostandard/neostandard/compare/v0.13.0...v0.14.0-next) (2026-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* package is ESM-only; Node.js floor raised to `^22.13.0 || >=24`; peer `eslint` range is `^9.22.0 || ^10.0.0`; `@stylistic` pinned at `5.10.0`; `eslint-plugin-n` v18; `eslint-plugin-react` and all React logic rules removed (JSX style rules remain); `cli.mjs` renamed to `cli.js`; default export property access deprecated in favor of named exports. All configs are now scoped to files and `ignores` is applied to those scopes rather than being global.
+
+### 🌟 Features
+
+* convert to ESM, support ESLint 10, adopt [@stylistic](https://github.com/stylistic) v5 ([#340](https://github.com/neostandard/neostandard/issues/340)) ([409c468](https://github.com/neostandard/neostandard/commit/409c46861f6a53a75a831e4fab63e64ce34fb4e7))
+
+
+### 📚 Documentation
+
+* correct version number in README.md import docs ([#365](https://github.com/neostandard/neostandard/issues/365)) ([99205a3](https://github.com/neostandard/neostandard/commit/99205a3ad36e2eca85776611582c6bdf57fcf8f3))
+
 ## [0.13.0](https://github.com/neostandard/neostandard/compare/v0.12.2...v0.13.0) (2026-02-26)
 
 
