@@ -1,11 +1,12 @@
 {
-  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/v16.12.0/schemas/config.json",
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/v17.1.3/schemas/config.json",
   "bump-minor-pre-major": true,
   "bump-patch-for-minor-pre-major": true,
   "include-component-in-tag": false,
   "release-type": "node",
 
   "prerelease": true,
+  "prerelease-type": "next",
   "versioning": "prerelease",
 
   "packages": {
