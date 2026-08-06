@@ -13,10 +13,10 @@ export type { NeostandardOptions } from './lib/main.js'
 export { globs } from './lib/globs.js'
 
 declare const plugins: {
-  readonly '@stylistic': import('eslint').ESLint.Plugin
-  readonly n: import('eslint').ESLint.Plugin & { configs: import('eslint-plugin-n').Configs }
+  readonly '@stylistic': import('@stylistic/eslint-plugin')
+  readonly n: import('eslint-plugin-n')
   readonly promise: import('eslint').ESLint.Plugin
-  readonly neostandard: import('eslint').ESLint.Plugin
+  readonly neostandard: typeof import('./lib/plugin/index.js')
   readonly 'typescript-eslint': typeof import('typescript-eslint')
 }
 
