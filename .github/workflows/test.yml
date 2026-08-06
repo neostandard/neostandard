@@ -9,6 +9,7 @@ on:
       - main
   schedule:
     - cron: '14 5 * * 1,3,5'
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref || github.run_id }}

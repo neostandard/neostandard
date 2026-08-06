@@ -5,6 +5,13 @@ on:
     branches:
       - main
 
+  workflow_dispatch:
+    inputs:
+      force-release:
+        description: 'Force release to npm'
+        required: false
+        type: boolean
+
 permissions:
   contents: read
 
@@ -43,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: npm
     needs: release_please
-    if: needs.release_please.outputs.releaseCreated
+    if: needs.release_please.outputs.releaseCreated || inputs.force-release
     permissions:
       id-token: write
     steps:
