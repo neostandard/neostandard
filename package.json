@@ -94,7 +94,7 @@
   "dependencies": {
     "@humanwhocodes/gitignore-to-minimatch": "^1.0.2",
     "@stylistic/eslint-plugin": "5.10.0",
-    "eslint-plugin-n": "^18.0.1",
+    "eslint-plugin-n": "^18.2.2",
     "eslint-plugin-promise": "^7.3.0",
     "find-up": "^8.0.0",
     "globals": "^17.9.0",
