@@ -57,7 +57,7 @@ jobs:
       - name: Build
         run: node cli.js | sed "s/'neostandard'/'.\/'/" > eslint.config.js && npx --yes @eslint/config-inspector build --base /neostandard/
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./.eslint-config-inspector
 
@@ -71,4 +71,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
