@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.14.0-next.1](https://github.com/neostandard/neostandard/compare/v0.14.0-next...v0.14.0-next.1) (2026-08-07)
+
+
+### 🌟 Features
+
+* **deps:** update dependency eslint-plugin-n to ^18.2.2 ([#381](https://github.com/neostandard/neostandard/issues/381)) ([3172802](https://github.com/neostandard/neostandard/commit/31728023c6b71f3c0c9e14986345a37e27e115b6))
+* **deps:** update dependency globals to ^17.9.0 ([#366](https://github.com/neostandard/neostandard/issues/366)) ([4b8bb40](https://github.com/neostandard/neostandard/commit/4b8bb40e14fdd6a20fd54d9cd8a93ee368c50fb1))
+
 ## [0.14.0-next](https://github.com/neostandard/neostandard/compare/v0.13.0...v0.14.0-next) (2026-08-06)
 
 
