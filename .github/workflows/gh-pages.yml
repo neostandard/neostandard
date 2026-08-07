@@ -53,7 +53,7 @@ jobs:
 
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Build
         run: node cli.js | sed "s/'neostandard'/'.\/'/" > eslint.config.js && npx --yes @eslint/config-inspector build --base /neostandard/
       - name: Upload artifact
