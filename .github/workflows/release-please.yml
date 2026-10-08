@@ -22,14 +22,6 @@ on:
         type: choice
         options:
           - next
-      npm-tag:
-        description: 'npm dist-tag to publish under'
-        required: true
-        default: latest
-        type: choice
-        options:
-          - latest
-          - next
       force-release:
         description: 'Force release to npm'
         required: false
@@ -46,8 +38,14 @@ jobs:
     if: github.repository == 'neostandard/neostandard'
     outputs:
       releaseCreated: ${{ steps.release.outputs.release_created }}
+      tagName: ${{ steps.release.outputs.tag_name }}
     environment: sync
     steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          show-progress: false
+
       # Generate bot token
       - uses: actions/create-github-app-token@v2
         id: app-token
@@ -63,17 +61,9 @@ jobs:
 
       - name: Configure release channel
         env:
-          RELEASE_PRERELEASE: ${{ inputs.release-channel == 'prerelease' }}
+          RELEASE_CHANNEL: ${{ inputs.release-channel || '' }}
           RELEASE_PRERELEASE_TYPE: ${{ inputs.prerelease-type || 'next' }}
-        run: |
-          jq --argjson prerelease "$RELEASE_PRERELEASE" \
-            --arg prerelease_type "$RELEASE_PRERELEASE_TYPE" \
-            'if $prerelease then
-               .prerelease = true | .["prerelease-type"] = $prerelease_type | .versioning = "prerelease"
-             else
-               del(.prerelease, .["prerelease-type"], .versioning)
-             end' \
-            .github/release-please/config.json > .github/release-please/config.generated.json
+        run: bash .github/scripts/configure-release-please-config.sh
 
       # Release please
       - uses: googleapis/release-please-action@v5
@@ -107,5 +97,5 @@ jobs:
 
       - name: Publish to npm
         env:
-          NPM_TAG: ${{ inputs.npm-tag || 'latest' }}
+          NPM_TAG: ${{ needs.release_please.outputs.tagName != '' && contains(needs.release_please.outputs.tagName, '-') && 'next' || inputs.release-channel == 'prerelease' && 'next' || 'latest' }}
         run: npm publish --provenance --access public --tag="$NPM_TAG"
