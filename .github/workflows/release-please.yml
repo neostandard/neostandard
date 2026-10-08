@@ -31,7 +31,7 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
-      # To request a one-off version, include `Release-As: x.y.z` in a commit merged to main.
+      # Put `Release-As: x.y.z` in the commit body (not the subject) to request a one-off version.
       # Release please
       - uses: googleapis/release-please-action@v5
         id: release
