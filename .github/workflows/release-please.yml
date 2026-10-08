@@ -22,6 +22,10 @@ on:
         type: choice
         options:
           - next
+      release-as:
+        description: 'Exact version to release (use 0.14.0 to promote the current prerelease to stable)'
+        required: false
+        type: string
       force-release:
         description: 'Force release to npm'
         required: false
@@ -71,6 +75,7 @@ jobs:
         with:
           config-file: ${{ steps.release-config.outputs.config_file }}
           manifest-file: .github/release-please/manifest.json
+          release-as: ${{ inputs.release-as || '' }}
           token: ${{ steps.app-token.outputs.token }}
 
   npm_publish:
