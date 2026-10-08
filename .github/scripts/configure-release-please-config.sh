@@ -1,23 +1,21 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-config_file='.github/release-please/config.json'
 manifest_file='.github/release-please/manifest.json'
-output_file='.github/release-please/config.generated.json'
 
 case "${RELEASE_CHANNEL:-}" in
   stable)
-    prerelease=false
+    config_file='.github/release-please/config.json'
     ;;
   prerelease)
-    prerelease=true
+    config_file='.github/release-please/config-prerelease.json'
     ;;
   '')
     version=$(jq -er '."."' "$manifest_file")
     if [[ "$version" == *-* ]]; then
-      prerelease=true
+      config_file='.github/release-please/config-prerelease.json'
     else
-      prerelease=false
+      config_file='.github/release-please/config.json'
     fi
     ;;
   *)
@@ -26,11 +24,4 @@ case "${RELEASE_CHANNEL:-}" in
     ;;
 esac
 
-jq --argjson prerelease "$prerelease" \
-  --arg prerelease_type "${RELEASE_PRERELEASE_TYPE:-next}" \
-  'if $prerelease then
-     .prerelease = true | .["prerelease-type"] = $prerelease_type | .versioning = "prerelease"
-   else
-     del(.prerelease, .["prerelease-type"], .versioning)
-   end' \
-  "$config_file" > "$output_file"
+printf 'config_file=%s\n' "$config_file" >> "$GITHUB_OUTPUT"
