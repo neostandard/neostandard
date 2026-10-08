@@ -1,0 +1,11 @@
+rules:
+  dependabot-cooldown:
+    config:
+      days: 1
+  unpinned-uses:
+    config:
+      policies:
+        # Allow major tags for official GitHub actions to receive compatible security updates.
+        "actions/*": ref-pin
+        # Require immutable references for every other third-party action.
+        "*": hash-pin
