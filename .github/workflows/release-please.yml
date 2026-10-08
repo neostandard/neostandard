@@ -7,9 +7,33 @@ on:
 
   workflow_dispatch:
     inputs:
+      release-channel:
+        description: 'Choose a regular release or a prerelease'
+        required: true
+        default: stable
+        type: choice
+        options:
+          - stable
+          - prerelease
+      prerelease-type:
+        description: 'Prerelease identifier'
+        required: true
+        default: next
+        type: choice
+        options:
+          - next
+      npm-tag:
+        description: 'npm dist-tag to publish under'
+        required: true
+        default: latest
+        type: choice
+        options:
+          - latest
+          - next
       force-release:
         description: 'Force release to npm'
         required: false
+        default: false
         type: boolean
 
 permissions:
@@ -37,11 +61,25 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
+      - name: Configure release channel
+        env:
+          RELEASE_PRERELEASE: ${{ inputs.release-channel == 'prerelease' }}
+          RELEASE_PRERELEASE_TYPE: ${{ inputs.prerelease-type || 'next' }}
+        run: |
+          jq --argjson prerelease "$RELEASE_PRERELEASE" \\
+            --arg prerelease_type "$RELEASE_PRERELEASE_TYPE" \\
+            'if $prerelease then
+               .prerelease = true | .["prerelease-type"] = $prerelease_type | .versioning = "prerelease"
+             else
+               del(.prerelease, .["prerelease-type"], .versioning)
+             end' \\
+            .github/release-please/config.json > .github/release-please/config.generated.json
+
       # Release please
       - uses: googleapis/release-please-action@v5
         id: release
         with:
-          config-file: .github/release-please/config.json
+          config-file: .github/release-please/config.generated.json
           manifest-file: .github/release-please/manifest.json
           token: ${{ steps.app-token.outputs.token }}
 
@@ -67,4 +105,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --ignore-scripts --force --no-fund --no-audit
 
-      - run: npm publish --provenance --access public --tag=next
+      - name: Publish to npm
+        env:
+          NPM_TAG: ${{ inputs.npm-tag || 'latest' }}
+        run: npm publish --provenance --access public --tag="$NPM_TAG"

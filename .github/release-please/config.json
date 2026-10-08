@@ -5,9 +5,6 @@
   "include-component-in-tag": false,
   "release-type": "node",
 
-  "prerelease": true,
-  "prerelease-type": "next",
-  "versioning": "prerelease",
 
   "packages": {
     ".": {}
