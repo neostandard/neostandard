@@ -66,13 +66,13 @@ jobs:
           RELEASE_PRERELEASE: ${{ inputs.release-channel == 'prerelease' }}
           RELEASE_PRERELEASE_TYPE: ${{ inputs.prerelease-type || 'next' }}
         run: |
-          jq --argjson prerelease "$RELEASE_PRERELEASE" \\
-            --arg prerelease_type "$RELEASE_PRERELEASE_TYPE" \\
+          jq --argjson prerelease "$RELEASE_PRERELEASE" \
+            --arg prerelease_type "$RELEASE_PRERELEASE_TYPE" \
             'if $prerelease then
                .prerelease = true | .["prerelease-type"] = $prerelease_type | .versioning = "prerelease"
              else
                del(.prerelease, .["prerelease-type"], .versioning)
-             end' \\
+             end' \
             .github/release-please/config.json > .github/release-please/config.generated.json
 
       # Release please
