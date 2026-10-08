@@ -5,32 +5,6 @@ on:
     branches:
       - main
 
-  workflow_dispatch:
-    inputs:
-      release-channel:
-        description: 'Choose a regular release or a prerelease'
-        required: true
-        default: stable
-        type: choice
-        options:
-          - stable
-          - prerelease
-      prerelease-type:
-        description: 'Prerelease identifier'
-        required: true
-        default: next
-        type: choice
-        options:
-          - next
-      release-as:
-        description: 'Exact version to release (use 0.14.0 to promote the current prerelease to stable)'
-        required: false
-        type: string
-      force-release:
-        description: 'Force release to npm'
-        required: false
-        default: false
-        type: boolean
 
 permissions:
   contents: read
@@ -42,14 +16,8 @@ jobs:
     if: github.repository == 'neostandard/neostandard'
     outputs:
       releaseCreated: ${{ steps.release.outputs.release_created }}
-      tagName: ${{ steps.release.outputs.tag_name }}
     environment: sync
     steps:
-      - uses: actions/checkout@v7
-        with:
-          persist-credentials: false
-          show-progress: false
-
       # Generate bot token
       - uses: actions/create-github-app-token@v2
         id: app-token
@@ -63,19 +31,12 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
-      - name: Select release config
-        id: release-config
-        env:
-          RELEASE_CHANNEL: ${{ inputs.release-channel || '' }}
-        run: bash .github/scripts/configure-release-please-config.sh
-
       # Release please
       - uses: googleapis/release-please-action@v5
         id: release
         with:
-          config-file: ${{ steps.release-config.outputs.config_file }}
+          config-file: .github/release-please/config.json
           manifest-file: .github/release-please/manifest.json
-          release-as: ${{ inputs.release-as || '' }}
           token: ${{ steps.app-token.outputs.token }}
 
   npm_publish:
@@ -83,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: npm
     needs: release_please
-    if: needs.release_please.outputs.releaseCreated || inputs.force-release
+    if: needs.release_please.outputs.releaseCreated
     permissions:
       id-token: write
     steps:
@@ -100,7 +61,4 @@ jobs:
       - name: Install dependencies
         run: npm ci --ignore-scripts --force --no-fund --no-audit
 
-      - name: Publish to npm
-        env:
-          NPM_TAG: ${{ needs.release_please.outputs.tagName != '' && contains(needs.release_please.outputs.tagName, '-') && 'next' || inputs.release-channel == 'prerelease' && 'next' || 'latest' }}
-        run: npm publish --provenance --access public --tag="$NPM_TAG"
+      - run: npm publish --provenance --access public --tag=latest
