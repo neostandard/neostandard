@@ -59,17 +59,17 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
-      - name: Configure release channel
+      - name: Select release config
+        id: release-config
         env:
           RELEASE_CHANNEL: ${{ inputs.release-channel || '' }}
-          RELEASE_PRERELEASE_TYPE: ${{ inputs.prerelease-type || 'next' }}
         run: bash .github/scripts/configure-release-please-config.sh
 
       # Release please
       - uses: googleapis/release-please-action@v5
         id: release
         with:
-          config-file: .github/release-please/config.generated.json
+          config-file: ${{ steps.release-config.outputs.config_file }}
           manifest-file: .github/release-please/manifest.json
           token: ${{ steps.app-token.outputs.token }}
 
