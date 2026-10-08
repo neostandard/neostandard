@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.14.0](https://github.com/neostandard/neostandard/compare/v0.14.0-next.1...v0.14.0) (2026-10-08)
+
+
+### 🩹 Fixes
+
+* complete release workflow lifecycle ([#401](https://github.com/neostandard/neostandard/issues/401)) ([7c5379b](https://github.com/neostandard/neostandard/commit/7c5379b0a5fee2fb3f2bc8702a4ea52c199e21e6))
+* select committed Release Please configs ([#402](https://github.com/neostandard/neostandard/issues/402)) ([9bf2092](https://github.com/neostandard/neostandard/commit/9bf2092a4ed927a23822b704a4b7a3d58217f6c3))
+
+
+### 🧹 Chores
+
+* request stable 0.14.0 ([#407](https://github.com/neostandard/neostandard/issues/407)) ([3a2295a](https://github.com/neostandard/neostandard/commit/3a2295aef03e1ad4138f339be853e001274063c6))
+
 ## [0.14.0-next.1](https://github.com/neostandard/neostandard/compare/v0.14.0-next...v0.14.0-next.1) (2026-08-10)
 
 
