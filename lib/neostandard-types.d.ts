@@ -22,8 +22,12 @@ export interface NeostandardSyntaxOptions {
    * Note: React-specific logic rules (eslint-plugin-react) are currently not included regardless, pending ESLint 10 support — see issue #350
    */
   noJsx?: boolean | undefined;
-  /** When set, enables same checks for TypeScript files */
-  ts?: boolean | undefined;
+  /**
+   * Enables TypeScript-file linting. `true` uses typescript-eslint; `'strip'`
+   * strips erasable TypeScript syntax with Node and lints the remaining JS AST.
+   * The strip mode only supports `.ts` files (not TSX) and provides no type-aware rules.
+   */
+  ts?: boolean | 'strip' | undefined;
 }
 
 export interface NeostandardStyleOptions {
