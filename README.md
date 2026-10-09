@@ -30,7 +30,7 @@ alt="platformatic"
 > **ESLint 10 + JSX:** This release supports ESLint 10 (while keeping ESLint 9 support). JSX/TSX files are still parsed and the JSX **style** rules still apply, but the React-specific **logic** rules (from `eslint-plugin-react`) are temporarily removed because `eslint-plugin-react` is not yet compatible with ESLint 10 ([jsx-eslint/eslint-plugin-react#3977](https://github.com/jsx-eslint/eslint-plugin-react/issues/3977)). They return once a v10-compatible React plugin is adopted. Tracking: [#350](https://github.com/neostandard/neostandard/issues/350).
 
 > [!NOTE]
-> **ESM, Node.js and TypeScript versions:** neostandard is now an ESM package requiring Node.js `^22.13.0 || >=24`. CommonJS configs keep working unchanged — `require('neostandard')` returns the `neostandard` function with `plugins` and `resolveIgnoresFromGitignore` attached, same as before (they are also proper ESM named exports, the preferred form). For the `ts` option, the supported TypeScript range for the installed `typescript` package tops out at 6.0 (typescript-eslint's peer is `<6.1.0`, and TypeScript 7 ships no compiler API for tooling until 7.1) — TypeScript 7 users should install `typescript@npm:@typescript/typescript6` for linting and alias TS7 separately for `tsc`, per [Microsoft's side-by-side guidance](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/).
+> **ESM and Node.js:** neostandard is an ESM package requiring Node.js `^22.13.0 || >=24`. CommonJS configs keep working unchanged — `require('neostandard')` returns the `neostandard` function with `plugins` and `resolveIgnoresFromGitignore` attached, same as before (they are also proper ESM named exports, the preferred form). The `ts: true` mode uses the optional `typescript-eslint` peer and currently requires its supported TypeScript API. The experimental `ts: 'strip'` mode uses Node's built-in type stripping instead, avoiding that peer for erasable `.ts` syntax; it does not support `.tsx` or type-aware rules. Node's stripping API is still experimental on some supported Node releases and may emit an `ExperimentalWarning`. See the TypeScript option details below.
 
 ## Table of Contents
 
@@ -235,13 +235,13 @@ The options below allow you to customize `neostandard` for your project. Use the
   })
   ```
   
-* `ts` - *`boolean`* - if set, TypeScript syntax will be supported and `*.ts` (including `*.d.ts`) will be checked. To add additional file patterns to the TypeScript checks, use `filesTs`
+* `ts` - *`boolean | 'strip'`* - enables TypeScript file linting. `true` uses `typescript-eslint` (install it as a peer dependency); `'strip'` strips erasable TypeScript syntax with Node's `module.stripTypeScriptTypes()` and runs ESLint rules on the remaining JavaScript AST, without requiring `typescript-eslint`. Strip mode only supports `.ts` files (not `.tsx`) and does not provide TypeScript-specific or type-aware rules. Node's strip-only mode also rejects TypeScript constructs that require code generation, such as enums and parameter properties. Use explicit `import type` for imports used only as types; run `tsc` separately for type checking and unused type declarations. `filesTs` adds file patterns to either mode.
   
   ```js
   import { neostandard } from 'neostandard'
 
   export default neostandard({
-    ts: true,  // Enable TypeScript support and lint .ts files
+    ts: 'strip', // Experimental: lint erasable .ts syntax without typescript-eslint
   })
   ```
 

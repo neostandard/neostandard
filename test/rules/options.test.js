@@ -3,6 +3,7 @@ import { createRequire } from 'node:module'
 import test from 'node:test'
 
 import { defaultFilePatterns, neostandard } from '../../index.js'
+import { nodeStripParser } from '../../lib/node-strip.js'
 
 // The TS block must extend the declared operator-linebreak preferences with
 // ignores for the TS-only `|`/`&` type operators (@stylistic 5 / #805 drift
@@ -85,9 +86,18 @@ test('default () — array of configs, no TS block', () => {
   assert.ok(!configs.some(c => c.name === 'neostandard/ts'))
 })
 
-test('ts: true — emits the TS block', () => {
+test('ts: true — emits the TypeScript-eslint block', () => {
   const configs = neostandard({ ts: true })
   assert.ok(configs.some(c => c.name === 'neostandard/ts'))
+})
+
+test('ts: strip — uses Node type stripping for .ts, not .tsx', () => {
+  const configs = neostandard({ ts: 'strip' })
+  const stripConfig = configs.find(config => config.name === 'neostandard/ts/strip')
+  assert.ok(stripConfig, 'has a neostandard/ts/strip block')
+  assert.equal(stripConfig.languageOptions?.['parser'], nodeStripParser)
+  assert.deepEqual(stripConfig.files, ['**/*.ts'])
+  assert.ok(!configs.some(config => config.name === 'neostandard/ts'))
 })
 
 test('noJsx: true — no jsx layer', () => {

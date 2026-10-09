@@ -88,6 +88,7 @@
     "knip": "^6.32.0",
     "list-dependents-cli": "^2.7.1",
     "npm-run-all2": "^9.0.3",
+    "typescript-eslint": "^8.56.0",
     "type-coverage": "^2.30.1",
     "typescript": "~6.0.3"
   },
@@ -99,9 +100,15 @@
     "find-up": "^8.0.0",
     "globals": "^17.9.0",
     "peowly": "^2.0.1",
-    "typescript-eslint": "^8.56.0"
+    "espree": "^9.6.1 || ^10.0.0"
   },
   "peerDependencies": {
-    "eslint": "^9.22.0 || ^10.0.0"
+    "eslint": "^9.22.0 || ^10.0.0",
+    "typescript-eslint": "^8.56.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript-eslint": {
+      "optional": true
+    }
   }
 }
