@@ -191,14 +191,26 @@ The options below allow you to customize `neostandard` for your project. Use the
   })
   ```
 
-* `ignores` - *`string[]`* - an array of glob patterns for files that the config should not apply to, see [ESLint documentation](https://eslint.org/docs/latest/use/configure/ignore) for details
+* `ignores` - *`string[]`* - glob patterns that prevent **neostandard's own config layers** from applying to matching files. These are not global ignores: other configs in your flat config can still lint those files. This is a change from v0.13.0; see ESLint's [ignore documentation](https://eslint.org/docs/latest/use/configure/ignore).
   
   ```js
   import { neostandard } from 'neostandard'
 
   export default neostandard({
-    ignores: ['dist/**/*', 'tests/**'],  // Ignore files in dist/ and tests/ directories
+    ignores: ['dist/**/*', 'tests/**'],  // Skip these files in neostandard's config layers
   })
+  ```
+
+  To ignore files globally across all configs (the v0.13.0 behavior), use ESLint's `globalIgnores()` instead:
+
+  ```js
+  import { globalIgnores } from 'eslint/config'
+  import { neostandard, resolveIgnoresFromGitignore } from 'neostandard'
+
+  export default [
+    globalIgnores(resolveIgnoresFromGitignore()),
+    ...neostandard(),
+  ]
   ```
 
 * `noJsx` - *`boolean`* - if set, skips JSX parsing and the JSX style rules. (Note: the React-specific *logic* rules are currently not included regardless — pending ESLint 10 support; see the note at the top and [#350](https://github.com/neostandard/neostandard/issues/350))
@@ -374,9 +386,21 @@ This provides more comprehensive checking including type imports, module resolut
 
 ### resolveIgnoresFromGitignore()
 
-Finds a `.gitignore` file that resides in the same directory as the ESLint config file and returns an array of ESLint ignores that matches the same files.
+Finds a `.gitignore` file that resides in the same directory as the ESLint config file and returns matching glob patterns. Passing them to `neostandard({ ignores })` skips those files in neostandard's layers only. To skip them for every config, pass the patterns to ESLint's `globalIgnores()` (the v0.13.0 behavior).
 
-ESM:
+Global ESM example:
+
+```js
+import { globalIgnores } from 'eslint/config'
+import { neostandard, resolveIgnoresFromGitignore } from 'neostandard'
+
+export default [
+  globalIgnores(resolveIgnoresFromGitignore()),
+  ...neostandard(),
+]
+```
+
+To scope the ignores to neostandard only, pass them as an option instead:
 
 ```js
 import { neostandard, resolveIgnoresFromGitignore } from 'neostandard'
@@ -386,12 +410,16 @@ export default neostandard({
 })
 ```
 
-CommonJS:
+CommonJS (global ignores):
 
 ```js
-module.exports = require('neostandard')({
-  ignores: require('neostandard').resolveIgnoresFromGitignore(),
-})
+const { globalIgnores } = require('eslint/config')
+const neostandard = require('neostandard')
+
+module.exports = [
+  globalIgnores(neostandard.resolveIgnoresFromGitignore()),
+  ...neostandard(),
+]
 ```
 
 ### Exported plugins
