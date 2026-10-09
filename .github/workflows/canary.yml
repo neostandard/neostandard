@@ -20,13 +20,14 @@ jobs:
           show-progress: false
       # Direct dependents come from the auto-discovered + curated ndjson lists;
       # indirect ones (consumers via @voxpelli/eslint-config) from dependents.json.
-      # Both are exercised the same way below, so merge into one matrix.
+      # Apply known failures after merging so the list covers every matrix source.
       - id: set-matrix
         run: |
           {
             jq -s '[.[].repositoryUrl | sub("https://github.com/";"";"i")]' dependents-data/neostandard-*.ndjson
             jq '.indirect' dependents-data/dependents.json
-          } | jq -s -c 'add | unique' | sed 's/^/matrix=/' >> "$GITHUB_OUTPUT"
+            jq 'keys | map(sub("^https://github.com/"; ""; "i"))' dependents-data/known-failures/neostandard.json
+          } | jq -s -c '. as $lists | (($lists[0] + $lists[1]) | unique) - $lists[2]' | sed 's/^/matrix=/' >> "$GITHUB_OUTPUT"
 
   test_dependents:
     needs: read_dependents
