@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.1](https://github.com/neostandard/neostandard/compare/v0.14.0...v0.14.1) (2026-10-09)
+
+
+### 📚 Documentation
+
+* clarify global ignore behavior ([#409](https://github.com/neostandard/neostandard/issues/409)) ([939f7b9](https://github.com/neostandard/neostandard/commit/939f7b91d8976b9ad47ce1376a50ac44684fc9f3))
+
 ## [0.14.0](https://github.com/neostandard/neostandard/compare/v0.14.0-next.1...v0.14.0) (2026-10-08)
 
 
