@@ -1,4 +1,27 @@
 {
+  "https://github.com/bcomnes/top-bun": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/fastify/fastify": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/mercurius-js/mercurius": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/nodejs/undici": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/pillarjs/iconv-lite": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
   "https://github.com/poolifier/poolifier": "Needs a more complex canary setup, see: https://github.com/neostandard/neostandard/pull/85#discussion_r1662247445",
-  "https://github.com/uuidjs/uuid": "Migrated to Biome; retains a vestigial neostandard devDependency but has no ESLint config, so it is not lintable by this harness"
+  "https://github.com/uuidjs/uuid": "Migrated to Biome; retains a vestigial neostandard devDependency but has no ESLint config, so it is not lintable by this harness",
+  "https://github.com/voxpelli/buffered-async-iterable": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/eslint-config": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/linemod": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/linemod-core": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/list-dependents": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/list-dependents-cli": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/list-installed": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/markdown-or-chalk": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/node-github-publish": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/node-test-pretty-reporter": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/peowly": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/peowly-commands": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/plugin-importer": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/read-workspaces": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/typed-utils": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/umzeption": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/validate-conventional-commit": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again",
+  "https://github.com/voxpelli/webring-opml": "Fails the neostandard 0.14.0 canary lint in run 37991047089; re-enable after its lint setup passes again"
 }
