@@ -81,7 +81,7 @@
     "@eslint/markdown": "^8.0.2",
     "@types/estree": "^1.0.9",
     "@types/node": "^22.20.1",
-    "@voxpelli/tsconfig": "^16.2.1",
+    "@voxpelli/tsconfig": "^17.0.0",
     "eslint": "^10.0.0",
     "husky": "^9.1.7",
     "installed-check": "^11.0.0",
