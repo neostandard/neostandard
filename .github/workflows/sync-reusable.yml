@@ -104,6 +104,8 @@ jobs:
         with:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.APP_PEM }}
+          permission-contents: write
+          permission-pull-requests: write
 
       - name: Retrieve GitHub App User ID
         if: steps.diff.outputs.hasDiff
