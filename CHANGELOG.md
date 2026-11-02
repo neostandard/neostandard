@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.2](https://github.com/neostandard/neostandard/compare/v0.14.1...v0.14.2) (2026-10-20)
+
+
+### 🌟 Features
+
+* **deps:** update dependency globals to ^17.13.0 ([#396](https://github.com/neostandard/neostandard/issues/396)) ([ef17bac](https://github.com/neostandard/neostandard/commit/ef17baca252e1af8add3b992c98d6f261c42e769))
+
 ## [0.14.1](https://github.com/neostandard/neostandard/compare/v0.14.0...v0.14.1) (2026-10-09)
 
 
