@@ -15,7 +15,9 @@ let {
   flags: {
     esm,
     migrate,
-    ...flags
+    jsx,
+    style,
+    ...otherFlags
   },
 } = peowly({
   options: {
@@ -44,15 +46,17 @@ let {
       multiple: true,
       short: 'i',
     },
-    'no-jsx': {
+    jsx: {
       listGroup: 'Config options',
-      description: 'Deactivates jsx parsing and jsx style rules',
+      description: 'Enable jsx parsing and jsx style rules',
       type: 'boolean',
+      default: true,
     },
-    'no-style': {
+    style: {
       listGroup: 'Config options',
-      description: 'Deactivates all style linting',
+      description: 'Enable style linting',
       type: 'boolean',
+      default: true,
     },
     ts: {
       listGroup: 'Config options',
@@ -77,6 +81,8 @@ let {
   name: 'neostandard',
   pkg,
 })
+
+const flags = { ...otherFlags, 'no-jsx': !jsx, 'no-style': !style }
 
 const flagMapping = /** @satisfies {Record<keyof typeof flags, keyof import('./index.js').NeostandardOptions>} */ ({
   env: 'env',
