@@ -78,7 +78,7 @@
   },
   "devDependencies": {
     "@eslint/json": "^2.1.1",
-    "@eslint/markdown": "^8.0.3",
+    "@eslint/markdown": "^9.0.0",
     "@types/estree": "^1.0.10",
     "@types/node": "^22.20.5",
     "@voxpelli/tsconfig": "^17.0.0",
